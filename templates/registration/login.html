@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LOGIN</title>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom-style.css' %}" />
+
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
+    <!--<script	type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container-fluid w-100 row login-height">
+      <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 banner p-0">
+        <img src="{% static 'img/cute-smiles.png' %}" alt="" class="card-img-top" />
+      </div>
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 login-form">
+        <div class="card login-height">
+          <div class="form-group p-2 mb-0 w-100 login-logo text-center">
+            <img class="card-img-top" src="{% static 'img/mood-png.png' %}" alt="" />
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group text-center">
+                <input
+                  type="text"
+                  class="form-control bg-gray rounded"
+                  id="username"
+                  name="username"
+                  placeholder="Enter mobile no/email"
+                />
+                <input
+                  type="password"
+                  class="form-control mt-4 bg-gray rounded"
+                  id="password"
+                  name="password"
+                  placeholder="Enter Password"
+                />
+                <input type="submit" class="btn btn-dark mt-4 rounded login-btn" value="Log in" />
+              </div>
+              <b style="color: red"
+                >{% if messages %} {% for msg in messages %} {{ msg }} {% endfor %} {% endif %}
+              </b>
+            </form>
+            <div class="text-center">
+              <a href="#"><span class="text-dark">Forget Password?</span></a>
+            </div>
+            <div class="text-center">
+              <a href="{% url 'register' %}">
+                <botton
+                  type="button"
+                  class="btn btn-dark mt-5 rounded login-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#verificationModal"
+                  >Create New Account</botton
+                >
+              </a>
+            </div>
+            <div class="d-flex mt-4 mb-5 text-center">
+              <a href="" class="ml-auto mr-auto text-dark">
+                <i class="fas fa-phone-alt fs-30"></i
+              ></a>
+              <a href="" class="ml-auto mr-auto text-dark">
+                <i class="fab fa-facebook fs-30"></i
+              ></a>
+              <a href="" class="ml-auto mr-auto text-dark"> <i class="fab fa-google fs-30"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Verification Modal -->
+    <div
+      class="modal fade"
+      id="verificationModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-toggle="modal"
+      data-bs-target="#successModal"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Your account is under verification</p>
+            <p>Please wait till the verification complete</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Verification Modal -->
+    <!--Success Modal -->
+    <div
+      class="modal fade"
+      id="successModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-toggle="modal"
+      data-bs-target="#rejectModal"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <img src="{% static 'img/150.png' %}" alt="" class="img-fluid" style="width: 15%" />
+            <p>Your account is successfully verified</p>
+            <input type="submit" class="btn btn-dark" value="OK" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Success Modal -->
+    <!--Reject Modal -->
+    <div
+      class="modal fade"
+      id="rejectModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <img
+              src="{% static 'img/Group3582.png' %}"
+              alt=""
+              class="img-fluid"
+              style="width: 15%"
+            />
+            <p>Your account is successfully is rejected</p>
+            <input type="submit" class="btn btn-dark" value="OK" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Reject Modal -->
+  </body>
+</html>

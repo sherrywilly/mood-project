@@ -1,0 +1,2898 @@
+@charset "utf-8";
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+/* CSS Document */
+/* Theme-Name:prof */
+/* author: Arya V Nair*/
+/* Date:28/10/2020 */
+html, body, p, h1, h2, h3, h4, h5, h6, div, span, head, nav, form, header, footer, label, table, caption, th, tr, td, ul, li, a, img {
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif !important;
+}
+p {
+  font-family: "Roboto", sans-serif !important;
+}
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  font: Medium 15px/18px Spartan;
+  letter-spacing: 0px;
+  color: #040922;
+  opacity: 1;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  position: relative;
+  min-height: 1px;
+  width: 100%;
+}
+html {
+  width: 100%;
+  overflow-x: hidden;
+  height: auto;
+  margin: 0rem;
+}
+body {
+  height: 100%;
+  width: 100% !important;
+  overflow: hidden !important;
+  overflow-x: hidden;
+  min-width: 200px;
+  margin: 0rem;
+}
+#page-content-wrapper {
+  overflow: hidden;
+}
+.navbar {
+  height: 80px;
+}
+/*-----------------------header---------------------------*/
+.btn-clean {
+  color: #555;
+}
+.preview img {
+  width: 100%;
+  object-fit: cover;
+}
+.hidden {
+  display: none !important;
+}
+.notification-btn {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+span.badge-danger {
+  background: #FF0004 none repeat scroll 0 0 !important;
+}
+.badge {
+  border-radius: 10px;
+}
+.badge.badge-corner {
+  color: #fff !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+}
+.bg-blue {
+  color: #2F26F3 !important;
+}
+.bg-gray {
+  background-color: #EDEDED;
+}
+.bgcolor-blue {
+  background-color: #6181FD !important;
+}
+.bg-maroon {
+  background-color: #800000 !important;
+}
+.bg-gradient-blue {
+  background: linear-gradient(to bottom, #024785 0%, #012443 100%) !important;
+}
+#menu-toggle {
+  display: none;
+}
+#search-input {
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+}
+#btn-icon {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.search {
+  width: 25rem !important;
+  margin: 0 0 0 20rem;
+}
+.search-leftnav {
+  display: none;
+}
+.headernav-profile img {
+  width: 100%;
+  border-radius: 50%;
+}
+.timeline-headernav-profile img {
+  width: 2.5rem;
+}
+.drop-noti {
+  margin-right: 3rem;
+}
+/*-----------------------/header---------------------------*/
+/*-----------------------leftside nav---------------------------*/
+.bordclass {
+  width: 100%;
+}
+#wrapper {
+  overflow-x: hidden;
+  background-color: #ffffff !important;
+}
+#sidebar-wrapper {
+  height: 100vh;
+  min-height: 100vh;
+  margin-left: 0rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+  background-color: #ffffff !important;
+  top: 81px;
+}
+#sidebar-wrapper {
+  background-color: #ffffff !important;
+}
+.list-group {
+  margin-top: 8% !important;
+  border: 1px solid #8c87de;
+  background-color: #fff7f7 !important;
+  margin: 10px;
+  border-radius: 15px !important;
+}
+.list-group-items {
+  text-decoration: none;
+  padding-bottom: 12px;
+  padding: 1rem 0.8rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+  opacity: 1;
+  text-align: right;
+}
+.list-group-item-action {
+  width: 90%;
+}
+.icons span {
+  font: Medium 15px/18px Spartan !important;
+}
+#page-content-wrapper {
+  min-height: 100vh;
+  margin: 0rem !important;
+}
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+.sidepanel {
+  width: auto;
+  z-index: 1;
+  height: 250px;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+.sidepanel a {
+  width: 100%;
+  padding: 8px 8px 20px 32px;
+  text-decoration: none;
+  color: #000000;
+  display: block;
+  transition: 0.3s;
+  border-radius: 13px;
+}
+.sidepanel a:hover {
+  color: #ffffff;
+  background: #2F26F3;
+}
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+.openbtn {
+  font-size: 12px;
+  cursor: pointer;
+  padding: 10px 15px;
+}
+.openbtn, .closebtn {
+  display: none !important;
+}
+.btn-rounded {
+  border-radius: 100% !important;
+  width: 50px;
+  height: 50px;
+  padding: 4px;
+}
+.btn-rounded-activity {
+  border-radius: 100% !important;
+  width: 40px;
+  height: 40px;
+  padding: 6px !important;
+  font-size: 10px !important;
+}
+.left-nav img {
+  width: 20%;
+}
+.my-profile {
+  display: none;
+}
+/*
+.openbtn:hover {
+  background-color: #444;
+}
+*/
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input {
+  display: none;
+}
+.rating > label:before {
+  margin: 5px;
+  font-size: .9em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input:checked ~ label, /* show gold star when clicked */ .rating:not(:checked) > label:hover, /* hover current star */ .rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+} /* hover previous stars in list */
+.rating > input:checked + label:hover, /* hover current star when changing rating */ .rating > input:checked ~ label:hover, .rating > label:hover ~ input:checked ~ label, /* lighten current selection */ .rating > input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+/*-----------------------/leftside nav---------------------------*/
+/*-----------------------body---------------------------*/
+.center-scroll {
+  overflow-y: scroll !important;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+* {
+  -ms-overflow-style: none !important;
+}
+/*Set the row height to the viewport*/
+.row-height {
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  opacity: 1;
+  padding: 0;
+  padding-bottom: 6rem;
+}
+.bg-border {
+  border: 1px solid #8c87de;
+  background-color: #fff7f7 !important;
+  border-radius: 15px;
+}
+.profile-img {
+  border-radius: 27%;
+  width: 80%;
+}
+.profile-address h5 {
+  font-weight: bold;
+}
+.content {
+  background: #EDEDED;
+  height: 150px;
+  max-width: 23% !important;
+  margin: 1rem 1rem 1rem 0;
+}
+.content img {
+  width: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.content h4 {
+  font-size: 1rem;
+  padding-bottom: .5rem;
+}
+.checked {
+  color: orange;
+}
+.avatar-edit-btn {
+  border: none;
+}
+.job-detail {
+  padding: 0;
+}
+.rightbtns {
+  width: 8rem !important;
+  font-size: 13px;
+  margin-top: 15px;
+  border-radius: 12px;
+  border: 0;
+  text-align: left;
+}
+.about {
+  width: 85%;
+}
+.about h5 {
+  border-bottom: 1px solid #000000;
+}
+.about p {
+  font-size: 13px !important;
+  text-align: justify;
+}
+.follow {
+  display: flex;
+  padding: 0
+}
+.follow-btn {
+  width: 100%;
+  background-color: #EDEDED;
+  border: 1px solid #B3B3B3;
+  color: #000000;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #2F26F3 !important;
+  border-radius: 0.5rem;
+  /*	padding: 10px 5px 0 5px;*/
+  border-color: #2F26F3;
+  max-width: 10rem;
+}
+.nav-link {
+  font-size: 18px;
+}
+.cards-info {
+  width: 100%;
+  margin: 0 auto;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+.display-cards {
+  display: flex;
+}
+.mycards {
+  text-align: center;
+  margin: 5px;
+  border: 5px solid white;
+  border-radius: 20px;
+  overflow-y: hidden !important;
+  overflow: hidden;
+}
+.savedcards {
+  text-align: center;
+  margin: 5px;
+  border-radius: 20px;
+  overflow-y: hidden !important;
+  overflow: hidden;
+  border: .4rem
+}
+.mycards-body {
+  background-color: #f1753d;
+  padding-left: 0;
+  padding-right: 0;
+}
+.mycards-companybody {
+  background-color: #9A9A9A;
+  padding-left: 0;
+  padding-right: 0;
+}
+.savedcard-body {
+  background-color: #E35094;
+  padding: 3rem;
+}
+.checked p {
+  color: #000000;
+  font-weight: normal;
+}
+.pen-edit {
+  margin: 0 auto;
+}
+.fa, .fas, .far {
+  padding-top: 3px;
+  padding-right: 3px;
+}
+.font-10 {
+  font-size: 10px;
+}
+.font-11 {
+  font-size: 11px;
+}
+.font-12 {
+  font-size: 12px;
+}
+.font-14 {
+  font-size: 14px;
+}
+.font-15 {
+  font-size: 15px;
+}
+.font-18 {
+  font-size: 18px !important;
+}
+.blue {
+  background-color: #2F26F3;
+}
+.phn {
+  float: left;
+  padding-left: 14px;
+}
+.company p {
+  font-size: 14px;
+}
+.cadress {
+  font-size: 12px !important;
+}
+.user img {
+  width: 5rem;
+}
+.certified-cards-body {
+  background-color: #FFFFFF !important;
+}
+.certified img {
+  width: 100%;
+  height: 100%;
+}
+.round-tick {
+  color: #2f26f3;
+  padding-left: 2rem;
+}
+.round-tick-transparent {
+  color: #efe8e8;
+  padding-left: 2rem;
+}
+.certified-name {
+  padding: 5px;
+  text-align: justify;
+}
+.certified-name p {
+  padding-top: 3rem;
+  font-size: 12px;
+}
+.attach {
+  font-size: 13px;
+}
+.attach-text p {
+  font-size: 12px;
+}
+.testimonialcard {
+  width: 70%;
+}
+.testimonial img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+.testimonial-name {
+  text-align: left;
+}
+.testimonial-digital {
+  color: #b5b5b5;
+}
+.mycards-phn {
+  font-size: 14px;
+}
+.post {
+  margin: 3px;
+}
+.post p {
+  font-size: 10px;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #4381c3 !important;
+  border-radius: 12px;
+}
+.btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show > .btn-warning.dropdown-toggle {
+  background-color: #d39e00 !important;
+  color: #fff;
+}
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show > .btn-success.dropdown-toggle {
+  background-color: #00b74a !important;
+}
+.phone {
+  margin-top: 5px;
+}
+.phone img {
+  width: 60%;
+}
+.phone p {
+  font-size: 10px;
+}
+.experience-card p.form_text1 > span {
+  display: inline-block;
+  min-width: 120px;
+  padding: 5px;
+  text-align: justify;
+}
+p.form_text2 > span {
+  display: inline-block;
+  min-width: 120px;
+}
+.category p {
+  width: 33%;
+  border: none;
+  color: #FFFFFF;
+  padding: 2px;
+  text-align: center;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.certified-footer {
+  font-size: 12px;
+  margin-top: 2rem;
+}
+.client-info img {
+  width: 50%;
+  border-radius: 50%;
+}
+.name-input {
+  border: none;
+  border-right: none;
+  border-top-right-radius: initial;
+  border-bottom-right-radius: initial;
+  background-color: #f3f3f3;
+  text-align: left;
+}
+.name-input p {
+  padding-top: 7px;
+  font-size: 14px;
+}
+.user-icon {
+  padding: 10px;
+  min-width: 50px;
+  border: none;
+  margin-left: -1px;
+  border-radius: 4px;
+  background-color: #f3f3f3;
+  text-align: center;
+  color: #007bff;
+  border-left: none;
+  border-top-left-radius: initial;
+  border-bottom-left-radius: initial;
+}
+.details-icon {
+  padding: 10px;
+  color: #007bff;
+}
+/*
+.marker{
+	padding-right: 12px!important;
+}
+*/
+.website-input {
+  padding-right: 5px;
+}
+.details-input {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+  text-align: left;
+}
+.details-input p {
+  padding-top: 7px;
+  font-size: 14px;
+}
+.personal-profilecard {
+  width: 50%;
+}
+.karmy-btn {
+  font-size: 10px;
+  margin: 25% 5% 5% 10%;
+  background-color: #2F26F3;
+  border-radius: 10px;
+}
+.download-pdf {
+  width: 75%;
+}
+.download-pdf-btn {
+  background-color: #2F26F3;
+  border-radius: 10px;
+  float: right;
+}
+/*-----------------------profile page---------------------------*/
+.search-bar {
+  width: 60%;
+  margin: 0 auto;
+}
+.corner-badge {
+  color: #fff !important;
+  position: absolute !important;
+  right: 10px !important;
+  top: 0 !important;
+}
+.bell-btn {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.fa-bell {
+  font-size: 20px;
+}
+.designer-profile {
+  width: 100%;
+}
+.designer-profile img {
+  width: 80%;
+  border-radius: 27%;
+}
+.designer-address {
+  text-align: left;
+}
+.designer-address p {
+  font-size: 14px;
+  padding-left: 1rem;
+}
+.green-tick {
+  color: #0ECB00;
+}
+#body-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5) !important;
+  margin-top: 1.5rem;
+  position: relative;
+  border-radius: 15px;
+}
+.profile-items {
+  display: flex;
+}
+.profile-items img {
+  width: 40px;
+  margin: 1.2rem 1.2rem 0 1.2rem;
+}
+.chat-online {
+  margin-top: 3%;
+  margin-left: -6%;
+  font-size: 12px;
+}
+.logged-in {
+  color: #2eff2e;
+  position: absolute;
+  left: 16rem;
+  top: 4.1rem;
+  font-size: 2rem;
+}
+.badge-enq {
+  font-size: 12px;
+}
+.enq-btns a {
+  border-radius: 10px;
+  margin-right: 0 !important;
+}
+.exp p {
+  color: #0ECB00;
+  font-weight: bold;
+}
+.achieve-btn {
+  margin-top: -12%;
+}
+.project-btn {
+  margin-top: -7%;
+}
+.working-btns {
+  text-align: left;
+}
+.working-btns a {
+  border-radius: 12px;
+}
+.working-hrs {
+  background: #f3f2f2;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 12px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 25vh;
+}
+.working-achievement {
+  padding-bottom: 11.1rem !important
+}
+.edit-achieve {
+  padding-bottom: 13.1rem !important
+}
+.red {
+  color: #FF0004;
+}
+.experience {
+  margin-top: 12rem;
+}
+.expertise {
+  margin-top: 2.1rem;
+}
+.pb-6 {
+  padding-bottom: 11.5rem !important;
+}
+.text-blue {
+  color: #1266f1;
+}
+.company-logo img {
+  width: 30%;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  margin-top: -50%;
+  margin-left: 10%;
+}
+.company-logo-cer img {
+  width: 35%;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  margin-top: -65%;
+  margin-left: 35%;
+}
+.profile-card {
+  border-radius: 12px;
+  margin: 1rem;
+  width: auto !important;
+}
+.add-btn {
+  border-radius: 25px;
+  background: white;
+  box-shadow: 0px 2px 6px 2px #04040466;
+  padding: 25px;
+}
+.btn.focus, .btn:focus {
+  box-shadow: 0 0 0 0.2rem #ffffff;
+}
+.view-more {
+  background-color: white;
+  border: none;
+  outline: none !important;
+  color: gray;
+}
+.more {
+  display: none;
+}
+.more-view {
+  border: none;
+  outline: none;
+  background: none;
+}
+.certfications {
+  padding: 20px;
+}
+.pt-6 {
+  padding-top: 5rem;
+}
+.company-details h6 {
+  font-size: 12px;
+  padding-bottom: 5px;
+}
+.company-details p {
+  font-size: 12px;
+}
+.login-header {
+  height: auto !important;
+}
+.search-bar-profile {
+  width: 40%;
+  margin: 0 0 0 15%;
+}
+.profile-body {
+  text-align: center;
+}
+.left-arrow, .right-arrow {
+  /*  padding-top: 6rem;*/
+  color: #000000 !important;
+}
+.left-arrow {
+  margin-right: 2rem;
+}
+.right-arrow {
+  margin-left: 2rem;
+}
+.btn-bg-blue {
+  background-color: #4381c3;
+  border: none;
+}
+/*-----------------------/user profile---------------------------*/
+/*-----------------------company profile---------------------------*/
+.company-profile {
+  width: 55%;
+}
+.attachment {
+  font-size: 10px;
+  border: 1px solid red;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  height: 15px;
+  text-align: center;
+  padding-top: 2px;
+  padding-left: 2px;
+  margin-top: 3px;
+  padding-right: 2px !important;
+}
+.certfication-page {
+  border: 1px solid #5600ff;
+  border-radius: 50% !important;
+  padding: 23% 23% 23% 0;
+  background-color: blue;
+  color: white;
+  padding-top: 8px;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+.company-profile-logo img {
+  width: 30%;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  margin-top: -50%;
+  margin-left: 30%;
+}
+.achieve-bottom {
+  padding-bottom: 6rem !important;
+}
+.organisation-btn {
+  margin-top: -4% !important;
+}
+.organisation-btn a {
+  font-size: 12px;
+  padding: 12px;
+}
+.five-star {
+  padding: 0;
+}
+.add-cards {
+  margin-top: 4rem;
+}
+.add-cards1 {
+  margin-top: 4rem;
+}
+.add-branchcards {
+  margin-top: 6rem;
+}
+.add-testimonialcards {
+  margin-top: 5rem;
+}
+.certificate-cards {
+  padding-bottom: 2%;
+}
+.working-hrs a {
+  text-decoration: none;
+  color: black;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+.exp-cer img {
+  width: 15%;
+  border-radius: 15px;
+  border: 1px solid #000000;
+}
+.working-hrs ul li {
+  list-style: none;
+}
+/*-----------------------/company profile---------------------------*/
+/*-----------------------Search page---------------------------*/
+.search-page {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px #00000029;
+}
+.search-profilepic {
+  padding-top: 0%;
+}
+.search-profilepic img {
+  width: 75%;
+}
+.search-profileadd {
+  padding-top: 2%;
+}
+.search-btns {
+  padding-top: 3%;
+}
+.search-btns button {
+  width: 7rem;
+}
+.search-pro {
+  color: #4381c3;
+}
+/*-----------------------/Search page---------------------------*/
+/*-----------------------activity-event page---------------------------*/
+.post-event {
+  margin: 5px;
+}
+.post-event p {
+  font-size: 12px !important;
+}
+.eventpost-details {
+  white-space: nowrap;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+}
+.event-body {
+  padding: 3rem;
+}
+.event-name {
+  padding-top: 5% !important;
+}
+/*-----------------------/activity-event page---------------------------*/
+/*-----------------------activity-enquiry page---------------------------*/
+.enquiry {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px #00000029;
+  padding: 3%;
+  margin: 3%;
+}
+.appointments {
+  display: flex;
+}
+.enquiry-1, .enquiry-2 {
+  white-space: nowrap;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+}
+.table-verifications {
+  overflow: hidden !important;
+  ;
+  overflow-x: scroll !important;
+}
+/*-----------------------activity-enquiry page---------------------------*/
+/*-----------------------notification---------------------------*/
+.notification-body {
+  background-color: #f3f3f3;
+  border: 1px solid #8c87de;
+  border-radius: 15px;
+}
+.notification {
+  display: flex;
+  margin: 1.5rem;
+}
+.notification img {
+  width: 4%;
+}
+.notification p {
+  margin-left: 1.5rem;
+  margin-top: .8rem;
+  color: black;
+}
+.notification-body a {
+  text-decoration: none;
+}
+/*-----------------------/notification---------------------------*/
+/*-----------------------settings---------------------------*/
+.edit-profile-body {
+  background-color: #f3f3f3;
+  border: 1px solid #8c87de;
+  border-radius: 15px;
+  display: flex !important;
+}
+.edit-profilee {
+  border-right: 1px solid #8c87de;
+}
+input.error {
+  font-size: 11px;
+  border: 1px solid #ff7c7c;
+}
+#error-msg {
+  font-size: 11px;
+  color: red;
+}
+#valid-msg {
+  font-size: 11px;
+  color: #00c900;
+}
+.hide {
+  display: none;
+}
+#messages {
+  display: none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+#messages p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+.tel{
+	border: 1px solid #ced4da!important;
+    padding-bottom: 17px;
+    padding-top: 17px;
+    width: 50rem;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+/*-----------------------/settings---------------------------*/
+/*-----------------------/body---------------------------*/
+/*-----------------------Modal---------------------------*/
+.savebtn, .cancelbtn {
+  width: 7rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+.savebtn1, .cancelbtn1 {
+  width: 5rem;
+}
+.cancelbtn {
+  background-color: #FFFFFF;
+  color: #575757;
+  border: 1px solid #575757;
+}
+.savebtn {
+  background-color: #324FAD;
+}
+.aboutus {
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+.modal-radius {
+  border-radius: 20px;
+  overflow-x: scroll;
+}
+.expert-exp {
+  margin-top: 5%;
+  margin-left: 5%;
+}
+.edit-cmpny td {
+  text-align: left !important;
+}
+.company-Card h5 {
+  color: #1900F8;
+}
+.profile-edit-icon {
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 50%;
+  font-size: 10px;
+  background-color: #F0F0F0;
+}
+.edit-icon {
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 50%;
+  font-size: 10px;
+  color: #FFFFFF;
+  background-color: #707070;
+  /*  line-height: .9rem;*/
+}
+.experience-heading {
+  padding-left: 0 !important;
+}
+.caption {
+  border: 1px solid black;
+  margin: 4px;
+  text-align: center;
+}
+.select2-container {
+  width: 100% !important;
+}
+.img-upload {
+  outline: none;
+}
+.testimonial-heading {
+  border-bottom: 1px solid #5c8de4;
+}
+.testimonial-heading h5 {
+  margin: 2%;
+  color: #5c8de4;
+}
+.cmpny-addrs img {
+  width: 100%;
+  border-radius: 12px;
+}
+.savebtn-testimonial, .cancelbtn-testimonial, .srqst-testimonial {
+  color: #FFFFFF;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  padding: 2px;
+  font-size: 14px;
+}
+.cancelbtn-testimonial {
+  background-color: #000000;
+  width: 7rem;
+  padding: 2px;
+}
+.cancelbtn-cert {
+  background-color: #ffffff;
+  color: #4B4B4B;
+  border: 1px solid #4B4B4B;
+}
+.savebtn-testimonial {
+  background-color: #399400;
+  width: 7rem;
+}
+.savebtn-testimonial2 {
+  background-color: #BAEBA9;
+  padding: 3px !important;
+}
+.srqst-testimonial {
+  background-color: #b4cdff;
+  width: 10rem;
+}
+.srqst-testimonial2 {
+  background-color: #2A5CD0;
+}
+.testimonial-btns {
+  margin: 2% 0 2% 5%;
+}
+.carousel-cards {
+  width: 80%;
+}
+.add-certification {
+  width: 20%;
+  margin-top: 3%;
+  height: 10rem;
+}
+.srqst-cert {
+  width: 12rem;
+  padding: 2px;
+}
+.certification-btns {
+  margin: 0 5% 0 4%;
+}
+.bg-red {
+  background: #FFC1C2;
+}
+.bg-majentha {
+  background-color: #ff3385;
+}
+.btn-chocolate {
+  background-color: chocolate;
+}
+.btn-violet {
+  background-color: darkviolet;
+}
+.border-red {
+  border: 1px solid #FF0004;
+}
+.testimonial-pic img {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+}
+.rejectbtn-testimonial {
+  width: 6rem;
+  background-color: #C3C3C3;
+  border: none;
+  border-radius: 15px;
+  padding: 2px;
+}
+.verifybtn-testimonial {
+  width: 6rem;
+  background-color: #0E5500;
+  border: none;
+  border-radius: 15px;
+  padding: 2px;
+}
+.from-to {
+  box-shadow: 0px 3px 20px #00000029;
+  padding-left: inherit;
+  padding: 5%;
+  border-radius: 10px;
+}
+.exp-photo {
+  box-shadow: 0px 3px 20px #00000029;
+  padding-left: inherit;
+  padding: 2%;
+  border-radius: 10px;
+}
+.res-ach {
+  box-shadow: 0px 3px 20px #00000029;
+  padding-left: inherit;
+  /*    padding: 5%;*/
+  border-radius: 10px;
+  padding-top: 2%;
+}
+.from-to, .exp-photo, .res-ach {
+  font-size: 13px;
+}
+/*-----------------------/Modal---------------------------*/
+@media (max-width: 1200px) {
+  /*
+  #sidebar-wrapper {
+    width: 12rem;
+  }
+*/
+  #sidebar-wrapper .list-group {
+    /*    padding-left: 1rem;*/
+  }
+  #wrapper {
+    margin-top: 4rem !important;
+  }
+  .sidepanel a {
+    padding: 8px 0 20px 25px;
+    text-align: right;
+  }
+  .nav-link {
+    font-size: 14px;
+  }
+  .experience-card p {
+    font-size: 14px;
+  }
+  .dropdown-menu.show {
+    right: 10% !important;
+  }
+  .navbar {
+    height: 70px;
+  }
+  .profile {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .profile-img {
+    width: 100% !important;
+    border-radius: 27%;
+    padding: 5%;
+  }
+  .profile-address h5 {
+    font-size: 16px !important;
+    font-weight: bold;
+  }
+  .profile-address p {
+    font-size: 13px !important;
+  }
+  .about {
+    width: 100%;
+  }
+  .about p {
+    font-size: 13px !important;
+    text-align: justify;
+  }
+  .connect-btn {
+    font-size: 13px;
+  }
+  .content {
+    max-width: 25% !important;
+    margin: 10px 5px 10px 0 !important;
+    height: auto;
+    padding-bottom: 10px;
+  }
+  .content h4 {
+    font-size: 16px !important;
+  }
+  .mycards-addline {
+    font-size: 13px;
+  }
+  .mycards-phn {
+    font-size: 13px;
+  }
+  .job-detail {
+    width: auto;
+    padding-right: 0;
+    margin-left: -5px;
+  }
+  .job-detail p {
+    font-size: 11px;
+  }
+  .profile-thirdrow {
+    padding-right: 0;
+  }
+  .profile-body {
+    padding: 0 2% 0 2%;
+  }
+  .profile-items {
+    font-size: 9px;
+  }
+  .profile-items p {
+    padding-left: 7px;
+  }
+  .profile-items img {
+    width: 60%;
+    margin: 1.2rem 1.2rem 0 1.2rem;
+  }
+  .saved-company {
+    margin-left: 15px;
+  }
+  .designer-address {
+    font-size: 10px;
+  }
+  .designer-address p {
+    font-size: 10px;
+    padding-left: 0 !important;
+  }
+  .working-btns a {
+    font-size: 10px;
+  }
+  .achieve-btn {
+    margin-top: -19%;
+  }
+  .project-btn {
+    margin-top: -10%;
+  }
+  /*
+	.expertise {
+  margin-top: 3rem;
+}
+	.experience{
+		margin-top: 12.7rem;
+	}
+*/
+  .working-hrs {
+    font-size: 8px;
+    /*		padding-bottom: 0!important;*/
+  }
+  .working-exp {
+    padding: 0 !important;
+  }
+  .working-achievement {
+    padding: 0 !important;
+    padding-bottom: 14.5rem !important;
+  }
+  .company-details h6 {
+    font-size: 12px;
+    font-weight: 100 !important;
+  }
+  .company-logo img {
+    margin-top: -20%;
+    margin-left: 15%;
+  }
+  .company-logo-cer img {
+    margin-top: -30%;
+    margin-left: 40%;
+  }
+  .left-arrow, .right-arrow {
+    /*    padding-top: 4rem;*/
+  }
+  .expert {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  .company-profile {
+    margin-left: 0 !important;
+  }
+  .five-star {
+    padding: 0 !important;
+    font-size: 10px;
+  }
+  .organisation-btn {
+    margin-top: -7% !important;
+  }
+  .organisation-btn a {
+    font-size: 8px !important;
+    padding: 10px !important;
+  }
+  .achieve-bottom {
+    font-size: 8px !important;
+    padding-bottom: 8rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .fa, .fas, .far {
+    padding-right: 5px;
+  }
+  .company-profile-logo img {
+    margin-top: -20%;
+  }
+  .edit-achieve {
+    padding-bottom: 15.5rem !important;
+  }
+  .headernav-profile img {
+    width: 40px;
+  }
+  .drop-noti {
+    margin-right: 2rem;
+  }
+  .add-cards {
+    margin-top: 4rem;
+  }
+  .add-cards1 {
+    margin-top: 4rem;
+    padding-bottom: 5%;
+  }
+  .add-btn {
+    padding: 5px 10px 5px 10px;
+  }
+  .cmpny-addrs label {
+    font-size: 14px;
+  }
+  .srqst-cert {
+    width: 12rem;
+    font-size: 14px;
+  }
+  .ptop-edit {
+    padding-top: .5rem !important;
+  }
+  .add-btn p {
+    font-size: 14px;
+  }
+  .exp-name {
+    font-size: 15px;
+    padding-left: 8px;
+  }
+  .select2-selection--single {
+    font-size: 15px !important;
+  }
+  .main-profile {
+    padding: 0;
+  }
+  .karmy-btn {
+    padding: 10px;
+    margin-top: 20% !important;
+    font-size: 12px;
+  }
+  .personal-profilecard {
+    width: 70%;
+  }
+  .companycard-details {
+    padding: 0;
+  }
+  .download-pdf {
+    width: 100%;
+  }
+  .rightbtns {
+    width: 5.5rem !important;
+    font-size: 8px;
+  }
+  .rating h4 {
+    font-size: 12px;
+  }
+  .category p {
+    font-size: 12px;
+  }
+  .mycards-footer {
+    font-size: 10px;
+  }
+  .post p, .phone p {
+    font-size: 8px;
+  }
+  .personal-profilecard {
+    width: 70%;
+  }
+  .search-btns button {
+    width: 5.5rem;
+    font-size: 14px;
+  }
+  .search-profileadd {
+    padding-top: 2%;
+  }
+  .search-btns {
+    padding-top: 3%;
+  }
+  .appointment-btn {
+    padding: 10px !important;
+  }
+  .notification img {
+    width: 6%;
+  }
+	.edit-profilee, .edit-profileePswdchnge{
+		padding: 0;
+	}
+	.tel{
+		width: 142%;
+	}
+	.edit-profileePassword label{
+		font-size: 12px;
+		padding-top: 10px!important;
+	}
+	.edit{
+		font-size: 12px!important;
+		padding: 7px;
+	}
+	.edit-profileePassword h2, .edit-profileeAddress h2{
+		font-size: 20px;
+	}
+	.edit-profileeAddress label{
+		font-size: 12px;
+	}
+	.gender label{
+		padding-top: 3px!important;
+	}
+}
+@media (max-width: 991.98px) {
+  .navbar {
+    height: 60px;
+  }
+  .about p {
+    font-size: 12px !important;
+  }
+  .profile-address p {
+    font-size: 12px !important;
+  }
+  .profile-address h5 {
+    font-size: 13px !important;
+  }
+  .connect-btn {
+    font-size: 12px;
+  }
+  .openbtn, .closebtn {
+    display: block !important;
+  }
+  .nav-link {
+    font-size: 13px;
+  }
+  .log, .notify, #menu-toggle {
+    display: block !important;
+  }
+  .sidepanel {
+    position: fixed;
+    width: 250px;
+    top: auto !important;
+  }
+  #sidebar-wrapper {
+    display: none;
+    height: 80vh;
+    min-height: 80vh;
+  }
+  #wrapper {
+    margin-top: 3.5rem !important;
+  }
+  #sidebar-wrapper .list-group {
+    padding-left: 0.5rem;
+  }
+  #sidebar-wrapper .list-group a {
+    padding-right: 0rem;
+    border-radius: 12px;
+  }
+  .list-group-item-action {
+    width: 100% !important;
+    margin-left: -0.2rem;
+  }
+  .list-group-items img {
+    margin-left: -0.6rem !important;
+  }
+  .items {
+    font-size: 16px !important;
+  }
+  .navv, #navbarSupportedContent {
+    display: none !important;
+  }
+  .font {
+    font-size: 13px;
+  }
+  .certified-footer {
+    padding: 2px;
+    font-size: 11px;
+  }
+  .cadress {
+    padding: 0;
+  }
+  .saved-company {
+    margin-left: 20px;
+  }
+  .designer-address p {
+    font-size: 10px;
+    padding-left: 0;
+  }
+  .profile-items {
+    font-size: 9px;
+  }
+  .profile-items img {
+    width: 50%;
+    margin: 1.2rem .8rem 0 .8rem;
+  }
+  .working-btns a {
+    font-size: 9px;
+  }
+  .achieve-btn {
+    margin-top: -19%;
+  }
+  .project-btn {
+    margin-top: -10%;
+  }
+  /*
+.experience {
+    margin-top: 9.4rem;
+}
+	.expertise {
+    margin-top: 1.8rem;
+}
+*/
+  .working-hrs {
+    font-size: 8px;
+    text-align: left;
+  }
+  .working-achievement {
+    padding-bottom: 14rem !important;
+  }
+  .certfications {
+    /*		padding: 0;*/
+  }
+  .profile-card {
+    margin: 3px;
+  }
+  .left-nav img {
+    width: 12%;
+  }
+  .cmpny-addrs label {
+    font-size: 11px;
+    margin-right: 5px;
+  }
+  .file {
+    font-size: 9px;
+    margin-left: -13px;
+  }
+  .savebtn, .cancelbtn {
+    width: 6rem;
+    font-size: 12px;
+  }
+  .search {
+    width: 24rem !important;
+    margin: 0 0 0 5rem;
+  }
+  .ptop-edit {
+    padding-top: 0 !important;
+  }
+  .add-btn {
+    padding: 5px 10px 5px 10px;
+  }
+  .add-btn p {
+    font-size: 13px;
+  }
+  .rightbtns {
+    width: 5rem !important;
+    font-size: 7px;
+  }
+  .client-info p, .client-info h5 {
+    font-size: 12px;
+  }
+  .phone p {
+    font-size: 8px;
+  }
+  .search-profileadd {
+    padding-top: 1%;
+    font-size: 12px;
+  }
+  .search-btns button {
+    width: 5rem;
+    font-size: 12px !important;
+  }
+  .appointment-btn {
+    padding: 8px !important;
+  }
+	.edit-profileePassword label{
+		font-size: 12px;
+}
+	.edit {
+    font-size: 11px!important;
+	}
+}
+@media (max-width: 767.98px) {
+  /*
+  #sidebar-wrapper {
+    width: 10rem;
+  }
+*/
+  #sidebar-wrapper .list-group {
+    padding-left: 0;
+  }
+  .list-group-item-action {
+    width: 9.8rem;
+    margin-left: 0rem;
+  }
+  .list-group-items {
+    font-size: 12px;
+  }
+  .nav-tabs {
+    justify-content: left;
+  }
+  .content {
+    max-width: 25% !important;
+    height: auto !important;
+    margin: 10px 5px 10px 0 !important;
+    padding: 0 !important;
+  }
+  .content h4 {
+    font-size: .8rem !important;
+    font-weight: 900;
+  }
+  .profile {
+    padding: 0px 5px 5px 5px;
+  }
+  .profile-img {
+    width: 90% !important;
+  }
+  .profile-address h5 {
+    font-size: 15px !important;
+    font-weight: bold;
+  }
+  .profile-address p {
+    font-size: 13px !important;
+  }
+  .about {
+    padding: 10px !important
+  }
+  .about p {
+    font-size: 14px !important;
+    text-align: justify;
+  }
+  #nav-tabContent {
+    padding: 10px 0 10px 0 !important;
+  }
+  #nav-home {
+    padding: 0;
+  }
+  .display-cards {
+    display: block;
+  }
+  .job-detail p {
+    font-size: 15px;
+  }
+  .nav-link {
+    padding: 0.5rem;
+    font-size: 13px;
+  }
+  .savedcards {
+    margin: 20px;
+  }
+  .cadress {
+    padding: 0;
+    font-size: 14px !important;
+  }
+  .cadress p {
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+  }
+  .saved-company {
+    margin-top: 3rem;
+  }
+  .company h6 {
+    font-size: 14px;
+  }
+  .company p {
+    font-size: 14px;
+  }
+  .company img {
+    width: 40% !important;
+  }
+  .mycards-addline p {
+    font-size: 14px;
+  }
+  .mycards-phn {
+    font-size: 14px;
+    padding: 0;
+  }
+  .phn {
+    padding-left: 14px;
+  }
+  .blue p {
+    font-size: 14px;
+  }
+  .mycards-footer {
+    padding: 5px;
+    font-size: 9px;
+  }
+  .certified-footer {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .testimonialcard {
+    width: 80%;
+  }
+  .designer-address {
+    font-size: 9px;
+  }
+  .designer-address h5 {
+    font-size: 10px !important;
+  }
+  .designer-address p {
+    font-size: 9px;
+  }
+  .font-star {
+    font-size: 6px;
+  }
+  .profile-items {
+    font-size: 10px;
+    margin-left: -117%;
+  }
+  .profile-items img {
+    margin: 1.2rem 1.8rem 0 1.8rem;
+  }
+  .user-profile-items {
+    margin-left: -65%;
+  }
+  .working-btns a {
+    font-size: 7px !important;
+    padding: 5px !important;
+  }
+  .experience {
+    margin-top: 8.7rem;
+  }
+  .expertise {
+    margin-top: 0;
+  }
+  .working-hrs {
+    font-size: 8px !important;
+  }
+  .working-achievement {
+    padding-bottom: 15.5rem !important;
+  }
+  .certfications {
+    padding: 5px;
+  }
+  .profile-card {
+    margin: 1rem;
+  }
+  .company-logo img {
+    width: 9%;
+    margin-left: 5%;
+    margin-top: -5%;
+  }
+  .company-logo-cer img {
+    width: 10%;
+    margin-top: -7%;
+    margin-left: 9%;
+  }
+  .certify-head {
+    width: 40% !important;
+  }
+  .project-btn {
+    margin-top: -18%;
+  }
+  .achieve-btn {
+    margin-top: -20%;
+  }
+  .profile-items img {
+    width: 40%;
+  }
+  .expert {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+  .five-star {
+    padding-left: 0 !important;
+    font-size: 6px;
+  }
+  .website {
+    margin-top: 10%;
+    margin-left: -75%;
+  }
+  .company-profile {
+    margin: 0 !important;
+  }
+  .profile-body {
+    padding: 0 !important;
+  }
+  .organisation-btn {
+    margin-top: -7% !important;
+  }
+  .company-profile-address {
+    padding: 0;
+  }
+  .company-profile-address p {
+    font-size: 10px !important;
+  }
+  .cmpny-addrs label {
+    font-size: 11px;
+  }
+  .search {
+    width: 14rem !important;
+    margin: 0 0 0 4rem;
+  }
+  .drop-noti {
+    margin-right: 1rem;
+  }
+  .certificate-cards {
+    display: block !important;
+  }
+  .add-cards {
+    margin-top: 2rem;
+    padding-bottom: 5%;
+    width: 95%;
+    margin: 5% auto;
+  }
+  .add-cards1 {
+    margin-top: 2rem;
+    padding-bottom: 5%;
+    width: 95%;
+    margin: 5% auto;
+  }
+  .rating-user {
+    font-size: 10px;
+    margin: -10px;
+  }
+  .rating {
+    font-size: 11px;
+  }
+  /*
+	.projects{
+		display: block!important;
+	}
+*/
+  .project-body {
+    padding: 5%;
+    font-size: 12px;
+  }
+  .project-footer {
+    padding: 5%;
+  }
+  .category p {
+    font-size: 9px;
+  }
+  .details-input {
+    font-size: 12px;
+    padding-left: 5px;
+  }
+  .name-input {
+    font-size: 12px;
+  }
+  .user-icon {
+    padding: 7px;
+  }
+  .website-input {
+    padding-left: 0;
+  }
+  .karmy-btn {
+    padding: 6px;
+    font-size: 11px;
+  }
+  .job-detail {
+    margin-left: 0;
+    margin-top: 2%;
+  }
+  .profile-rightbtns {
+    justify-content: center;
+  }
+  .rightbtns {
+    width: 8rem !important;
+    font-size: 12px;
+  }
+  .fa, .fas, .far {
+    padding-top: 3px;
+  }
+  .search-btns {
+    padding: 5% 0;
+  }
+  .search-btns button {
+    width: 4rem;
+    font-size: 9px !important;
+  }
+  .appointment-btn {
+    padding: 6px !important;
+    font-size: 10px !important;
+  }
+  .verify-heading1 h5 {
+    font-size: 16px;
+  }
+  .notification img {
+    width: 9%;
+  }
+	.edit-profile-body {
+		display: block!important;
+	}
+	.profile-tabs{
+		display: flex!important;
+	}
+	.edit-profileePswdchnge, .edit-profileeContent{
+		display: block!important;
+	}
+	.edit-profileePhoto{
+		width: 35%;
+	}
+	.edit{
+		font-size: 14px!important;
+	}
+	.edit-profileePassword label, .edit-profileeAddress label {
+    font-size: 13px;
+}
+	.edit-profileePassword{
+		padding: 0;
+	}
+	.edit-profilee {
+    border-right: none;
+}
+  /*
+	.personal-profilecard {
+    width: 82%;
+}
+*/
+}
+@media (max-width: 575.98px) {
+  .row-height {
+    height: 100% !important;
+    padding-left: 0 !important;
+  }
+  .content {
+    max-width: 25% !important;
+    height: auto !important;
+    margin: 10px 5px 10px 0 !important;
+    padding: 0 !important;
+  }
+  .profile-img {
+    width: 65% !important;
+    padding: 20px !important;
+  }
+  .profile-address h5 {
+    font-size: 16px !important;
+  }
+  .profile-address p {
+    font-size: 16px !important;
+  }
+  .font {
+    font-size: 1.5rem;
+  }
+  .details {
+    padding: 0;
+  }
+  .content h4 {
+    font-size: .8rem !important;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+  }
+  .job-detail p {
+    font-size: 11px !important;
+  }
+  .cards-info {
+    padding: 0;
+  }
+  .about {
+    margin-top: 3%;
+    padding: 10px !important
+  }
+  .about p {
+    font-size: 18px !important;
+    text-align: justify;
+  }
+  #nav-tabContent {
+    padding: 10px 0 10px 0 !important;
+  }
+  #nav-home {
+    padding: 0;
+  }
+  .search {
+    display: none !important;
+  }
+  .search-leftnav {
+    display: flex;
+    margin-top: 1rem;
+  }
+  .search2 {
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+  }
+  .scrhbtn {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+  .cadress {
+    padding: 0;
+    font-size: 14px !important;
+  }
+  .cadress p {
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+  }
+  .savedcards {
+    margin-left: 0 !important;
+  }
+  .saved-company {
+    margin-top: 3rem;
+  }
+  .company h6 {
+    font-size: 14px;
+  }
+  .company p {
+    font-size: 14px;
+  }
+  .company img {
+    width: 40% !important;
+  }
+  .mycards-addline p {
+    font-size: 14px;
+  }
+  .mycards-phn {
+    font-size: 12px;
+    padding: 0;
+  }
+  .phn {
+    padding-left: 9px;
+  }
+  .blue p {
+    font-size: 14px;
+  }
+  .certified-footer {
+    font-size: 10px;
+  }
+  .testimonialcard {
+    width: 96%;
+  }
+  .testimonial-name p {
+    font-size: 12px;
+  }
+  .search-bar-profile {
+    width: 60%;
+  }
+  .corner-badge {
+    right: 31rem !important;
+  }
+  .profile-body {
+    display: block !important;
+  }
+  .profile-items {
+    margin-left: -6%;
+  }
+  .exp {
+    margin-left: 15% !important;
+  }
+  .badge-enq {
+    margin-left: -5px;
+  }
+  .designer-address {
+    font-size: 12px;
+  }
+  .designer-address h5 {
+    font-size: 24px !important;
+  }
+  .designer-address p {
+    font-size: 16px;
+  }
+  .font-star {
+    font-size: 10px;
+  }
+  .profile-items {
+    font-size: 12px !important;
+  }
+  .working-btns a {
+    font-size: 12px !important;
+  }
+  .working-hrs {
+    font-size: 12px !important;
+    /*    height: auto;*/
+  }
+  .wed-evng {
+    margin-left: 15% !important;
+    text-align: left !important;
+  }
+  .achieve-btn {
+    margin-top: 0%;
+  }
+  .project-btn {
+    margin-top: 2%;
+  }
+  .certfications {
+    display: block !important;
+  }
+  .company-logo img {
+    width: 9%;
+    margin-top: -5%;
+    margin-left: 5%;
+  }
+  .company-logo-cer img {
+    width: 9%;
+  }
+  .profile-card {
+    margin: 5%;
+  }
+  .left-arrow, .right-arrow {
+    margin-top: -20%;
+  }
+  .certfications {
+    height: auto !important;
+  }
+  .working-achievement {
+    padding-bottom: 0 !important;
+  }
+  .profile-card {
+    width: auto !important;
+  }
+  .website {
+    margin-left: 0 !important;
+  }
+  .company-profile-address {
+    margin-right: 20%;
+  }
+  .company-profile-address p {
+    font-size: 14px !important;
+  }
+  .organisation-btn a {
+    font-size: 8px !important;
+  }
+  .company-profile-logo img {
+    width: 9% !important;
+    margin-top: -5%;
+    margin-left: 10%;
+  }
+  .organisation-btn {
+    margin-top: 3% !important;
+  }
+  .achieve-bottom {
+    padding-bottom: 0 !important;
+  }
+  .cmpny-addrs label {
+    font-size: 10px;
+  }
+  .expertise-heading h5 {
+    font-size: 14px;
+  }
+  .expert-exp {
+    font-size: 14px;
+  }
+  .upload-img {
+    font-size: 12px !important;
+  }
+  .certificate-cards {
+    padding-bottom: 3% !important;
+  }
+  .add-cards {
+    margin-top: 0;
+    padding-bottom: 2rem;
+    width: 90%;
+    margin: 5% auto;
+  }
+  .add-cards1 {
+    margin-top: 0;
+    padding-bottom: 2rem;
+    width: 90%;
+    margin: 5% auto;
+  }
+  .srqst-cert {
+    width: 10rem !important;
+  }
+  .cancelbtn-testimonial, .savebtn-testimonial, .srqst-testimonial {
+    font-size: 12px;
+    padding: 3px;
+  }
+  .testimonial-btns {
+    margin: 2% 0 2% 10%;
+  }
+  .exp-name {
+    font-size: 13px;
+    padding-left: 8px;
+  }
+  .select2-selection--single {
+    font-size: 13px !important;
+  }
+  .from-to, .exp-photo, .res-ach {
+    font-size: 12px;
+  }
+  .my-profile {
+    display: flex;
+  }
+  .sidepanel a {
+    text-align: left;
+  }
+  .leftside-dropdown {
+    padding: 0;
+  }
+  .exp-btn {
+    width: auto !important;
+    padding: 5px;
+  }
+  .exp-cer {
+    display: block !important;
+  }
+  .exp-cer img {
+    width: 30%;
+    margin-top: 5px;
+  }
+  .rating {
+    font-size: 1rem;
+  }
+  .card-btn {
+    display: grid;
+  }
+  .download-pdf-btn {
+    width: 50%;
+    margin-left: 1%;
+    float: left;
+  }
+  .details-group {
+    display: block !important;
+    margin-bottom: 0 !important;
+  }
+  .whatp-icon {
+    padding-right: 5px;
+  }
+  .wbste-icon {
+    padding-right: 3px;
+  }
+  .details-input1 {
+    margin-right: 17px !important;
+  }
+  .details-input2 {
+    margin-right: 17px !important;
+  }
+  .personal-profilecard {
+    width: auto;
+  }
+  .client, .projects {
+    display: block !important;
+  }
+  .client-info {
+    margin-top: 5%;
+  }
+  .projects-card {
+    margin: 5% 0 !important;
+  }
+  .category p {
+    font-size: 14px;
+  }
+  .project-body {
+    font-size: 14px;
+  }
+  .mycards-footer {
+    font-size: 14px;
+  }
+  .details-input {
+    margin-right: 8px;
+  }
+  .search-profilepic {
+    padding: 0;
+  }
+  .search-profileadd {
+    font-size: 14px;
+  }
+  .search-btns {
+    padding: 0;
+  }
+  .search-btns button {
+    width: 7rem;
+    font-size: 12px !important;
+  }
+  .appointments {
+    display: block !important;
+  }
+  .appointment-btn {
+    padding: 10px !important;
+    font-size: 14px !important;
+  }
+  .notification img {
+    width: 12%;
+  }
+	.edit-profileeAddress, .edit-profileeContent, .edit-profile-content{
+		padding: 0;
+	}
+}
+@media (max-width: 475px) {
+  .profile-img {
+    width: 75% !important;
+  }
+  .savedcards {
+    margin-left: 0 !important;
+  }
+  .cadress {
+    padding: 0;
+    font-size: 8px !important;
+  }
+  .cadress p {
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+  }
+  .savedcards {
+    margin-left: 0 !important;
+  }
+  .saved-company {
+    margin-top: 5rem;
+    font-size: 10px;
+  }
+  .saved-company h6 {
+    font-size: 10px;
+  }
+  .savedcard-body {
+    padding: 5px;
+  }
+  .company h6 {
+    font-size: 8px;
+  }
+  .company p {
+    font-size: 8px;
+  }
+  .company img {
+    width: 40% !important;
+  }
+  .mycards-addline p {
+    font-size: 7px;
+  }
+  .mycards-phn {
+    padding: 0;
+    font-size: 7px;
+  }
+  .phn {
+    padding-left: 9px;
+  }
+  .blue p {
+    font-size: 14px;
+  }
+  .mycards-footer {
+    font-size: 10px;
+  }
+  .certified-footer {
+    font-size: 9px;
+  }
+  .user img {
+    width: 3rem;
+  }
+  .content h4 {
+    font-size: 1rem !important;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+  }
+  .attach {
+    font-size: 11px;
+  }
+  .attach-text p {
+    font-size: 10px;
+  }
+  .profile-body {
+    display: block !important;
+  }
+  .testimonial-name p {
+    font-size: 10px;
+  }
+  .certfications {
+    display: block !important;
+  }
+  .company-logo img {
+    width: 14%;
+    margin-top: -10%;
+    margin-left: 10%;
+  }
+  .company-logo-cer img {
+    width: 15%;
+    margin-top: -15%;
+    margin-left: 15%;
+  }
+  .designer-address h5 {
+    font-size: 1.5rem;
+  }
+  .designer-address p {
+    font-size: 14px;
+  }
+  .font-star {
+    font-size: .7rem;
+  }
+  .working-achievement {
+    padding-bottom: 0 !important;
+  }
+  .profile-items {
+    margin-left: -12px;
+    font-size: 8px;
+  }
+  .enq-btns {
+    float: left !important;
+  }
+  .profile-items img {
+    width: 24px;
+    margin: 1.2rem .7rem 0 .7rem;
+  }
+  .badge-enq {
+    margin-left: -5px;
+  }
+  .experience {
+    margin-top: 0.7rem;
+  }
+  .working-btns a {
+    font-size: 12px;
+  }
+  .working-hrs {
+    font-size: 12px;
+  }
+  .left-arrow {
+    padding-top: 0;
+  }
+  .left-arrow, .right-arrow {
+    margin-top: -20%;
+  }
+  .certfications {
+    height: 320vh;
+  }
+  .profile-card {
+    width: auto !important;
+    margin: 10%;
+  }
+  .certify-head {
+    width: 60% !important;
+  }
+  .exp {
+    margin-left: 20% !important;
+  }
+  .exp p {
+    font-size: 14px;
+  }
+  .company-profile-logo img {
+    width: 14% !important;
+    margin-top: -10%;
+    margin-left: 10%;
+  }
+  .company-profile-address {
+    margin-right: 0%;
+  }
+  .company-profile-address p {
+    font-size: 10px !important;
+  }
+  .organisation-btn {
+    width: auto;
+    display: block !important;
+    padding: 0;
+  }
+  .organisation-btn a {
+    width: auto !important;
+    font-size: 10px !important;
+  }
+  .cmpny-addrs label {
+    font-size: 8px;
+    margin-right: 5px;
+  }
+  .savebtn, .cancelbtn {
+    width: 6rem;
+  }
+  .expertise-heading h5 {
+    font-size: 13px;
+  }
+  .expert-exp {
+    font-size: 13px;
+    margin-top: 7%;
+  }
+  .certificate img {
+    width: 2.5rem !important;
+  }
+  .upld-doc {
+    font-size: 12px;
+  }
+  .testimonial-btns {
+    margin: 2% 0 2% 0%;
+  }
+  .savebtn-testimonial, .cancelbtn-testimonial {
+    width: 4rem;
+  }
+  .srqst-testimonial {
+    width: 7rem;
+  }
+  .srqst-cert {
+    width: 8rem !important;
+  }
+  .srqst-testimonial {
+    font-size: 10px;
+  }
+  .caption {
+    padding: 0;
+  }
+  .from-to, .exp-photo, .res-ach {
+    font-size: 10px;
+  }
+  .exp-cer img {
+    width: 50%;
+  }
+  /*
+	.karmy-btn{
+	padding: 5px;
+    font-size: 8px;
+	}
+*/
+  .personalcard-detail {
+    display: block !important;
+  }
+  .personalcard-photo {
+    margin: 0 auto !important;
+  }
+  .karmy-btn {
+    width: 7rem;
+    padding: 10%;
+    font-size: 12px;
+    margin-top: 0 !important;
+  }
+  .download-pdf-btn {
+    font-size: 14px;
+  }
+  .experience-card p {
+    font-size: 12px;
+  }
+  .profile-address p, .profile-address h5, .about p, .project-body, .certified-name h6 {
+    font-size: 12px !important;
+  }
+  .certified-footer {
+    font-size: 8px;
+  }
+  .certified {
+    padding: 0;
+  }
+  .event-btns {
+    display: block !important;
+  }
+  .post p, .phone p {
+    font-size: 10px;
+  }
+  .details-input {
+    margin-right: 2px;
+  }
+  .search-profileadd {
+    font-size: 10px;
+    padding: 0 3%;
+  }
+  .search-btns button {
+    width: 6rem;
+  }
+  .details-input1 {
+    margin-right: 5% !important;
+  }
+  .details-input2 {
+    margin-right: 11px !important;
+  }
+  .personalcard-title {
+    font-size: 16px;
+  }
+  .personalcard-btn {
+    font-size: 14px;
+  }
+  .personalcard-details {
+    margin: 0 25% 0 auto;
+  }
+  .personalcard-karmybtn {
+    margin: 0 45% 0 auto;
+  }
+  .name-input p {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .details-input p {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .name-input, .details-input {
+    font-size: 11px;
+  }
+  .verify-heading {
+    padding: 0 !important;
+  }
+  .verify-heading1 {
+    padding: 0;
+  }
+  .verify-heading1 h5 {
+    margin-right: 35px;
+    font-size: 12px;
+  }
+  .cancel-certbtn, .save-certbtn {
+    width: 3.5rem !important;
+    padding: 15% !important;
+    font-size: 11px !important;
+  }
+  .send-certbtn {
+    width: 9rem !important;
+    padding: 8% !important;
+    font-size: 9px !important;
+  }
+  .notification img {
+    width: 12%;
+  }
+  .notification p {
+    margin-left: .4rem;
+    margin-top: .5rem;
+    font-size: 14px;
+  }
+	.gender label{
+		padding-top: 3px!important;
+	}
+	.gender{
+		display: block!important;
+	}
+/*
+	.edit-profileePassword label{
+		padding-top: 0!important;
+	}
+*/
+	.edit-profileePassword label, .edit-profileeAddress label{
+		font-size: 9px;
+	}
+}
+@media (max-width: 320px) {
+  .profile-img {
+    width: 85% !important;
+  }
+  .certified-name h6 {
+    font-size: 11px !important;
+  }
+  .certify-head {
+    width: 80% !important;
+  }
+  .profile-items {
+    margin-left: -20px;
+    font-size: 7px !important;
+  }
+  .profile-items img {
+    width: 17px;
+    margin: 1.2rem .7rem 0 .7rem;
+  }
+  .exp {
+    margin-left: 4% !important;
+  }
+  .working-btns a {
+    font-size: 10px !important;
+  }
+  .left-arrow, .right-arrow {
+    margin-top: -35%;
+  }
+  .company-logo img, .company-profile-logo img {
+    width: 20%;
+    margin-top: -20%;
+  }
+  .company-logo-cer img {
+    width: 20%;
+    margin-top: -22%;
+    margin-left: 25%;
+  }
+  .attachment {
+    padding-right: 2px !important;
+  }
+  .company-profile-address p {
+    font-size: 8px !important;
+  }
+  .font-star {
+    font-size: .5rem !important;
+  }
+  .cmpny-addrs label {
+    margin-right: 10px;
+  }
+  .savebtn, .cancelbtn {
+    width: 4rem;
+  }
+  .expertise-heading h5 {
+    font-size: 10px;
+  }
+  .expert-exp {
+    margin-top: 10%;
+    font-size: 10px;
+  }
+  .place-holder {
+    font-size: 10px;
+  }
+  .upld-doc {
+    font-size: 10px;
+  }
+  .certificate {
+    padding: 0;
+  }
+  .testimonial-btns {
+    margin: 2% 0 2% 5%;
+  }
+  .savebtn-testimonial, .cancelbtn-testimonial, .srqst-testimonial {
+    font-size: 8px;
+    width: auto;
+    padding: 4px;
+  }
+  .srqst-cert {
+    width: auto !important;
+  }
+  .savebtn-testimonial {
+    width: 3rem;
+  }
+  .cancelbtn-testimonial {
+    width: 4rem;
+  }
+  .srqst-testimonial {
+    width: 5rem;
+  }
+  .certification-btns {
+    margin: 0;
+  }
+  .exp-name {
+    font-size: 10px;
+  }
+  .select2-selection--single {
+    font-size: 10px !important;
+  }
+  .rating > input {
+    display: none;
+  }
+  .rating > label:before {
+    font-size: .8em;
+  }
+  .rating {
+    font-size: 12px;
+  }
+  .rightbtns {
+    width: 7rem !important;
+    font-size: 11px;
+  }
+  .experience-card p {
+    font-size: 10px;
+  }
+  .category p {
+    font-size: 12px;
+  }
+  .certified-footer {
+    font-size: 7px;
+  }
+  .attach-text h6 {
+    font-size: 12px;
+  }
+  .details-input {
+    margin-right: -8px;
+  }
+  .search-card {
+    width: 100%;
+  }
+  .search-cardbody {
+    padding: 3%;
+  }
+  .search-btns button {
+    width: 5rem;
+  }
+  .details-input2 {
+    margin-right: 2px !important;
+  }
+  .personalcard-title {
+    font-size: 14px;
+  }
+  .personalcard-btn {
+    font-size: 12px;
+  }
+  .karmy-btn {
+    width: 6rem;
+  }
+  .eventpost-details {
+    font-size: 12px;
+  }
+  .event-body {
+    padding: 5px !important;
+    font-size: 12px;
+  }
+  .enquiry h5, p {
+    font-size: 12px;
+  }
+  .appointments {
+    display: block !important;
+  }
+  .appointment-btn {
+    width: 4rem;
+    padding: 4px !important;
+  }
+  .verify-heading {
+    padding: 0 !important;
+  }
+  .verify-heading1 {
+    padding: 0 !important;
+  }
+  .verify-heading1 h5 {
+    font-size: 12px;
+  }
+  .verify-cells td {
+    font-size: 12px;
+  }
+  .cancel-certbtn, .save-certbtn {
+    width: 3rem !important;
+    padding: 15% !important;
+    font-size: 11px !important;
+  }
+  .send-certbtn {
+    width: 8rem !important;
+    padding: 8% !important;
+    font-size: 9px !important;
+  }
+  .notification p {
+    margin-top: .4rem;
+    font-size: 12px;
+  }
+	.edit-profileePassword h2, .edit-profileeAddress h2 {
+    font-size: 17px;
+}
+
+}

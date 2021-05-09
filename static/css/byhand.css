@@ -1,0 +1,404 @@
+@charset "utf-8";
+/* CSS Document */
+/* Theme-Name:prof */
+/* author: Dona elizabeth*/
+/* Date:28/10/2020 */
+html, body, p, h1, h2, h3, h4, h5, h6, div, span, head, nav, form, header, footer, label, table, caption, th, tr, td, ul, li, a, img {
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif !important;
+}
+p {
+  font-family: 'Roboto', sans-serif !important;
+}
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  font: Medium 15px/18px Spartan;
+  letter-spacing: 0px;
+  color: #040922;
+  opacity: 1;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  position: relative;
+  min-height: 1px;
+  width: 100%;
+}
+body {
+  background-size: 100%;
+  background: linear-gradient(to right, #a8a0c4, #5e85c1);
+  overflow: hidden;
+  height: auto;
+}
+.width {
+  width: 80%;
+}
+.top {
+  margin-top: 1.1rem;
+}
+.login-header {
+  width: 100%;
+  background: linear-gradient(#024785, #370f82);
+  height: auto !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.pswd p {
+  color: #FFFFFF;
+  padding-left: 10px;
+  font-size: 12px;
+}
+.login p {
+  font-size: 12px;
+}
+.center-scroll {
+  overflow-y: scroll !important;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+* {
+  -ms-overflow-style: none !important;
+}
+/*Set the row height to the viewport*/
+.row-height {
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  opacity: 1;
+  padding: 0;
+  padding-bottom: 6rem;
+}
+.register {
+  width: 100%;
+  height: auto
+}
+.register h4 {
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 10%;
+  border-bottom: 2px solid #FFFFFF;
+}
+.register-as {
+  display: flex;
+}
+.register-as2 {
+  display: flex;
+  /*	margin: 0 20%;*/
+}
+.register-all {
+  width: 100%;
+  max-width: 32% !important;
+  height: 120px;
+  background: #FFFFFF;
+  margin: 30px 10px 10px 10px !important;
+  text-align: center;
+  padding-top: 2.5rem !important;
+  border-radius: 12px;
+  border: 1px solid #848484;
+}
+.register-all2 {
+  max-width: 32% !important;
+  height: 120px;
+  background: #FFFFFF;
+  /*	margin: 30px 10px 10px 10px!important;*/
+  text-align: center;
+  padding-top: 2.5rem !important;
+  border-radius: 12px;
+  border: 1px solid #848484;
+  margin: 0 auto;
+}
+.mr {
+  margin-right: 1% !important;
+}
+.ml {
+  margin-left: 1% !important;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 25%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 20px !important;
+  margin-top: 2% !important;
+  /*	margin-bottom: 5.7rem;*/
+  border-radius: 20px;
+  overflow-y: hidden !important;
+  overflow: hidden;
+}
+.reg {
+  width: 40% !important;
+}
+.reg h4 {
+  color: #324FAD;
+/*  margin-top: 10%;*/
+  font-weight: bold;
+}
+.reg-std {
+  width: 40% !important;
+}
+.reg-std h4 {
+  color: #324FAD;
+/*  margin-top: 3%;*/
+  font-weight: bold;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.container {
+  padding: 2px 16px;
+}
+.header {
+  margin-top: 8% !important;
+}
+.fields {
+  padding-bottom: 20px;
+}
+.edit {
+  margin-top: 20px;
+  padding-right: 20px;
+}
+.form-control {
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 12px !important;
+}
+.email {
+  width: auto !important;
+  color: #6E6E6E;
+}
+.login {
+  text-align: center;
+  margin-top: 10px;
+}
+.images img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+.btn1 {
+  border-radius: 12px;
+  padding: 5px !important;
+  background: #324FAD !important;
+  outline: none;
+  border: none;
+}
+.bg-blue {
+  background-color: #4381c3;
+}
+.icon img{
+	width: 15%;
+}
+@media (max-width: 1200px) {
+  /*
+  .card {
+    width: 50% !important;
+  }
+*/
+  .card-header {
+    font-size: 15px !important;
+  }
+  .form-group {
+    display: block !important;
+  }
+  .name {
+    font-size: 14px !important;
+  }
+  .register-all2 {
+    max-width: 32% !important;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 992px) {
+  .width {
+    width: 50%;
+  }
+  .card {
+    width: 50% !important;
+  }
+  .card-header {
+    font-size: 11px !important;
+  }
+  .form-group {
+    display: block !important;
+  }
+  .name {
+    font-size: 14px !important;
+  }
+}
+@media (max-width: 767px) {
+  .card {
+    width: 50% !important;
+  }
+  .card-header {
+    font-size: 11px !important;
+  }
+  .form-group {
+    display: block !important;
+  }
+  #emailHelp {
+    font-size: 12px !important;
+  }
+  .name {
+    font-size: 14px !important;
+  }
+  .register-as {
+    display: block;
+  }
+  .register-all {
+    max-width: 60% !important;
+    margin: 5% auto !important;
+  }
+  .register-all2 {
+    max-width: 60% !important;
+    margin: 5% auto !important;
+  }
+  .register-as2 {
+    display: block;
+    margin: 0 !important;
+  }
+  .mem {
+    text-align: left !important;
+/*    margin-left: 4%;*/
+  }
+  .std {
+    text-align: left !important;
+/*    margin-left: 5%;*/
+  }
+  .mem h2 {
+    margin-left: 15px;
+  }
+  .std h2 {
+    margin-left: 10px;
+  }
+}
+@media (max-width: 576px) {
+  .card {
+    width: 75% !important;
+  }
+  .card-header {
+    font-size: 12px !important;
+  }
+  .form-group {
+    display: block !important;
+  }
+  /*
+    .form-control {
+      width: 31rem !important;
+		
+    }
+*/
+  #emailHelp {
+    font-size: 9px !important;
+  }
+  .name {
+    font-size: 14px !important;
+  }
+  .mem img {
+    width: 50%;
+    margin-right: 50%;
+  }
+  .std img {
+    width: 70%;
+    margin-right: 30%;
+  }
+  .mem h2, .std h2 {
+    text-align: left;
+  }
+	.mem h2 {
+    margin-left: 0;
+  }
+  .std h2 {
+    margin-left: 0;
+  }
+}
+@media (max-width: 425px) {
+  .card {
+    width: 75% !important;
+  }
+  .card-header {
+    font-size: 8px !important;
+  }
+  /*
+    .form-control {
+      width: 18rem !important;
+		
+    }
+*/
+  .name {
+    font-size: 12px !important;
+  }
+  .btn {
+    font-size: 10px !important;
+  }
+  #emailHelp {
+    font-size: 9px !important;
+  }
+  .register-all {
+    max-width: 100% !important;
+  }
+  .register-all2 {
+    max-width: 100% !important;
+  }
+  .std img {
+    width: 70%;
+    margin-right: 30px;
+  }
+  .std h2, .mem h2 {
+    text-align: left;
+  }
+  .mem img {
+    width: 60%;
+    margin-right: 65%;
+  }
+  .com h2, .mem h2, .std h2 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 320px) {
+  .card {
+    width: 100% !important;
+  }
+  .card-header {
+    font-size: 9px !important;
+  }
+  /*
+	  .form-control {
+      width: 15rem !important;
+    }*/
+  .btn {
+    font-size: 10px !important;
+  }
+  #emailHelp {
+    font-size: 9px !important;
+  }
+  .pswd p {
+    font-size: 10px;
+  }
+  .std img {
+    width: 60%;
+    margin-right: 25px;
+  }
+  .mem img {
+    width: 50%;
+    margin-right: 50%;
+  }
+  .com h2, .mem h2, .std h2 {
+    font-size: 15px;
+  }
+}

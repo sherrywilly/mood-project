@@ -1,0 +1,323 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 04-Feb-2021, 9:52:23 PM
+    Author     : TIBIN MATHEW
+*/
+/*Welcome Page Css*/
+body {
+  font-family: 'PT Sans Caption', sans-serif;
+  overflow: hidden !important;
+  overflow-y: scroll !important;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.body-bg {
+  background-color: #000000 !important;
+}
+.video-bg {
+  height: 500px;
+  object-fit: cover;
+  width: fit-content;
+  margin: -50px;
+}
+.login-btn {
+  border-bottom-left-radius: 25px !important;
+}
+.register-btn {
+  border-bottom-right-radius: 25px !important;
+}
+.border-vertical-line {
+  border-left: 5px solid #e55a5e;
+  height: 20em;
+}
+.text-col {
+  padding: 50px 150px 0px 0px !important;
+  margin-top: 40px !important;
+}
+.heading-text {
+  text-align: right;
+}
+.text-col strong {
+  color: #d6a550;
+}
+.text-col p {
+  margin-top: 15px;
+  text-align: right;
+  font-size: 18px;
+}
+.front-img {
+  width: 80%;
+  margin-left: 75px;
+  margin-top: 40px;
+}
+.bg-famroutes {
+  background-color: #d94352 !important;
+}
+/*Login Page Css*/
+body.skin-light {
+  color: #4f4f4f;
+}
+body.pt-100px {
+  padding-top: 100px;
+}
+.skin-light .jumbotron {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}
+.page-header {
+  width: 100%;
+  background-color: #c5e0e8;
+  margin-left: 2px;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.skin-light.color-grey-light, .skin-light .color-grey-light, .skin-light .badge-grey-light, .skin-light .bg-grey-light {
+  background-color: #fbfbfb !important;
+}
+.btn-famroutes {
+  color: #fff !important;
+  background-color: #d94352 !important;
+}
+.btn-outline-famroutes {
+  color: #959595 !important;
+  border-color: #959595 !important;
+}
+#body-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+#sidebar-container {
+  min-height: 100vh;
+  background-color: #333;
+  padding: 0;
+}
+/* Sidebar sizes when expanded and expanded */
+.sidebar-expanded {
+  width: 230px;
+}
+.sidebar-collapsed {
+  width: 60px;
+}
+/* Menu item*/
+#sidebar-container .list-group a {
+  height: 50px;
+  color: white;
+}
+/* Submenu item*/
+#sidebar-container .list-group .sidebar-submenu a {
+  height: 45px;
+  padding-left: 30px;
+}
+.sidebar-submenu {
+  font-size: 0.9rem;
+}
+.profile-pic {
+  padding: .5rem 3rem !important;
+}
+/* Separators */
+.sidebar-separator-title {
+  background-color: #333;
+  height: 35px;
+}
+.sidebar-separator {
+  background-color: #333;
+  height: 25px;
+}
+.logo-separator {
+  background-color: #333;
+  height: 60px;
+}
+/* Closed submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+  content: " \f0d7";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 10px;
+}
+/* Opened submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+  content: " \f0da";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 10px;
+}
+/*Home Page Css*/
+.rounded-circle {
+  object-fit: contain;
+}
+.write-post-btn {
+  margin-left: 9rem;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  width: 70%;
+  height: 50px;
+  text-align: left;
+  padding-left: 25px;
+}
+.privacy-select {
+  border-radius: 15px;
+  float: right;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  color: #676363;
+  border: 2px solid #9a9696;
+  outline: none;
+}
+.br-20 {
+  border-radius: 20px;
+}
+#upload {
+  display: none;
+  margin-left: 2rem;
+}
+.add {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+.add .upload-label:hover {
+  cursor: pointer !important;
+}
+.add:hover {
+  color: #e55858;
+  cursor: pointer !important;
+}
+.vertical-scrollable {
+  border-right: 2px solid #c3bdbd;
+  min-height: 100vh;
+}
+.preview {
+  text-align: center;
+}
+.preview img {
+  width: 35% !important;
+}
+.custom-model-content {
+  border-top-right-radius: 50px;
+}
+.custom-modal-header {
+  background: linear-gradient(to right, #313131, #cbd0d0);
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  color: white;
+}
+.custom-btn {
+  background: none;
+  outline: none;
+  border: none;
+}
+.timeline-head{
+	margin-left: 3rem;
+}
+.timeline-post textarea {
+  width: 60%;
+  outline: none !important;
+  margin-left: 12%;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px #00000029;
+  border-radius: 12px;
+}
+.timeline-post p {
+  margin-left: 13%;
+}
+.ad-box {
+  box-shadow: 0 10px 20px #3c1c1c7a;
+}
+.card-comment {
+  padding: 25px;
+  margin-top: 25px;
+  border-radius: 12px;
+}
+.comment-input {
+  margin-top: 15px;
+  margin-left: 60px;
+  width: 83%;
+  border: 1px solid #989896;
+  border-radius: 15px;
+  padding: 15px;
+  outline: none;
+  resize: none;
+}
+.comment-send {
+  height: 57px;
+  margin-top: .92rem;
+  width: 5%;
+}
+.comment-text {
+  background-color: #abada64a;
+  margin: 0px 35px 20px 65px;
+  padding: 10px 25px 0px 25px;
+  border-radius: 25px;
+}
+.hidden {
+  display: none !important;
+}
+select {
+  font-family: FontAwesome
+}
+.blue-text {
+  color: #2196f3 !important;
+}
+.bg-outline-famroutes {
+  border: 2px solid #d94352;
+}
+#mdb-5-search-container {
+  position: relative;
+  font-size: .8rem;
+}
+.pills-deep-purple .nav-link.active, .pills-deep-purple .show > .nav-link, .tabs-deep-purple {
+  background-color: #512da8 !important;
+}
+.md-pills .nav-link.active {
+  color: #fff;
+}
+.card.card-cascade.wider {
+  background-color: transparent;
+  box-shadow: none;
+}
+.card.card-cascade.wider .view.view-cascade {
+  z-index: 2;
+}
+.card.card-cascade .view.view-cascade, .card.card-image [class*=rgba-] {
+  border-radius: .25rem;
+}
+.card.card-cascade .view.view-cascade, .md-pills .nav-link.active:hover {
+  box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+}
+.view {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.card.card-cascade.wider .card-body.card-body-cascade {
+  z-index: 1;
+  margin-right: 4%;
+  margin-left: 4%;
+  background: #fff;
+  border-radius: 0 0 .25rem .25rem;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+.md-pills .nav-link:hover {
+  background-color: #c2c0c0;
+  color: #ffffff;
+  text-align: center;
+  transition: all .4s;
+}

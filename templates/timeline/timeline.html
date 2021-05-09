@@ -1,0 +1,700 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %} " />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/profile-mood.css' %} " />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link href=" {% static 'css/mdb.min.cs' %}s" rel="stylesheet" />
+    <link href=" {% static 'css/style.css' %}" rel="stylesheet" />
+    <link href=" {% static 'css/responsive.css' %}" rel="stylesheet" />
+    <link href=" {% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src=" {% static 'js/popper.min.js' %} "></script>
+    <script type="text/javascript" src=" {% static 'bootstrap/js/bootstrap.min.js' %} "></script>
+    <script type="text/javascript" src=" {% static 'js/jquery.liveurl.js' %} "></script>
+    <script type="text/javascript" src=" {% static 'js/mdb.min.j' %} s"></script>
+    <script type="text/javascript" src=" {% static 'fontawesome-pro-5.13.0/js/all.js' %} "></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-gray d-flex fixed-top">
+        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-6 col-8 d-flex">
+            <div class="">
+                <button class="btn btn-outline-dark btn-sm openbtn" onclick="myFunction()" id="menu-toggle">
+                    <span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span>
+                </button>
+            </div>
+            <form action="#" method="post">
+                <div class="container flex">
+                    <div class="mood-logo col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6">
+                        <img src=" {% static 'img/mood-png.png' %}" alt="" class="img-fluid" />
+                    </div>
+                    <div class="input-group search">
+                        <input class="form-control py-2 border-right-0 border" type="search" id="search-input"
+                            placeholder="Search" />
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary border-left-0 border bg-white" id="btn-icon"
+                                type="button">
+                                <i class="fa fa-search text-dark"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-5 col-sm-6 col-4 float-right d-flex">
+            <button class="navbar-toggler navv" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContents" aria-controls="navbarSupportedContents" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContents">
+                <ul class="navbar-nav disp">
+                    <li class="nav-item dropdown drop-noti comment">
+                        <a href="#" class="btn btn-clean notification-btn comment-btn">
+                            <i class="fas fa-comment-alt bell-btn"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown drop-noti noti">
+                        <a href="#" class="btn btn-clean notification-btn">
+                            <span class="badge badge-dark badge-corner"
+                                style="padding-top: 5px; border-radius: 50%">8</span>
+                            <i class="far fa-bell text-dark bell-btn"></i>
+                        </a>
+                    </li>
+                    <div class="d-flex">
+                        <div class="timeline-headernav-profile">
+                            <img src=" {{ request.user.bio.profile_pic}}" alt="" class="rounded-circle" />
+                        </div>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mr-5 text-dark" href="#" id="navbarDropdown2"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{request.user.username}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-danger logout-dropbox" href=" #">View Profile</a>
+                                <a class="dropdown-item logout-dropbox" href="#">Help</a>
+                                <a class="dropdown-item logout-dropbox" href="#">Logout</a>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="border-bottom bordclass"></div>
+    <div class="d-flex w-100" style="margin-top: 5rem" id="wrapper">
+        <!-- Sidebar -->
+        <div class="border-right sidepanel" id="sidebar-wrapper">
+            <div class="col-12 my-profile mt-4">
+                <div class="profilepic-leftnav">
+                    <img src="{{request.user.bio.profile_pic}}" alt="" style="border-radius: 50%; width: 45%" />
+                </div>
+                <div class="dropdown show leftside-dropdown">
+                    <a class="btn btn-secondary dropdown-toggle border-0 text-dark text"
+                        style="background-color: transparent" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{request.user.username}}
+                    </a>
+                    <div class="dropdown-menu text-left" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Help</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="search-leftnav col-12">
+                <div class="nav-item dropdown drop-noti">
+                    <a href="#" class="btn btn-clean notification-btn">
+                        <i class="fas fa-comment-alt"></i>
+                    </a>
+                </div>
+                <div class="nav-item dropdown drop-noti">
+                    <a href="#" class="btn btn-clean notification-btn">
+                        <span class="badge badge-dark badge-corner"
+                            style="padding-top: 5px; border-radius: 50%; right: -20px !important">8</span>
+                        <i class="far fa-bell text-dark"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="search-leftnav col-12">
+                <input type="text" name="search" placeholder="SEARCH.." class="search2" />
+                <button type="submit" class="scrhbtn"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="list-group list-group-flush mt-4 left-nav">
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="fas fa-home-lg bg-white p-1 text-dark p-1 rounded-circle"></i>
+                    </button>
+                    <span class="px-4 pt-1 items text-success font-weight-bold">Home</span>
+                </a>
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="fas fa-id-card bg-dark text-white p-1 rounded-circle"></i>
+                    </button>
+                    <span class="px-4 pt-1 items font-weight-bold">Profile</span></a>
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="fas fa-user-friends bg-dark p-1 text-white rounded-circle"></i>
+                    </button>
+                    <span class="px-3 pt-1 items font-weight-bold">Groups</span></a>
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="fas fa-bell bg-dark p-1 text-white rounded-circle"></i>
+                    </button>
+                    <span class="px-4 pt-1 items font-weight-bold">Activities</span></a>
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="fas fa-cog bg-dark p-1 text-white rounded-circle"></i>
+                    </button>
+                    <span class="px-4 pt-1 items font-weight-bold">Settings</span>
+                </a>
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="fas fa-question-circle bg-dark p-1 text-white rounded-circle"></i>
+                    </button>
+                    <span class="px-4 pt-1 items font-weight-bold">Help</span>
+                </a>
+                <a href="#" class="list-group-items list-group-item-action d-flex">
+                    <button type="button" class="custom-btn icon-btn" title="Save">
+                        <i class="far fa-plus-circle bg-dark p-1 text-white rounded-circle"></i>
+                    </button>
+                    <span class="px-4 pt-1 items font-weight-bold">FAQ</span>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex w-100" id="page-content-wrapper">
+            <!-- Sidebar -->
+            <div class="container-fluid p-0">
+                <div class="row m-0">
+                    <div
+                        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 center-scroll row-height p-0 profile-body pt-3">
+                        <div class="col-md-9 col-12 timeline-post pt-1 pb-1 mt-2" style="
+                  background: #ffffff 0% 0% no-repeat padding-box;
+                  box-shadow: 0px 3px 10px #c1c1c1;
+                  border-radius: 12px;
+                  margin: 2% auto;
+                ">
+                            <div class="d-flex mt-2 timeline-head">
+                                <img src="{{request.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                                    loading="lazy" />
+                                <h6 class="text-center mt-4 ml-2"><strong>{{request.user.username}}</strong></h6>
+                            </div>
+                            <textarea class="form-control" rows="1" placeholder="Write something to Roland…"></textarea>
+                            <p data-toggle="modal" data-target="#newPostModal">
+                                <span><i class="far fa-image"></i></span>Photos/Videos
+                            </p>
+                        </div>
+                        {% for i in posts %}
+                        <div class="col-md-9 col-12 card mt-3" style="
+                  background: #ffffff 0% 0% no-repeat padding-box;
+                  box-shadow: 0px 3px 10px #c1c1c1;
+                  border-radius: 12px;
+                  margin: 2% auto;
+                ">
+                            <div class="card-header border-0">
+                                <div class="card-title">
+                                    <div class="d-flex">
+                                        <img src="{{i.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                                            loading="lazy" />
+                                        <h6 class="text-center mt-4 ml-2"><strong>{{i.user.first_name}}
+                                                {% if  i.user.last_name %} {{i.user.last_name}} {% endif %}</strong>
+                                        </h6>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="custom-btn" title="Save">
+                                            <i class="far fa-bookmark"></i>
+                                        </button>
+                                        <small class="text-muted">Posted {{i.date|naturaltime}}</small>
+                                    </div>
+                                    <div class="float-right"></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    {{i.caption}}
+                                </p>
+                            </div>
+                            <img src="{{i.file.url }}" class="card-img-bottom m-auto" style="width: 95%" alt="..." />
+                            <div class="card-footer border-0">
+                                <a href="{% url 'postlike' i.id %}" id="likeBtn{{i.id}}">
+                                    <i id="likeIcon{{i.id}}"
+                                        class="{% if i.pk in liked_posts %} fas fa-heart {% else %} far fa-heart {% endif %} text-dark">
+                                    </i></a> <button id="likeCount{{i.id}}"
+                                    style="background:none;border:none;">{{ i.likecount }}</button>
+
+                                <button type="button" class="custom-btn mr-4" title="Share">
+                                    <i class="fas fa-share text-primary"></i>20
+                                </button> <button type="button" class="custom-btn comment-btn{{i.id}}" title="Comment"
+                                    id="comment-btn{{i.id}}"><i class="fas fa-comment"
+                                        style="color: #D848DC;"></i>{{i.cmtcount}}
+                                </button>
+
+
+                                <div class="card-comment hidden" id="comment-card{{i.id}}">
+                                    <div class="d-flex avatar">
+                                        {% if request.user.bio.profile_pic %}<img src="{{request.user.bio.profile_pic}}"
+                                            class="rounded-circle" height="50" style="margin-left: -31px;" alt=""
+                                            loading="lazy" /> {% else %}
+                                        <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="50"
+                                            width="50" style="margin-left: -31px;" alt="" loading="lazy" />
+                                        {% endif %}
+                                        <h6 class="text-center mt-3 ml-2"><strong>Blue Sapphire</strong></h6>
+                                    </div>
+                                    <form method="post" action="{% url 'comment' %}" id="commentForm{{i.id}}">
+                                        {% csrf_token %}
+
+                                        <div class="input-group">
+                                            <textarea class="comment-input " rows="1" placeholder="Write a comment.."
+                                                name="comments" id="comments{{i.id}}"></textarea>
+                                            <input type="hidden" value="{{i.id}}" name="commentid"
+                                                id="commentid{{i.id}}">
+                                            <button type="submit"
+                                                class="btn btn-outline-famroutes btn-floating comment-send"><i
+                                                    class="fas fa-angle-double-right"
+                                                    style="font-size:25px;"></i></button>
+                                        </div>
+
+                                    </form>
+                                    <div class="col mt-3">
+                                        <h6>Recent Comments</h6>
+                                        <p>{{i.cmtcount}}</p>
+                                    </div>
+
+
+
+
+
+                                    <div class="card w-100">
+
+                                        {% for j in i.cmtset %}
+                                        <div class="d-flex p-3 avatar">
+                                            {% if j.user.bio.profile_pic %}
+                                            <img src="{{j.user.bio.profile_pic}}" class="rounded-circle " height="40"
+                                                width="40" alt="" loading="lazy" />
+                                            {% else %}
+                                            <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="40"
+                                                width="40" alt="" loading="lazy" />
+
+                                            {% endif%}
+
+                                            <h6 class="text-center mt-2 ml-2"><strong>{{j.user.first_name}}</strong>
+                                            </h6>
+                                        </div>
+                                        <div class="comment-text">
+                                            <p>{{j.comment}}</p>
+                                        </div>
+                                        <!--                                    <div class="d-flex p-3 avatar"><img-->
+                                        <!--                                            src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"-->
+                                        <!--                                            class="rounded-circle " height="70" width="70" alt="" loading="lazy"/>-->
+                                        <!--                                        <h6 class="text-center mt-2 ml-2"><strong>Blue Sapphire</strong></h6>-->
+                                        <!--                                    </div>-->
+                                        {% endfor %}
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $("#likeBtn{{i.id}}").click(function (e) {
+                                e.preventDefault();
+                                var URL = this.href;
+                                var likecount = $('#likeCount{{i.id}}').val();
+                                console.log(likecount);
+
+
+                                $.ajax({
+                                    url: URL,
+                                    success: function (response) {
+                                        console.log(response.liked);
+                                        console.log(response.lcn);
+
+                                        if (response.liked === true) {
+                                            $("#likeIcon" + response.post_id).removeClass(
+                                                'far fa-heart text-dark');
+                                            $("#likeIcon" + response.post_id).attr('class',
+                                                'fas fa-heart text-dark');
+
+                                            $("#likeCount{{i.id}}").html(response.lcn);
+
+
+                                        } else {
+                                            $("#likeIcon" + response.post_id).removeClass(
+                                                'fas fa-heart text-dark');
+                                            $("#likeIcon" + response.post_id).attr('class',
+                                                'far fa-heart text-dark');
+
+                                            $("#likeCount{{i.id}}").html(response.lcn);
+
+                                        }
+                                    },
+
+                                });
+                            });
+                            $(".comment-btn{{i.id}}").on("click", function () {
+                                $("#comment-card{{i.id}}").toggleClass("hidden");
+                            });
+
+
+                            $("#commentForm{{i.id}}").on("submit", function (e) {
+                                e.preventDefault();
+
+                                var comments = $('#comments{{i.id}}').val();
+                                var commentid = $('#commentid{{i.id}}').val();
+                                var token = '{{csrf_token}}';
+
+                                $.ajax({
+                                    headers: {
+                                        "X-CSRFToken": token
+                                    },
+                                    url: "{% url 'comment' %}",
+                                    type: 'POST',
+                                    data: {
+                                        "comments": comments,
+                                        "commentid": commentid
+                                    },
+                                    dataType: 'json',
+                                    success: function (comment_list) {
+
+
+
+
+
+
+
+
+
+                                    }
+
+                                })
+
+                            });
+                        </script>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- /#Sidebar -->
+        </div>
+    </div>
+    <!--Modal Start     -->
+    <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-model-content">
+                <div class="modal-header custom-modal-header bg-gradient-blue">
+                    <h5 class="modal-title" id="newPostModalLabel">New Post</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'post' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <select class="privacy-select" name="privacy" id="privacy">
+                                <option value="1">&#xf0ac; Public</option>
+                                <option value="2">&#xf0c0; Friends</option>
+                                <option value="3">&#xf023; Only Me</option>
+                            </select>
+                            <textarea class="form-control br-20" placeholder="write something here" name="caption"
+                                id="caption"></textarea>
+                            <div class="liveurl-loader"></div>
+                            <div class="liveurl">
+                                <div class="close" title="Entfernen"></div>
+                                <div class="inner">
+                                    <div class="image"></div>
+                                    <div class="details">
+                                        <div class="info">
+                                            <div class="title"></div>
+                                            <div class="description"></div>
+                                            <div class="url"></div>
+                                        </div>
+                                        <div class="thumbnail">
+                                            <div class="pictures">
+                                                <div class="controls">
+                                                    <div class="prev button inactive"></div>
+                                                    <div class="next button inactive"></div>
+                                                    <div class="count">
+                                                        <span class="current">0</span><span> on </span><span
+                                                            class="max">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="video"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview">
+                            <img class="img-thumbnail preview w-25 ml-2" src="img/DENTOL black.png" alt="" />
+                        </div>
+                        <div class="add">
+                            <label for="upload"><i class="fas fa-photo-video"></i> Add photos or videos</label>
+                            <input type="file" id="upload" name="file" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4" />
+                        </div>
+
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    <button type="submit" class="btn btn-primary bg-gradient-blue">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Ends-->
+    <script>
+        function myFunction() {
+            var x = document.getElementById("sidebar-wrapper");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        //        $("#menu-toggle").click(function (e) {
+        //            e.preventDefault();
+        //            $("#sidebar-wrapper").show();
+        //            $("#wrapper").toggleClass("toggled");
+        //        });
+        //
+    </script>
+    <script>
+        $(".comment-btn{{i.id}}").on("click", function () {
+            $("#comment-card{{i.id}}").toggleClass("hidden");
+        });
+        // Hide submenus
+        $("#body-row .collapse").collapse("hide");
+
+        // Collapse/Expand icon
+        $("#collapse-icon").addClass("fa-angle-double-left");
+
+        // Collapse click
+        $("[data-toggle=sidebar-colapse]").click(function () {
+            SidebarCollapse();
+        });
+
+        function SidebarCollapse() {
+            $(".menu-collapsed").toggleClass("d-none");
+            $(".sidebar-submenu").toggleClass("d-none");
+            $(".submenu-icon").toggleClass("d-none");
+            $("#sidebar-container").toggleClass("sidebar-expanded sidebar-collapsed");
+
+            // Treating d-flex/d-none on separators with title
+            var SeparatorTitle = $(".sidebar-separator-title");
+            if (SeparatorTitle.hasClass("d-flex")) {
+                SeparatorTitle.removeClass("d-flex");
+            } else {
+                SeparatorTitle.addClass("d-flex");
+            }
+
+            // Collapse/Expand icon
+            $("#collapse-icon").toggleClass("fa-angle-double-left fa-angle-double-right");
+        }
+
+        document.getElementById("upload").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            var fileReader = new FileReader();
+            if (file.type.match("image")) {
+                fileReader.onload = function (event) {
+                    $(".preview").attr("src", event.target.result);
+                };
+                fileReader.readAsDataURL(file);
+            } else {
+                fileReader.onload = function () {
+                    var blob = new Blob([fileReader.result], {
+                        type: file.type
+                    });
+                    var url = URL.createObjectURL(blob);
+                    // console.log(url);
+                    var video = document.createElement("video");
+                    var timeupdate = function () {
+                        if (snapImage()) {
+                            video.removeEventListener("timeupdate", timeupdate);
+                            video.pause();
+                        }
+                    };
+                    video.addEventListener("loadeddata", function () {
+                        if (snapImage()) {
+                            video.removeEventListener("timeupdate", timeupdate);
+                        }
+                    });
+                    var snapImage = function () {
+                        var canvas = document.createElement("canvas");
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+                        var image = canvas.toDataURL();
+                        var success = image.length > 100000;
+                        if (success) {
+                            var img = document.createElement("img");
+                            img.src = image;
+                            // document.getElementsByTagName('div')[0].appendChild(img);
+                            $(".preview").attr("src", image);
+                            URL.revokeObjectURL(url);
+                        }
+                        return success;
+                    };
+                    video.addEventListener("timeupdate", timeupdate);
+                    video.preload = "metadata";
+                    video.src = url;
+                    // Load video in Safari / IE11
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.play();
+                };
+                fileReader.readAsArrayBuffer(file);
+            }
+        });
+    </script>
+    <script>
+        var curImages = new Array();
+
+        $("textarea").liveUrl({
+            loadStart: function () {
+                $(".liveurl-loader").show();
+            },
+            loadEnd: function () {
+                $(".liveurl-loader").hide();
+            },
+            clear: function () {
+                $(".liveurl").hide();
+            },
+            success: function (data) {
+                var output = $(".liveurl");
+                output.find(".title").text(data.title);
+                output.find(".description").text(data.description);
+                output.find(".url").text(data.url);
+                output.find(".image").empty();
+
+                output.find(".close").one("click", function () {
+                    var liveUrl = $(this).parent();
+                    liveUrl.hide("fast");
+                    liveUrl.find(".video").html("").hide();
+                    liveUrl.find(".image").html("");
+                    liveUrl.find(".controls .prev").addClass("inactive");
+                    liveUrl.find(".controls .next").addClass("inactive");
+                    liveUrl.find(".thumbnail").hide();
+                    liveUrl.find(".image").hide();
+
+                    $("textarea").trigger("clear");
+                    curImages = new Array();
+                });
+
+                output.show("fast");
+
+                if (data.video != null) {
+                    var ratioW = data.video.width / 350;
+                    data.video.width = 350;
+                    data.video.height = data.video.height / ratioW;
+
+                    var video =
+                        '<object width="' +
+                        data.video.width +
+                        '" height="' +
+                        data.video.height +
+                        '">' +
+                        '<param name="movie"' +
+                        'value="' +
+                        data.video.file +
+                        '"></param>' +
+                        '<param name="allowScriptAccess" value="always"></param>' +
+                        '<embed src="' +
+                        data.video.file +
+                        '"' +
+                        'type="application/x-shockwave-flash"' +
+                        'allowscriptaccess="always"' +
+                        'width="' +
+                        data.video.width +
+                        '" height="' +
+                        data.video.height +
+                        '"></embed>' +
+                        "</object>";
+                    output.find(".video").html(video).show();
+                }
+            },
+            addImage: function (image) {
+                var output = $(".liveurl");
+                var jqImage = $(image);
+                jqImage.attr("alt", "Preview");
+
+                if (image.width / image.height > 7 || image.height / image.width > 4) {
+                    // we dont want extra large images...
+                    return false;
+                }
+
+                curImages.push(jqImage.attr("src"));
+                output.find(".image").append(jqImage);
+
+                if (curImages.length == 1) {
+                    // first image...
+
+                    output.find(".thumbnail .current").text("1");
+                    output.find(".thumbnail").show();
+                    output.find(".image").show();
+                    jqImage.addClass("active");
+                }
+
+                if (curImages.length == 2) {
+                    output.find(".controls .next").removeClass("inactive");
+                }
+
+                output.find(".thumbnail .max").text(curImages.length);
+            },
+        });
+
+        $(".liveurl ").on("click", ".controls .button", function () {
+            var self = $(this);
+            var liveUrl = $(this).parents(".liveurl");
+            var content = liveUrl.find(".image");
+            var images = $("img", content);
+            var activeImage = $("img.active", content);
+
+            if (self.hasClass("next")) var elem = activeImage.next("img");
+            else var elem = activeImage.prev("img");
+
+            if (elem.length > 0) {
+                activeImage.removeClass("active");
+                elem.addClass("active");
+                liveUrl.find(".thumbnail .current").text(elem.index() + 1);
+
+                if (elem.index() + 1 == images.length || elem.index() + 1 == 1) {
+                    self.addClass("inactive");
+                }
+            }
+
+            if (self.hasClass("next")) var other = elem.prev("img");
+            else var other = elem.next("img");
+
+            if (other.length > 0) {
+                if (self.hasClass("next")) self.prev().removeClass("inactive");
+                else self.next().removeClass("inactive");
+            } else {
+                if (self.hasClass("next")) self.prev().addClass("inactive");
+                else self.next().addClass("inactive");
+            }
+        });
+    </script>
+</body>
+
+</html>
