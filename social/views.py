@@ -1,3 +1,4 @@
+from mood.helpers import *
 from django.shortcuts import redirect, render
 from social.models import *
 from mood.models import *
@@ -5,7 +6,23 @@ from django.db.models.query_utils import Q
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import json
 from social.forms import *
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+
+
+def activity(request):
+    try:
+        posts = Post.objects.filter(user=request.user)
+    except:
+        posts = []
+    # print(posts)
+    liked_posts = [i.post.pk for i in Like.objects.filter(user=request.user)]
+    print(liked_posts)
+    context = {
+        'posts': posts,
+        'liked_posts': liked_posts
+    }
+    return render(request, 'timeline/timeline.html', context)
 
 
 def timeline(request):
@@ -27,7 +44,6 @@ def timeline(request):
 
 
 def PostView(request):
-    form = PostForm()
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
 
@@ -116,7 +132,7 @@ def postlike(request, id):
 
     resp = {
         "liked": is_liked,
-        "post_id": id,
+        "post_id": str(id),
         "lcn": lcn,
     }
     response = json.dumps(resp)
@@ -134,8 +150,9 @@ def comment(request):
         post = request.POST.get('commentid')
         commentfeed = request.POST.get('comments')
 
-        postid = int(post)
-        p = Post.objects.get(id=postid)
+        postid = post
+        print(postid)
+        p = Post.objects.get(id=post)
         print(p)
         sender = p.user.id
         print(sender)
@@ -156,7 +173,7 @@ def comment(request):
         notify.notification_type = 2
         notify.save()
 
-        comment_list = []
+        # comment_list = []
 
         comment_list = [{
             "sender": request.user.id,
@@ -164,3 +181,80 @@ def comment(request):
         }]
 
         return JsonResponse(comment_list, safe=False)
+
+
+def check_friends(id, id2):
+    try:
+        c = Follow.objects.get(following__id=id2, follower__id=id)
+        x = Follow.objects.get(following__id=id, follower__id=id2)
+        if c.to == x.by:
+            pass
+
+    except:
+        pass
+    return None
+
+
+def friends(request):
+    c = get_active_friends(user=request.user)
+    # x = [i for i in Follow.objects.filter(
+    #     follower=request.user) if i.friends == True]
+    # print(x)
+    # print([i.following.pk for i in request.user.by.all()])
+    # print(request.user.bio.following)
+
+    # _x = [i.following.pk for i in request.user.by.all()]
+    # print(_x)
+    # f = Follow.objects.filter(follower__in=_x)
+    # print(f)
+    return HttpResponse('text')
+
+
+def post_detail(request, id):
+    post = Post.objects.get(id=id)
+    context = {
+        'post': post
+    }
+    return render(request, 'post/post.html', context)
+
+
+@ csrf_exempt
+def follow(request):
+    if request.method == 'POST':
+        following = request.POST.get('f-id')
+        try:
+            x = Follow.objects.get(
+                following_id=following, follower=request.user)
+        except:
+            x = None
+        if x is None:
+            try:
+                Follow.objects.create(following_id=following,
+                                      follower=request.user)
+
+            except:
+                pass
+            print('followed')
+        else:
+            x.delete()
+            print('unfollow')
+        return HttpResponse(True)
+    return HttpResponse(False)
+
+
+def friend_request(request):
+    if request.method == "POST":
+        rid = request.POST.get('r-id')
+        try:
+            x = Friend.objects.get(
+                Q(u1=request.user, u2_id=rid) | Q(u1_id=rid, u2=request.user)).exclude(active=True)
+        except:
+            x = None
+        if x is None:
+            Friend.objects.create(u1=request.user, u2_id=rid)
+            print('friend request sent')
+        else:
+            x.delete()
+            print('friend request canceled')
+        return HttpResponse(True)
+    return HttpResponse(False)

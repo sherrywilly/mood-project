@@ -6,6 +6,8 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
+# from social.models import Notification
+
 # from byhandpro.social.models import Post
 
 
@@ -40,7 +42,6 @@ class CustomAccountManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(_('email address'), unique=True, null=True)
     username = models.CharField(max_length=150, unique=True, null=True)
     first_name = models.CharField(max_length=150, blank=True, null=True)
@@ -95,3 +96,29 @@ class Bio(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    @property
+    def notification_count(self):
+        try:
+            _x = self.user.noti_to_user.filter(is_seen=False)
+            _x = _x.count()
+        except:
+            _x = 0
+        return _x
+
+
+class Privacy(models.Model):
+    CHOICE = (
+        ('1', 'Public'),
+        ('2', 'Friends'),
+        ('3', 'Only Me'),
+    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    phone_privacy = models.CharField(
+        choices=CHOICE, default='1', max_length=25)
+    email_privacy = models.CharField(
+        choices=CHOICE, default='1', max_length=25)
+    about_privacy = models.CharField(
+        choices=CHOICE, default='1', max_length=25)
+    search_privacy = models.CharField(
+        choices=CHOICE, default='1', max_length=25)

@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+{% load static %}
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notifications</title>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile-mood.css' %}" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+    <link href="{% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.liveurl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fontawesome-pro-5.13.0/js/all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        .divider-self {
+
+            width: 100%;
+            background-color: rgb(199, 186, 186);
+            margin-bottom: 3px;
+            margin-left: 20px;
+            position: relative;
+            padding: 1px;
+        }
+    </style>
+</head>
+
+{% endblock %}
+
+
+{% block body%}
+
+
+<div class="d-flex w-100" id="page-content-wrapper">
+    <!-- Sidebar -->
+    <div class="container-fluid">
+        <div class="row m-0 p-l-3">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 center-scroll row-height pt-3">
+                <div class="row m-0 notification-body pt-2 pb-3 pr-5 pl-2">
+                    <h5>Notification</h5>
+                    <div class="divider-self"></div>
+                    {% for i in notifications %}
+
+
+
+                    {% if i.notification_type == 1 %}
+                    <div>
+                        <a href="{% url 'post_detail' i.post_id %}">
+                            <div class="m-2 notification">
+                                {% if i.sender.bio.profile_pic %}
+                                <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
+                                {% else %}
+                                <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
+
+                                {% endif %}
+                                <p>{{ i.sender.first_name }}<span class="text-blue ml-2">Liked your Post</span></p>
+                            </div>
+                        </a>
+                    </div>
+                    {% elif i.notification_type == 2 %}
+                    <div>
+
+
+
+                        <a href="{% url 'post_detail' i.post_id %}">
+                            <div class="m-2 notification">
+                                <div class="m-2 notification">
+                                    {% if i.sender.bio.profile_pic %}
+                                    <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
+                                    {% else %}
+                                    <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
+
+                                    {% endif %}
+                                    <p>{{ i.sender.first_name }}<span class="text-blue ml-2">Commented on your
+                                            post</span></p>
+                                </div>
+                        </a>
+                    </div>
+                    {% elif i.notification_type == 3 %}
+                    <div>
+                        <div class="m-2 notification">
+                            <div class="m-2 notification">
+                                {% if i.sender.image %}
+                                <img src="{{i.sender.image.url}}" alt="" class="img-fluid rounded-circle">
+                                {% else %}
+                                <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
+                                {% endif %}
+                                <p>{{ i.sender.first_name }}<span class="text-blue ml-2">follow you</span></p>
+                            </div>
+                        </div>
+                        <!-- {% elif i.notification_type == 5 %}
+                        <div>
+                            <div class="m-2 notification">
+                                <div class="m-2 notification">
+                                    {% if i.sender.image %}
+                                    <img src="{{i.sender.image.url}}" alt="" class="img-fluid rounded-circle">
+                                    {% else %}
+                                    <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
+                                    {% endif %}
+                                    <p>{{ i.sender.first_name }}<span class="text-blue ml-2">Endorsed your
+                                            profile</span></p>
+                                </div>
+                            </div> -->
+                        {% elif i.notification_type == 4 %}
+                        <div>
+                            <div class="m-2 notification">
+                                <div class="m-2 notification">
+                                    {% if i.sender.image %}
+                                    <img src="{{i.sender.image.url}}" alt="" class="img-fluid rounded-circle">
+                                    {% else %}
+                                    <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
+                                    {% endif %}
+                                    <p>{{ i.sender.first_name }}<span class="text-blue ml-2">Connection request send
+                                            your profile</span></p>
+                                </div>
+                            </div>
+                            {% else %}
+                            <!--					  <a href="#">-->
+                            <!--						  <div class="m-2 notification">-->
+                            <!--						  <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">-->
+                            <!--						  <p>Bluesapphire<span class="text-blue ml-2">posted an nothing</span></p>-->
+                            <!--						  </div>-->
+                            <!--					  </a>-->
+                            {% endif %}
+
+                            <!--				  <a href="">-->
+                            <!--					  <div class="m-2 notification">-->
+                            <!--					  <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">-->
+                            <!--					  <p>Bluesapphire<span class="text-blue ml-2">posted an enquiry</span></p>-->
+                            <!--					  </div>-->
+                            <!--				  </a>-->
+
+                            {% endfor %}
+                            <!--			      <div class="m-2 notification">-->
+                            <!--				  <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">-->
+                            <!--				  <p>Bluesapphire<span class="text-blue ml-2">posted an enquiry</span></p>-->
+                            <!--				  </div>-->
+                            <!--			      <div class="m-2 notification">-->
+                            <!--				  <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">-->
+                            <!--				  <p>Bluesapphire<span class="text-blue ml-2">posted an enquiry</span></p>-->
+                            <!--				  </div>-->
+                            <!--			      <div class="m-2 notification">-->
+                            <!--				  <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">-->
+                            <!--				  <p>Bluesapphire<span class="text-blue ml-2">posted an enquiry</span></p>-->
+                            <!--				  </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#Sidebar -->
+        </div>
+    </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("sidebar-wrapper");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        //        $("#menu-toggle").click(function (e) {
+        //            e.preventDefault();
+        //            $("#sidebar-wrapper").show();
+        //            $("#wrapper").toggleClass("toggled");
+        //        });
+        //    
+    </script>
+    <script>
+        //function openNav() {
+        //  document.getElementById("sidebar-wrapper").style.width = "166px";
+        //}
+        //
+        //function closeNav() {
+        //  document.getElementById("sidebar-wrapper").style.width = "0";
+        //}
+
+        function readMore(id) {
+            let dots = document.querySelector(`.card[data-id="${id}"] .dots`);
+            let moreText = document.querySelector(`.card[data-id="${id}"] .more`);
+            let btnText = document.querySelector(`.card[data-id="${id}"] .myBtn`);
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+
+                btnText.innerHTML = '<i class="fas fa-chevron-circle-down "></i>';
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = '<i class="fas fa-chevron-circle-up"></i>';
+                moreText.style.display = "inline";
+            }
+        }
+    </script>
+    </body>
+
+</html>
+
+{% endblock %}

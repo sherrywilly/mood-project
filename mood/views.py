@@ -7,6 +7,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from social.models import *
+from itertools import groupby
+from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your views here.
 
 
@@ -48,8 +51,9 @@ def check_email_exist(request):
     print(request.user.id)
 
     user_obj = CustomUser.objects.filter(
-        Q(email=email) & ~Q(id=request.user.id)).exists()
+        Q(email=email)).exists()
     print(user_obj)
+    print("user")
     if user_obj:
         return HttpResponse(True)
     else:
@@ -73,7 +77,8 @@ def loginpage(request):
         password = request.POST.get('password')
         # user = authenticate(request, email=username, password=password)
         try:
-            user = CustomUser.objects.get(username=username)
+            user = CustomUser.objects.get(
+                Q(username=username) | Q(email=username))
 
             if user.check_password(password):
 
@@ -102,9 +107,142 @@ def loginpage(request):
     return render(request, 'registration/login.html')
 
 
-def my_profile(request):
-    posts = Post.objects.filter(user=request.user)
+def my_profile(request, pk=None):
+    if pk is not None:
+        current_user = CustomUser.objects.get(id=pk)
+    else:
+        current_user = request.user
+    posts = Post.objects.filter(user=current_user)
+    try:
+        friends = [i for i in Follow.objects.filter(
+            follower=current_user) if i.friends == True]
+    except:
+        friends = []
+    _y = [i.following.pk for i in request.user.by.all()]
+    print(_y)
+    p = groupby(posts, 4)
+
     context = {
         'posts': posts,
+        'gposts': p,
+        'friends': friends,
+        'r_user': _y,
+        'current_user': current_user
     }
     return render(request, 'profile/profile.html', context)
+
+
+def notification(request):
+    notifications = Notification.objects.filter(
+        user=request.user).order_by('-date')
+    notifications.update(is_seen=True)
+    x = request.user.noti_to_user.filter(is_seen=False)
+    print(x)
+
+    context = {
+        'notifications': notifications,
+    }
+    return render(request, 'notification/notification.html', context)
+
+
+def explore_users(request):
+
+    search = request.GET.get('tags')
+    searching = CustomUser.objects.filter(Q(first_name__icontains=search) | Q(
+        username__icontains=search) | Q(email__icontains=search)).exclude(id=request.user.id)
+    a = len(searching)
+    print(a)
+    print(searching)
+    _y = [i.following.pk for i in request.user.by.all()]
+
+    context = {
+        'searching': searching,
+        'count': a,
+        'r_user': _y
+    }
+    return render(request, 'search/search.html', context)
+
+
+def user_setting(request):
+    context = {
+
+    }
+    return render(request, "profile/edit.html", context)
+
+
+@csrf_exempt
+def email_privacy_update(request):
+    Privacy.objects.get_or_create(user=request.user)
+
+    _x = Privacy.objects.get(user=request.user)
+    print(_x)
+    _x.email_privacy = request.POST.get('email-id')
+    _x.save()
+
+    return HttpResponse(True)
+
+
+@csrf_exempt
+def phone_privacy_update(request):
+    Privacy.objects.get_or_create(user=request.user)
+    try:
+        _x = Privacy.objects.get(user=request.user)
+        _x.phone_privacy = request.POST.get('phone-id')
+        _x.save()
+    except:
+        pass
+    return HttpResponse(True)
+
+
+@csrf_exempt
+def about_privacy_update(request):
+    Privacy.objects.get_or_create(user=request.user)
+    try:
+        _x = Privacy.objects.get(user=request.user)
+        _x.about_privacy = request.POST.get('about-id')
+        _x.save()
+    except:
+        pass
+    return HttpResponse(True)
+
+
+@csrf_exempt
+def search_privacy_update(request):
+    Privacy.objects.get_or_create(user=request.user)
+    try:
+        _x = Privacy.objects.get(user=request.user)
+        _x.search_privacy = request.POST.get('search-id')
+        _x.save()
+    except:
+        pass
+    return HttpResponse(True)
+
+
+def setting_update(request):
+    if request.method == 'POST':
+        fname = request.POST.get('first_name')
+        lname = request.POST.get('last_name')
+        email = request.POST.get('email')
+        dob = request.POST.get('dob')
+        phone = request.POST.get('phone')
+        gender = request.POST.get('inlineRadioOptions')
+        category = request.POST.get('inlineRadioOptions1')
+        partner = request.POST.get('partner')
+        user = CustomUser.objects.get(id=request.user.id)
+        user.first_name = fname
+        user.last_name = lname
+        user.email = email
+        user.phone = phone
+        user.save()
+        user2 = Bio.objects.get(user=request.user)
+        user2.gender = gender
+        user2.category = category
+        if partner is not None:
+            user2.partner = partner
+        user2.dob = dob
+        user2.save()
+
+        # lname= request.POST.get('')
+
+        return HttpResponseRedirect(reverse('my_profile'))
+    return HttpResponse(True)

@@ -1,858 +1,566 @@
+{% extends 'base.html' %}
 {% load static %}
-
+{% load humanize%}
+{% block header %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Profile</title>
 
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-    <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-      rel="stylesheet"
-    />
-    <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/profile-mood.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-      crossorigin="anonymous"
-    />
-    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/responsive.cs' %}s" rel="stylesheet" />
-    <link href="{% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
-    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.liveurl.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'fontawesome-pro-5.13.0/js/all.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile</title>
 
-  <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-gray d-flex fixed-top">
-      <div class="col-xl-8 col-lg-8 col-md-7 col-sm-6 col-8 d-flex">
-        <div class="">
-          <button
-            class="btn btn-outline-dark btn-sm openbtn"
-            onclick="myFunction()"
-            id="menu-toggle"
-          >
-            <span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span>
-          </button>
-        </div>
-        <form action="#" method="post">
-          <div class="container flex">
-            <div class="mood-logo col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6">
-              <img src="{% static 'img/mood-png.png' %}" alt="" class="img-fluid" />
-            </div>
-            <div class="input-group search">
-              <input
-                class="form-control py-2 border-right-0 border"
-                type="search"
-                id="search-input"
-                placeholder="Search"
-              />
-              <span class="input-group-append">
-                <button
-                  class="btn btn-outline-secondary border-left-0 border bg-white"
-                  id="btn-icon"
-                  type="button"
-                >
-                  <i class="fa fa-search text-dark"></i>
-                </button>
-              </span>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-6 col-4 float-right d-flex">
-        <button
-          class="navbar-toggler navv"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContents"
-          aria-controls="navbarSupportedContents"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContents">
-          <ul class="navbar-nav disp">
-            <li class="nav-item dropdown drop-noti comment">
-              <a href="#" class="btn btn-clean notification-btn comment-btn">
-                <i class="fas fa-comment-alt bell-btn"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown drop-noti noti">
-              <a href="#" class="btn btn-clean notification-btn">
-                <span
-                  class="badge badge-dark badge-corner"
-                  style="padding-top: 5px; border-radius: 50%"
-                  >8</span
-                >
-                <i class="far fa-bell text-dark bell-btn"></i>
-              </a>
-            </li>
-            <div class="d-flex">
-              <div class="timeline-headernav-profile">
-                <img src="{{request.user.bio.profile_pic}}" alt="" class="rounded-circle" />
-              </div>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle mr-5 text-dark"
-                  href="#"
-                  id="navbarDropdown2"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  {{request.user.username}}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item text-danger logout-dropbox" href=" #">View Profile</a>
-                  <a class="dropdown-item logout-dropbox" href="#">Help</a>
-                  <a class="dropdown-item logout-dropbox" href="#">Logout</a>
-                </div>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="border-bottom bordclass"></div>
-    <div class="d-flex w-100" style="margin-top: 5rem" id="wrapper">
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+  <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/profile-mood.css' %}" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/responsive.cs' %}s" rel="stylesheet" />
+  <link href="{% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.liveurl.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'fontawesome-pro-5.13.0/js/all.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body>
+{% endblock header %}
+{% block body %}
+    <div class="d-flex w-100" id="page-content-wrapper">
       <!-- Sidebar -->
-      <div class="border-right sidepanel" id="sidebar-wrapper">
-        <div class="col-12 my-profile mt-4">
-          <div class="profilepic-leftnav">
-            <img
-              src="{{request.user.bio.profile_pic}}"
-              alt=""
-              style="border-radius: 50%; width: 45%"
-            />
-          </div>
-          <div class="dropdown show leftside-dropdown">
-            <a
-              class="btn btn-secondary dropdown-toggle border-0 text-dark text"
-              style="background-color: transparent"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              {{request.user.username}}
-            </a>
-            <div class="dropdown-menu text-left" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">View Profile</a>
-              <a class="dropdown-item" href="#">Help</a>
-              <a class="dropdown-item" href="#">Logout</a>
+      <div class="container-fluid p-0">
+        <div class="row m-0">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 center-scroll row-height p-0 profile-body">
+            <div class="cover-photo p-0 w-100 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12">
+              <img src="{% static 'img/Rectangle-1774.jpg' %}" alt="" class="img-fluid" />
+              {% if not current_user.pk == request.user.pk %}
+              <div class="cover-photoBtn w-100 d-flex">
+                <button class="btn btn-light text-dark btn-photo m-1 f-btn" id="{{current_user.pk}}">{% if current_user.pk in r_user  %}UnFollow {% else %}Follow{% endif %}</button>
+
+                <script>
+                $(document).ready(function(){
+                  
+                  $('.f-btn').click(function(){
+                    x= $(this).attr('id')
+                    let y = $(this).text()
+                    console.log(x)
+                    console.log(y)
+                      $.ajax({
+                          url:'{% url 'follow' %}',
+                          method:"POST",
+                          data:{'f-id':x},
+                          success:function(data){
+                            console.log(y)
+                            if (data !="True"){
+                              alert('Failed')
+                            }else{
+                              console.log('hjk')
+                             if ( y != "UnFollow"){
+                              
+                             document.getElementById(x).innerHTML = "UnFollow"
+                            }else{
+      
+                               document.getElementById(x).innerHTML = "Follow"
+                            }}}
+                            
+                          
+                          
+                        })
+                  })
+
+                })
+                </script>
+                <button class="btn btn-light text-dark btn-photo m-1">Friends</button>
+              </div>
+              {% endif %}
             </div>
-          </div>
-        </div>
-        <div class="search-leftnav col-12">
-          <div class="nav-item dropdown drop-noti">
-            <a href="#" class="btn btn-clean notification-btn">
-              <i class="fas fa-comment-alt"></i>
-            </a>
-          </div>
-          <div class="nav-item dropdown drop-noti">
-            <a href="#" class="btn btn-clean notification-btn">
-              <span
-                class="badge badge-dark badge-corner"
-                style="padding-top: 2px; border-radius: 50%; right: -20px !important"
-                >8</span
-              >
-              <i class="far fa-bell text-dark"></i>
-            </a>
-          </div>
-        </div>
-        <div class="search-leftnav col-12">
-          <input type="text" name="search" placeholder="SEARCH.." class="search2" />
-          <button type="submit" class="scrhbtn"><i class="fa fa-search"></i></button>
-        </div>
-        <div class="list-group list-group-flush mt-4 left-nav">
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="fas fa-home-lg bg-dark p-1 text-white rounded-circle"></i>
-            </button>
-            <span class="px-4 pt-1 items font-weight-bold">Home</span>
-          </a>
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="fas fa-id-card bg-white p-1 text-dark rounded-circle"></i>
-            </button>
-            <span class="px-4 pt-1 items font-weight-bold text-success">Profile</span></a
-          >
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="fas fa-user-friends bg-dark p-1 text-white rounded-circle"></i>
-            </button>
-            <span class="px-3 pt-1 items font-weight-bold">Groups</span></a
-          >
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="fas fa-bell bg-dark p-1 text-white rounded-circle"></i>
-            </button>
-            <span class="px-4 pt-1 items font-weight-bold">Activities</span></a
-          >
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="fas fa-cog bg-dark p-1 text-white rounded-circle"></i>
-            </button>
-            <span class="px-4 pt-1 items font-weight-bold">Settings</span>
-          </a>
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="fas fa-question-circle bg-dark p-1 text-white rounded-circle"></i>
-            </button>
-            <span class="px-4 pt-1 items font-weight-bold">Help</span>
-          </a>
-          <a href="#" class="list-group-items list-group-item-action d-flex">
-            <button type="button" class="custom-btn icon-btn" title="Save">
-              <i class="far fa-plus-circle bg-dark p-1 text-white rounded-circle"></i>
-            </button>
-            <span class="px-4 pt-1 items font-weight-bold">FAQ</span>
-          </a>
-        </div>
-      </div>
-      <div class="d-flex w-100" id="page-content-wrapper">
-        <!-- Sidebar -->
-        <div class="container-fluid p-0">
-          <div class="row m-0">
-            <div
-              class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 center-scroll row-height p-0 profile-body"
-            >
-              <div class="cover-photo p-0 w-100 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12">
-                <img src="{% static 'img/Rectangle-1774.jpg' %}" alt="" class="img-fluid" />
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 profile-details p-0 m-2">
+              <div class="col-md-2 col-sm-2 col-12 profile-name text-center bg-gray">
+                <img src="{{ current_user.bio.profile_pic}}" alt="" class="img-fluid" style="object-fit: cover;" />
+                <h5 class="pt-2">{{current_user.first_name}}</h5>
               </div>
-              <div
-                class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 profile-details p-0 m-2"
-              >
-                <div class="col-md-2 col-sm-2 col-12 profile-name text-center bg-gray">
-                  <img src="{{request.user.bio.profile_pic}}" alt="" class="img-fluid" />
-                  <h5 class="pt-2">{{request.user.first_name}}</h5>
-                </div>
-                <div class="col-md-10 col-sm-10 col-12 profile-about bg-gray m-2">
-                  <h5>About Himself</h5>
-                  <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority
-                    have suffered alteration in some form, by injected humour, or randomised words
-                    which don't look even slightly believable.
-                  </p>
-                </div>
-              </div>
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 d-flex">
-                <div class="col-2 nav-dis"></div>
-                <div class="col-md-10 col-12 nav-pad">
-                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <a
-                        class="nav-link active"
-                        id="pills-expertise-tab"
-                        data-toggle="pill"
-                        href="#nav-about"
-                        role="tab"
-                        aria-controls="pills-home"
-                        aria-selected="true"
-                        >About</a
-                      >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a
-                        class="nav-link"
-                        id="pills-experience-tab"
-                        data-toggle="pill"
-                        href="#nav-posts"
-                        role="tab"
-                        aria-controls="pills-profile"
-                        aria-selected="false"
-                        >Posts</a
-                      >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a
-                        class="nav-link"
-                        id="pills-projects-tab"
-                        data-toggle="pill"
-                        href="#nav-gallery"
-                        role="tab"
-                        aria-controls="pills-contact"
-                        aria-selected="false"
-                        >Gallery</a
-                      >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a
-                        class="nav-link"
-                        id="pills-achievements-tab"
-                        data-toggle="pill"
-                        href="#nav-friends"
-                        role="tab"
-                        aria-controls="pills-contact"
-                        aria-selected="false"
-                        >Friends</a
-                      >
-                    </li>
-                  </ul>
-                  <div class="col-12 tab-content py-1 pl-0 px-sm-0" id="nav-tabContent">
-                    <div
-                      class="tab-pane fade show active"
-                      id="nav-about"
-                      role="tabpanel"
-                      aria-labelledby="nav-profile-tab"
-                    >
-                      <div class="col-12 text-right">
-                        <button
-                          type="submit"
-                          class="btn btn-light border m-1"
-                          data-toggle="modal"
-                          data-target="#editModal"
-                        >
-                          Edit Profile
-                        </button>
-                      </div>
-                      <div class="card login-height registration-card">
-                        <div class="card-body registration-body">
-                          <form action="" methot="post">
-                            <div class="form-group d-flex mt-3">
-                              <input
-                                type="text"
-                                class="form-control m-1 p-2 bg-gray"
-                                placeholder="First Name"
-                                value="{{request.user.first_name}}"
-                              />
-                              <input
-                                type="text"
-                                class="form-control m-1 p-2 bg-gray"
-                                placeholder="Last Name"
-                                value="{% if request.user.last_name %}{{ request.user.last_name }} {% endif %}"
-                              />
-                            </div>
-                            <div class="form-group d-flex">
-                              <input
-                                type="text"
-                                class="form-control m-1 p-2 bg-gray"
-                                placeholder="Mobile Number"
-                                value="{% if request.user.phone %}{{request.user.phone}}{% endif %}"
-                              />
-                              <input
-                                type="email"
-                                class="form-control m-1 p-2 bg-gray"
-                                placeholder="Email"
-                                value="{% if request.user.email %}{{request.user.email}}{% endif %}"
-                              />
-                            </div>
-                            <div class="form-group birth d-flex" style="margin: 0.3rem">
-                              <label
-                                class="col-form-label col-lg-2 col-md-2 col-sm-2 col-4 bg-gray dob rounded"
-                                style="padding-top: 5px !important"
-                                >Date of Birth</label
-                              >
-                              <input
-                                type="date"
-                                class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-8 p-2 bg-gray"
-                                value="{{request.user.bio.dob|date:'Y-m-d'}}"
-                              />
-                            </div>
 
-                            <div
-                              class="form-group d-flex bg-gray details-group m-1 mt-3"
-                              style="border-radius: 6px"
-                            >
-                              <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1"
-                                >Gender</label
-                              >
-                              <div class="gender col-sm-10 col-9 pt-2">
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions" id="inlineRadio1" value="1" &nbsp; ##
-                                  ##{% if request.user.bio.gender == '1' %} checked {% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio1"
-                                    >Male</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions" id="inlineRadio2" value="2" &nbsp; ##
-                                  ##{% if request.user.bio.gender == '2' %} checked {% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio2"
-                                    >Female</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions" id="inlineRadio3" value="3" &nbsp; ##
-                                  ##{% if request.user.bio.gender == '3' %} checked {% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio3"
-                                    >Transgender</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions" id="inlineRadio4" value="4" &nbsp; ##
-                                  ##{% if request.user.bio.gender == '4' %} checked {% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio4"
-                                    >Not To Say</label
-                                  >
-                                </div>
+              <div class="col-md-10 col-sm-10 col-12 profile-about bg-gray m-2">
+                <h5>About Himself</h5>
+                <p>
+                  {{current_user.bio.about}}
+                </p>
+              </div>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 d-flex">
+              <div class="col-2 nav-dis"></div>
+              <div class="col-md-10 col-12 nav-pad">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="pills-expertise-tab" data-toggle="pill" href="#nav-about" role="tab"
+                      aria-controls="pills-home" aria-selected="true">About</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-experience-tab" data-toggle="pill" href="#nav-posts" role="tab"
+                      aria-controls="pills-profile" aria-selected="false">Posts</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-projects-tab" data-toggle="pill" href="#nav-gallery" role="tab"
+                      aria-controls="pills-contact" aria-selected="false">Gallery</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-achievements-tab" data-toggle="pill" href="#nav-friends" role="tab"
+                      aria-controls="pills-contact" aria-selected="false">Friends</a>
+                  </li>
+                </ul>
+                <div class="col-12 tab-content py-1 pl-0 px-sm-0" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-about" role="tabpanel"
+                    aria-labelledby="nav-profile-tab">
+                    <div class="col-12 text-right">
+                      <button type="submit" class="btn btn-light border m-1" data-toggle="modal"
+                        data-target="#editModal">
+                        Edit Profile
+                      </button>
+                    </div>
+                    <div class="card login-height registration-card">
+                      <div class="card-body registration-body">
+                        <form action="" methot="post">
+                          <div class="form-group d-flex mt-3">
+                            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name"
+                              value="{{current_user.first_name}}" />
+                            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name"
+                              value="{% if current_user.last_name %}{{ current_user.last_name }} {% endif %}" />
+                          </div>
+                          <div class="form-group d-flex">
+                            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number"
+                              value="{% if request.user.phone %}{{request.user.phone}}{% endif %}" />
+                            <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email"
+                              value="{% if current_user.email %}{{request.user.email}}{% endif %}" />
+                          </div>
+                          {% if current_user.bio.dob %}
+                          <div class="form-group birth d-flex" style="margin: 0.3rem">
+                            <label class="col-form-label col-lg-2 col-md-2 col-sm-2 col-4 bg-gray dob rounded"
+                              style="padding-top: 5px !important">Date of Birth</label>
+                            <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-8 p-2 bg-gray"
+                              value="{{current_user.bio.dob|date:'Y-m-d'}}" />
+                          </div>
+                          {% endif %}
+                          <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                  value="1" &nbsp; ## ##{% if current_user.bio.gender == '1' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio1">Male</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                  value="2" &nbsp; ## ##{% if current_user.bio.gender == '2' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio2">Female</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                  value="3" &nbsp; ## ##{% if current_user.bio.gender == '3' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio3">Transgender</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                  value="4" &nbsp; ## ##{% if current_user.bio.gender == '4' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
                               </div>
                             </div>
-                            <div
-                              class="form-group d-flex bg-gray details-group m-1 mt-3"
-                              style="border-radius: 6px"
-                            >
-                              <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1"
-                                >Category</label
-                              >
-                              <div class="gender col-sm-10 col-9 pt-2">
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions1" id="inlineRadio5" value="1" &nbsp;
-                                  &nbsp;{% if request.user.bio.category == '1' %} checked
-                                  &nbsp;&nbsp;{% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio5"
-                                    >Single
-                                  </label>
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions1" id="inlineRadio6" value="2" &nbsp;
-                                  &nbsp;{% if request.user.bio.category == '2' %} checked
-                                  &nbsp;&nbsp;{% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio6"
-                                    >Couple</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions1" id="inlineRadio7" value="3" &nbsp; ##
-                                  {% if request.user.bio.category == '3' %} checked {% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio7"
-                                    >Widower</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input class="form-check-input" type="radio"
-                                  name="inlineRadioOptions1" id="inlineRadio8" value="4"
-                                  &nbsp;&nbsp; &nbsp;{% if request.user.bio.category == '4' %}
+                          </div>
+                          <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Category</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio5" value="1" &nbsp; &nbsp;{% if current_user.bio.category == '1' %}
+                                  checked &nbsp;&nbsp;{% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio5">Single
+                                </label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio6" value="2" &nbsp; &nbsp;{% if current_user.bio.category == '2' %}
+                                  checked &nbsp;&nbsp;{% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio6">Couple</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio7" value="3" &nbsp; ## {% if current_user.bio.category == '3' %}
                                   checked {% endif %} />
-                                  <label class="form-check-label p-0" for="inlineRadio8"
-                                    >Divorced</label
-                                  >
-                                </div>
+                                <label class="form-check-label p-0" for="inlineRadio7">Widower</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio8" value="4" &nbsp;&nbsp;
+                                  &nbsp;{% if current_user.bio.category == '4' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio8">Divorced</label>
                               </div>
                             </div>
-                            <div class="form-group partdob mt-3">
-                              <input
-                                type="text"
-                                class="form-control m-1 p-2 bg-gray"
-                                placeholder="Partner Name"
-                              />
-                              <div class="d-flex birth col-md-6 col-sm-6 col-12 p-0">
-                                <label
-                                  class="col-form-label col-4 bg-gray dob rounded"
-                                  style="padding-top: 5px !important"
-                                  >Date of Birth</label
-                                >
-                                <input type="date" class="form-control m-1 p-2 bg-gray" />
+                          </div>
+                          {% if current_user.bio.category == '2' %}
+                          <div class="form-group partdob mt-3">
+                            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Partner Name" />
+                            {% comment %}
+                            <div class="d-flex birth col-md-6 col-sm-6 col-12 p-0">
+                              <label class="col-form-label col-4 bg-gray dob rounded"
+                                style="padding-top: 5px !important">Date of Birth</label>
+                              <input type="date" class="form-control m-1 p-2 bg-gray" />
+                            </div>
+                            {% endcomment %}
+                          </div>
+                          {% endif %} {% comment %}
+                          <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                  id="inlineRadio9" value="option1" />
+                                <label class="form-check-label p-0" for="inlineRadio9">Male</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                  id="inlineRadio10" value="option2" />
+                                <label class="form-check-label p-0" for="inlineRadio10">Female</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                  id="inlineRadio11" value="option3" />
+                                <label class="form-check-label p-0" for="inlineRadio11">Transgender</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                  id="inlineRadio12" value="option4" />
+                                <label class="form-check-label p-0" for="inlineRadio12">Not To Say</label>
                               </div>
                             </div>
-                            <div
-                              class="form-group d-flex bg-gray details-group m-1 mt-3"
-                              style="border-radius: 6px"
-                            >
-                              <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1"
-                                >Gender</label
-                              >
-                              <div class="gender col-sm-10 col-9 pt-2">
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="inlineRadioOptions2"
-                                    id="inlineRadio9"
-                                    value="option1"
-                                  />
-                                  <label class="form-check-label p-0" for="inlineRadio9"
-                                    >Male</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="inlineRadioOptions2"
-                                    id="inlineRadio10"
-                                    value="option2"
-                                  />
-                                  <label class="form-check-label p-0" for="inlineRadio10"
-                                    >Female</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="inlineRadioOptions2"
-                                    id="inlineRadio11"
-                                    value="option3"
-                                  />
-                                  <label class="form-check-label p-0" for="inlineRadio11"
-                                    >Transgender</label
-                                  >
-                                </div>
-                                <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                  <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="inlineRadioOptions2"
-                                    id="inlineRadio12"
-                                    value="option4"
-                                  />
-                                  <label class="form-check-label p-0" for="inlineRadio12"
-                                    >Not To Say</label
-                                  >
-                                </div>
-                              </div>
-                            </div>
+                          </div>
+                          {% endcomment %}
 
-                            <div class="col-12 profile-about-them bg-gray mt-2">
-                              <h5>About Himself</h5>
-                              <p>
-                                There are many variations of passages of Lorem Ipsum available, but
-                                the majority have suffered alteration in some form, by injected
-                                humour, or randomised words which don't look even slightly
-                                believable.
-                              </p>
-                            </div>
-                          </form>
-                        </div>
+                          <div class="col-12 profile-about-them bg-gray mt-2">
+                            <h5>About Himself</h5>
+                            <p>{{current_user.bio.about}}</p>
+                          </div>
+                        </form>
                       </div>
                     </div>
-                    <div
-                      class="tab-pane fade"
-                      id="nav-posts"
-                      role="tabpanel"
-                      aria-labelledby="nav-profile-tab"
-                    >
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0 pr-0">
-                        <div
-                          class="timeline-post pt-1 pb-1"
-                          style="
+                  </div>
+                  <div class="tab-pane fade" id="nav-posts" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0 pr-0">
+                      <!-- user post upload  -->
+                      {% if   request.user.pk == current_user.pk %}
+                      <div class="timeline-post pt-1 pb-1" style="
                             background: #ffffff 0% 0% no-repeat padding-box;
                             box-shadow: 0px 3px 10px #c1c1c1;
                             border-radius: 12px;
-                          "
-                        >
-                          <div class="d-flex mt-2 timeline-head">
-                            <img
-                              src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                              class="rounded-circle"
-                              height="70"
-                              alt=""
-                              loading="lazy"
-                            />
-                            <h6 class="text-center mt-4 ml-2"><strong>Blue Sapphire</strong></h6>
+                          ">
+                        <div class="d-flex mt-2 timeline-head">
+                          <img src="{{request.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                            loading="lazy" />
+                          <h6 class="text-center mt-4 ml-2">
+                            <strong>{{request.user.username}}</strong>
+                          </h6>
+                        </div>
+                        <textarea class="form-control" rows="1" placeholder="Write something to Roland…"></textarea>
+                        <p data-toggle="modal" data-target="#newPostModal">
+                          <span><i class="far fa-image"></i></span>Photos/Videos
+                        </p>
+                      </div>
+                      {% endif %}
+
+                      <!-- user post upload ends -->
+                      {% for i in posts %}
+                      <div class="card mt-4" style="
+                            background: #ffffff 0% 0% no-repeat padding-box;
+                            box-shadow: 0px 3px 10px #c1c1c1;
+                            border-radius: 12px;
+                          ">
+                        <div class="card-header border-0">
+                          <div class="card-title">
+                            <div class="d-flex">
+                              <img src="{{i.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                                loading="lazy" />
+                              <h6 class="text-center mt-4 ml-2">
+                                <strong>{{i.user.first_name}} &nbsp;
+                                  {% if i.user.last_name %}{{i.user.last_name}}{% endif %}</strong>
+                              </h6>
+                            </div>
+                            <div>
+                              <button type="button" class="custom-btn" title="Save">
+                                <i class="far fa-bookmark"></i>
+                              </button>
+                              <small class="text-muted">Posted {{i.date|naturaltime}}
+                              </small>
+                            </div>
+                            <div class="float-right"></div>
                           </div>
-                          <textarea
-                            class="form-control"
-                            rows="1"
-                            placeholder="Write something to Roland…"
-                          ></textarea>
-                          <p data-toggle="modal" data-target="#newPostModal">
-                            <span><i class="far fa-image"></i></span>Photos/Videos
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text">
+                            {{i.caption}}
                           </p>
                         </div>
-                        <div
-                          class="card mt-4"
-                          style="
-                            background: #ffffff 0% 0% no-repeat padding-box;
-                            box-shadow: 0px 3px 10px #c1c1c1;
-                            border-radius: 12px;
-                          "
-                        >
-                          <div class="card-header border-0">
-                            <div class="card-title">
-                              <div class="d-flex">
-                                <img
-                                  src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                  class="rounded-circle"
-                                  height="70"
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                <h6 class="text-center mt-4 ml-2">
-                                  <strong>Blue Sapphire</strong>
-                                </h6>
-                              </div>
-                              <div>
-                                <button type="button" class="custom-btn" title="Save">
-                                  <i class="far fa-bookmark"></i>
-                                </button>
-                                <small class="text-muted">Posted 3 mins ago</small>
-                              </div>
-                              <div class="float-right"></div>
+                        <img src="{{i.file.url }}" class="card-img-bottom m-auto" style="width: 95%" alt="..." />
+                        <div class="card-footer border-0">
+                          <a href="{% url 'postlike' i.id %}" id="likeBtn{{i.id}}">
+                            <i id="likeIcon{{i.id}}"
+                              class="{% if i.pk in liked_posts %} fas fa-heart {% else %} far fa-heart {% endif %} text-dark">
+                            </i></a> <button id="likeCount{{i.id}}"
+                            style="background:none;border:none;">{{ i.likecount }}</button>
+
+                          <button type="button" class="custom-btn mr-4" title="Share">
+                            <i class="fas fa-share text-primary"></i>20
+                          </button> <button type="button" class="custom-btn comment-btn{{i.id}}" title="Comment"
+                            id="comment-btn{{i.id}}"><i class="fas fa-comment"
+                              style="color: #D848DC;"></i>{{i.cmtcount}}
+                          </button>
+
+
+                          <div class="card-comment hidden" id="comment-card{{i.id}}">
+                            <div class="d-flex avatar">
+                              {% if request.user.bio.profile_pic %}<img src="{{request.user.bio.profile_pic}}"
+                                class="rounded-circle" height="50" style="margin-left: -31px;" alt="" loading="lazy" />
+                              {% else %}
+                              <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="50" width="50"
+                                style="margin-left: -31px;" alt="" loading="lazy" />
+                              {% endif %}
+                              <h6 class="text-center mt-3 ml-2"><strong>{{request.user.username}}</strong></h6>
                             </div>
-                          </div>
-                          <div class="card-body">
-                            <p class="card-text">
-                              This is a wider card with supporting text below as a natural lead-in
-                              to additional content. This content is a little bit longer.
-                            </p>
-                          </div>
-                          <img
-                            src="https://mdbootstrap.com/img/new/slides/042.jpg"
-                            class="card-img-bottom m-auto"
-                            style="width: 95%"
-                            alt="..."
-                          />
-                          <div class="card-footer border-0">
-                            <button type="button" class="custom-btn mr-5" title="Like">
-                              <i class="fas fa-heart"></i>50
-                            </button>
-                            <button type="button" class="custom-btn mr-4" title="Share">
-                              <i class="fas fa-share text-primary"></i>20
-                            </button>
-                            <button type="button" class="custom-btn comment-btn" title="Comment">
-                              <i class="fas fa-comment" style="color: #d848dc"></i>20
-                            </button>
-                            <div class="card-comment hidden" id="comment-card">
-                              <div class="d-flex">
-                                <img
-                                  src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                  class="rounded-circle"
-                                  height="50"
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                <h6 class="text-center mt-3 ml-2">
-                                  <strong>Blue Sapphire</strong>
-                                </h6>
-                              </div>
+                            <form method="post" action="{% url 'comment' %}" id="commentForm{{i.id}}">
+                              {% csrf_token %}
+
                               <div class="input-group">
-                                <textarea
-                                  class="comment-input"
-                                  rows="1"
-                                  placeholder="Write a comment.."
-                                  name="comment"
-                                ></textarea>
-                                <button
-                                  type="submit"
-                                  class="btn btn-outline-famroutes btn-floating comment-send"
-                                >
-                                  <i class="fas fa-angle-double-right" style="font-size: 25px"></i>
-                                </button>
+                                <textarea class="comment-input " rows="1" placeholder="Write a comment.."
+                                  name="comments" id="comments{{i.id}}"></textarea>
+                                <input type="hidden" value="{{i.id}}" name="commentid" id="commentid{{i.id}}">
+                                <button type="submit" class="btn btn-outline-famroutes btn-floating comment-send"><i
+                                    class="fas fa-angle-double-right" style="font-size:25px;"></i></button>
                               </div>
-                              <div class="col mt-3">
-                                <h6>Recent Comments</h6>
-                                <p>0 Comments</p>
-                              </div>
-                              <div
-                                class="card w-100"
-                                style="
-                                  background: #ffffff 0% 0% no-repeat padding-box;
-                                  box-shadow: 0px 3px 10px #c1c1c1;
-                                  border-radius: 12px;
-                                "
-                              >
-                                <div class="d-flex p-3">
-                                  <img
-                                    src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                    class="rounded-circle"
-                                    height="40"
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                  <h6 class="text-center mt-2 ml-2">
-                                    <strong>Blue Sapphire</strong>
-                                  </h6>
-                                </div>
-                                <div class="comment-text">
-                                  <p>
-                                    Lorem ipsum kjha ggs ghgy6t hgt6t hgtrt hftrt hgtftf gvfgft
-                                    vgftfgb hvgfgfg gfgfg
-                                  </p>
-                                </div>
-                                <div class="d-flex p-3">
-                                  <img
-                                    src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                    class="rounded-circle"
-                                    height="40"
-                                    alt=""
-                                    loading="lazy"
-                                  />
-                                  <h6 class="text-center mt-2 ml-2">
-                                    <strong>Blue Sapphire</strong>
-                                  </h6>
-                                </div>
-                                <div class="comment-text">
-                                  <p>
-                                    Lorem ipsum kjha ggs ghgy6t hgt6t hgtrt hftrt hgtftf gvfgft
-                                    vgftfgb hvgfgfg gfgfg
-                                  </p>
-                                </div>
-                              </div>
+
+                            </form>
+                            <div class="col mt-3">
+                              <h6>Recent Comments</h6>
+                              <p>{{i.cmtcount}}</p>
                             </div>
+
+
+
+
+
+                            <div class="card w-100">
+
+                              {% for j in i.cmtset %}
+                              <div class="d-flex p-3 avatar">
+                                {% if j.user.bio.profile_pic %}
+                                <img src="{{j.user.bio.profile_pic}}" class="rounded-circle " height="40" width="40"
+                                  alt="" loading="lazy" />
+                                {% else %}
+                                <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="40" width="40"
+                                  alt="" loading="lazy" />
+
+                                {% endif%}
+
+                                <h6 class="text-center mt-2 ml-2"><strong>{{j.user.first_name}}</strong>
+                                </h6>
+                              </div>
+                              <div class="comment-text">
+                                <p>{{j.comment}}</p>
+                              </div>
+                              <!--                                    <div class="d-flex p-3 avatar"><img-->
+                              <!--                                            src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"-->
+                              <!--                                            class="rounded-circle " height="70" width="70" alt="" loading="lazy"/>-->
+                              <!--                                        <h6 class="text-center mt-2 ml-2"><strong>Blue Sapphire</strong></h6>-->
+                              <!--                                    </div>-->
+                              {% endfor %}
+
+                            </div>
+
                           </div>
                         </div>
                       </div>
+                      <script>
+                        $("#likeBtn{{i.id}}").click(function (e) {
+                          e.preventDefault();
+                          var URL = this.href;
+                          var likecount = $('#likeCount{{i.id}}').val();
+                          console.log(likecount);
+
+
+                          $.ajax({
+                            url: URL,
+                            success: function (response) {
+                              console.log(response.liked);
+                              console.log(response.lcn);
+
+                              if (response.liked === true) {
+                                $("#likeIcon" + response.post_id).removeClass(
+                                  'far fa-heart text-dark');
+                                $("#likeIcon" + response.post_id).attr('class',
+                                  'fas fa-heart text-dark');
+
+                                $("#likeCount{{i.id}}").html(response.lcn);
+
+
+                              } else {
+                                $("#likeIcon" + response.post_id).removeClass(
+                                  'fas fa-heart text-dark');
+                                $("#likeIcon" + response.post_id).attr('class',
+                                  'far fa-heart text-dark');
+
+                                $("#likeCount{{i.id}}").html(response.lcn);
+
+                              }
+                            },
+
+                          });
+                        });
+                        $(".comment-btn{{i.id}}").on("click", function () {
+                          $("#comment-card{{i.id}}").toggleClass("hidden");
+                        });
+
+
+                        $("#commentForm{{i.id}}").on("submit", function (e) {
+                          e.preventDefault();
+
+                          var comments = $('#comments{{i.id}}').val();
+                          var commentid = $('#commentid{{i.id}}').val();
+
+                          var token = '{{csrf_token}}';
+
+                          $.ajax({
+                            headers: {
+                              "X-CSRFToken": token
+                            },
+                            url: "{% url 'comment' %}",
+                            type: 'POST',
+                            data: {
+                              "comments": comments,
+                              "commentid": commentid
+                            },
+                            dataType: 'json',
+                            success: function (comment_list) {
+
+
+
+
+
+
+
+
+
+                            }
+
+                          })
+
+                        });
+                      </script>
+                      {% endfor %}
                     </div>
-                    <div
-                      class="tab-pane fade"
-                      id="nav-gallery"
-                      role="tabpanel"
-                      aria-labelledby="nav-profile-tab"
-                    >
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
-                        <div class="d-flex">
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
+                  </div>
+                  <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
+                      <div class="d-flex">
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
+                          <div class="d-flex">
+                            {% for i in posts %}
+                            <div class="col-3 border m-1 p-0">
+                              <!-- {{forloop.counter|divisibleby:4}} -->
+                              <img src="{{i.file.url}}" alt="" class="img-fluid"
+                                style="object-fit: cover; height:270px; width:100%" />
+                            </div>
+                            {% if  forloop.counter|divisibleby:4 %}
                           </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
-                        <div class="d-flex">
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
+
+
+
+                          <div class="d-flex"> {% endif %}
+                            {%  endfor %}
                           </div>
                         </div>
                       </div>
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
-                        <div class="d-flex">
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                          <div class="col-3 border m-1 p-0">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                          </div>
-                        </div>
-                      </div>
+
                     </div>
-                    <div
-                      class="tab-pane fade"
-                      id="nav-friends"
-                      role="tabpanel"
-                      aria-labelledby="nav-profile-tab"
-                    >
-                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
-                        <div class="input-group search searchFriends">
-                          <input
-                            class="form-control py-2 border-right-0 border"
-                            type="search"
-                            id="search-inputFriends"
-                            placeholder="Search"
-                          />
-                          <span class="input-group-append">
-                            <button
-                              class="btn btn-outline-secondary border-left-0 border bg-white"
-                              id="btn-iconFriends"
-                              type="button"
-                            >
-                              <i class="fa fa-search text-dark"></i>
-                            </button>
-                          </span>
+
+                  </div>
+                  <div class="tab-pane fade" id="nav-friends" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 pt-3 pl-0">
+                      <div class="input-group search searchFriends">
+                        <input class="form-control py-2 border-right-0 border" type="search" id="search-inputFriends"
+                          placeholder="Search" />
+                        <span class="input-group-append">
+                          <button class="btn btn-outline-secondary border-left-0 border bg-white" id="btn-iconFriends"
+                            type="button">
+                            <i class="fa fa-search text-dark"></i>
+                          </button>
+                        </span>
+                      </div>
+                      <div class="d-flex">
+                        {% for i in friends %}
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="{{i.following.bio.profile_pic}}" alt="" class="img-fluid img-thumbnail"
+                            style="height:270px !important; object-fit:cover;width:100%" />
+                          <p>{{i.following.first_name}}&nbsp;{% if i.following.last_name %}{{i.following.last_name}}
+                            {% endif %}</p>
                         </div>
-                        <div class="d-flex">
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
+                        {% if  forloop.counter|divisibleby:4 %}
+                      </div>
+
+
+
+                      <div class="d-flex"> {% endif %}
+
+                        {% endfor %}
+
+                      </div>
+                      <!-- <div class="d-flex">
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
                         </div>
-                        <div class="d-flex">
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
                         </div>
-                        <div class="d-flex">
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
-                          <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                            <img src="img/g1.jpg" alt="" class="img-fluid" />
-                            <p>Arya V Nair</p>
-                          </div>
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
+                        </div>
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
                         </div>
                       </div>
+                      <div class="d-flex">
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
+                        </div>
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
+                        </div>
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
+                        </div>
+                        <div class="col-3 border m-1 p-0 text-center friendsDetails">
+                          <img src="img/g1.jpg" alt="" class="img-fluid" />
+                          <p>Arya V Nair</p>
+                        </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -860,539 +568,405 @@
             </div>
           </div>
         </div>
-        <!-- /#Sidebar -->
       </div>
+      <!-- /#Sidebar -->
     </div>
-    <!--Modal Start     -->
-    <div
-      class="modal fade"
-      id="newPostModal"
-      tabindex="-1"
-      aria-labelledby="newPostModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content custom-model-content">
-          <div class="modal-header custom-modal-header bg-gradient-blue">
-            <h5 class="modal-title" id="newPostModalLabel">New Post</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <select class="privacy-select" name="privacy" id="privacy">
-                  <option value="public">&#xf0ac; Public</option>
-                  <option value="friends">&#xf0c0; Friends</option>
-                  <option value="private">&#xf023; Only Me</option>
-                </select>
-                <textarea class="form-control br-20" placeholder="write something here"></textarea>
-                <div class="liveurl-loader"></div>
-                <div class="liveurl">
-                  <div class="close" title="Entfernen"></div>
-                  <div class="inner">
-                    <div class="image"></div>
-                    <div class="details">
-                      <div class="info">
-                        <div class="title"></div>
-                        <div class="description"></div>
-                        <div class="url"></div>
-                      </div>
-                      <div class="thumbnail">
-                        <div class="pictures">
-                          <div class="controls">
-                            <div class="prev button inactive"></div>
-                            <div class="next button inactive"></div>
-                            <div class="count">
-                              <span class="current">0</span><span> on </span
-                              ><span class="max">0</span>
-                            </div>
+  </div>
+  <!--Modal Start     -->
+  <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-model-content">
+        <div class="modal-header custom-modal-header bg-gradient-blue">
+          <h5 class="modal-title" id="newPostModalLabel">New Post</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'post' %}" enctype="multipart/form-data">
+            <div class="mb-3">
+              {% csrf_token %}
+              <select class="privacy-select" name="privacy" id="privacy">
+                <option value="1">&#xf0ac; Public</option>
+                <option value="2">&#xf0c0; Friends</option>
+                <option value="3">&#xf023; Only Me</option>
+              </select>
+              <textarea class="form-control br-20" placeholder="write something here" name="caption"
+                id="caption"></textarea>
+              <div class="liveurl-loader"></div>
+              <div class="liveurl">
+                <div class="close" title="Entfernen"></div>
+                <div class="inner">
+                  <div class="image"></div>
+                  <div class="details">
+                    <div class="info">
+                      <div class="title"></div>
+                      <div class="description"></div>
+                      <div class="url"></div>
+                    </div>
+                    <div class="thumbnail">
+                      <div class="pictures">
+                        <div class="controls">
+                          <div class="prev button inactive"></div>
+                          <div class="next button inactive"></div>
+                          <div class="count">
+                            <span class="current">0</span><span> on </span><span class="max">0</span>
                           </div>
                         </div>
                       </div>
-                      <div class="video"></div>
                     </div>
+                    <div class="video"></div>
                   </div>
                 </div>
               </div>
-              <div class="preview">
-                <img class="img-thumbnail preview w-25 ml-2" src="img/DENTOL black.png" alt="" />
+            </div>
+            <div class="preview">
+              <img class="img-thumbnail preview w-25 ml-2" src="img/DENTOL black.png" alt="" />
+            </div>
+            <div class="add">
+              <label for="upload"><i class="fas fa-photo-video"></i> Add photos or videos</label>
+              <input type="file" id="upload" name="file" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4" />
+            </div>
+
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+          <button type="submit" class="btn btn-primary bg-gradient-blue">Post</button>
+
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--Modal Ends-->
+  <!--Edit Modal Start     -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content custom-model-content">
+        <div class="modal-header custom-modal-header bg-gray">
+          <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="card login-height registration-card modal-body">
+          <div class="card-body registration-body">
+            <form action="{% url 'setting_update' %}" method="post">
+            {% csrf_token %}
+              <div class="form-group d-flex mt-3">
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name='first_name' value"{% if request.user.first_name %}{{request.user.first_name}}{% endif %}" required/>
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name' value="{% if request.user.last_name %}{{request.user.last_name}}{% endif %}"" required/>
               </div>
-              <div class="add">
-                <label for="upload"><i class="fas fa-photo-video"></i> Add photos or videos</label>
-                <input
-                  type="file"
-                  id="upload"
-                  name="file"
-                  accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4"
-                />
+              <div class="form-group d-flex">
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number" name='phone' value="{% if request.user.phone %}{{request.user.phone}}{% endif %}" required/>
+                <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email" name='email' value="{{request.user.email}}" required/>
+              </div>
+              <div class="form-group d-flex mt-3">
+                <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
+                <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob"/>
+              </div>
+                   <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                  value="1" &nbsp; ## ##{% if current_user.bio.gender == '1' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio1">Male</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                  value="2" &nbsp; ## ##{% if current_user.bio.gender == '2' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio2">Female</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                  value="3" &nbsp; ## ##{% if current_user.bio.gender == '3' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio3">Transgender</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                  value="4" &nbsp; ## ##{% if current_user.bio.gender == '4' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Category</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio5" value="1" &nbsp; &nbsp;{% if current_user.bio.category == '1' %}
+                                  checked &nbsp;&nbsp;{% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio5">Single
+                                </label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio6" value="2" &nbsp; &nbsp;{% if current_user.bio.category == '2' %}
+                                  checked &nbsp;&nbsp;{% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio6">Couple</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio7" value="3" &nbsp; ## {% if current_user.bio.category == '3' %}
+                                  checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio7">Widower</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio8" value="4" &nbsp;&nbsp;
+                                  &nbsp;{% if current_user.bio.category == '4' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio8">Divorced</label>
+                              </div>
+                            </div>
+                          </div>
+            
+             
+              <div class="col-12 buttons mt-4 pb-5 text-center">
+                <button class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit">
+                  Save
+                </button>
+                <button class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit">
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
-          <div class="modal-footer border-0">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <a href="#">
-              <button type="button" class="btn btn-primary bg-gradient-blue">Post</button>
-            </a>
-          </div>
         </div>
       </div>
     </div>
-    <!--Modal Ends-->
-    <!--Edit Modal Start     -->
-    <div
-      class="modal fade"
-      id="editModal"
-      tabindex="-1"
-      aria-labelledby="newPostModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content custom-model-content">
-          <div class="modal-header custom-modal-header bg-gray">
-            <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="card login-height registration-card modal-body">
-            <div class="card-body registration-body">
-              <form action="" methot="post">
-                <div class="form-group d-flex mt-3">
-                  <input
-                    type="text"
-                    class="form-control m-1 p-2 bg-gray"
-                    placeholder="First Name"
-                  />
-                  <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" />
-                </div>
-                <div class="form-group d-flex">
-                  <input
-                    type="text"
-                    class="form-control m-1 p-2 bg-gray"
-                    placeholder="Mobile Number"
-                  />
-                  <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email" />
-                </div>
-                <div class="form-group d-flex mt-3">
-                  <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
-                  <input
-                    type="date"
-                    class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray"
-                  />
-                </div>
-                <div
-                  class="form-group d-flex bg-gray details-group m-1 mt-3"
-                  style="border-radius: 6px"
-                >
-                  <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
-                  <div class="gender d-flex col-sm-10 col-9 pt-2">
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="male"
-                        value="option1"
-                      />
-                      <label class="form-check-label p-0" for="male">Male</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="female"
-                        value="option2"
-                      />
-                      <label class="form-check-label p-0" for="female">Female</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="trans"
-                        value="option3"
-                      />
-                      <label class="form-check-label p-0" for="trans">Transgenders</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="not"
-                        value="option4"
-                      />
-                      <label class="form-check-label p-0" for="not">Not To Say</label>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="form-group d-flex bg-gray details-group m-1 mt-4"
-                  style="border-radius: 6px"
-                >
-                  <label for="category" class="col-md-2 col-sm-2 col-3 col-form-label p-2 m-1"
-                    >Category</label
-                  >
-                  <div class="gender d-flex col-md-10 col-sm-10 col-9 pt-2">
-                    <div class="form-check d-flex pl-4 col-3">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="single"
-                        value="option1"
-                      />
-                      <label class="form-check-label p-0" for="single">Single</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-3">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="couple"
-                        value="option2"
-                      />
-                      <label class="form-check-label p-0" for="couple">Couple</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-3">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="widower"
-                        value="option3"
-                      />
-                      <label class="form-check-label p-0" for="widower">Widower</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-3">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="divorced"
-                        value="option4"
-                      />
-                      <label class="form-check-label p-0" for="divorced">Divorced</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group d-flex mt-3">
-                  <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
-                  <input
-                    type="date"
-                    class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray"
-                  />
-                </div>
-                <div
-                  class="form-group d-flex bg-gray details-group m-1 mt-3"
-                  style="border-radius: 6px"
-                >
-                  <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
-                  <div class="gender d-flex col-sm-10 col-9 pt-2">
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="male1"
-                        value="option1"
-                      />
-                      <label class="form-check-label p-0" for="male1">Male</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="female1"
-                        value="option2"
-                      />
-                      <label class="form-check-label p-0" for="female1">Female</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="trans1"
-                        value="option3"
-                      />
-                      <label class="form-check-label p-0" for="trans1">Transgenders</label>
-                    </div>
-                    <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="not1"
-                        value="option4"
-                      />
-                      <label class="form-check-label p-0" for="not1">Not To Say</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 buttons mt-4 pb-5 text-center">
-                  <button
-                    class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0"
-                    type="submit"
-                  >
-                    Save
-                  </button>
-                  <button
-                    class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0"
-                    type="submit"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--Edit Modal Ends-->
-    <script>
-      function myFunction() {
-        var x = document.getElementById("sidebar-wrapper");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
+  </div>
+  <!--Edit Modal Ends-->
+  <script>
+    function myFunction() {
+      var x = document.getElementById("sidebar-wrapper");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
       }
-      //        $("#menu-toggle").click(function (e) {
-      //            e.preventDefault();
-      //            $("#sidebar-wrapper").show();
-      //            $("#wrapper").toggleClass("toggled");
-      //        });
-      //
-    </script>
-    <script>
-      $(".comment-btn").on("click", function () {
-        $("#comment-card").toggleClass("hidden");
-      });
-      // Hide submenus
-      $("#body-row .collapse").collapse("hide");
+    }
+    //        $("#menu-toggle").click(function (e) {
+    //            e.preventDefault();
+    //            $("#sidebar-wrapper").show();
+    //            $("#wrapper").toggleClass("toggled");
+    //        });
+    //
+  </script>
+  <script>
+    $(".comment-btn").on("click", function () {
+      $("#comment-card").toggleClass("hidden");
+    });
+    // Hide submenus
+    $("#body-row .collapse").collapse("hide");
+
+    // Collapse/Expand icon
+    $("#collapse-icon").addClass("fa-angle-double-left");
+
+    // Collapse click
+    $("[data-toggle=sidebar-colapse]").click(function () {
+      SidebarCollapse();
+    });
+
+    function SidebarCollapse() {
+      $(".menu-collapsed").toggleClass("d-none");
+      $(".sidebar-submenu").toggleClass("d-none");
+      $(".submenu-icon").toggleClass("d-none");
+      $("#sidebar-container").toggleClass("sidebar-expanded sidebar-collapsed");
+
+      // Treating d-flex/d-none on separators with title
+      var SeparatorTitle = $(".sidebar-separator-title");
+      if (SeparatorTitle.hasClass("d-flex")) {
+        SeparatorTitle.removeClass("d-flex");
+      } else {
+        SeparatorTitle.addClass("d-flex");
+      }
 
       // Collapse/Expand icon
-      $("#collapse-icon").addClass("fa-angle-double-left");
+      $("#collapse-icon").toggleClass("fa-angle-double-left fa-angle-double-right");
+    }
 
-      // Collapse click
-      $("[data-toggle=sidebar-colapse]").click(function () {
-        SidebarCollapse();
-      });
+    document.getElementById("upload").addEventListener("change", function (event) {
+      var file = event.target.files[0];
+      var fileReader = new FileReader();
+      if (file.type.match("image")) {
+        fileReader.onload = function (event) {
+          $(".preview").attr("src", event.target.result);
+        };
+        fileReader.readAsDataURL(file);
+      } else {
+        fileReader.onload = function () {
+          var blob = new Blob([fileReader.result], {
+            type: file.type,
+          });
+          var url = URL.createObjectURL(blob);
+          // console.log(url);
+          var video = document.createElement("video");
+          var timeupdate = function () {
+            if (snapImage()) {
+              video.removeEventListener("timeupdate", timeupdate);
+              video.pause();
+            }
+          };
+          video.addEventListener("loadeddata", function () {
+            if (snapImage()) {
+              video.removeEventListener("timeupdate", timeupdate);
+            }
+          });
+          var snapImage = function () {
+            var canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+            var image = canvas.toDataURL();
+            var success = image.length > 100000;
+            if (success) {
+              var img = document.createElement("img");
+              img.src = image;
+              // document.getElementsByTagName('div')[0].appendChild(img);
+              $(".preview").attr("src", image);
+              URL.revokeObjectURL(url);
+            }
+            return success;
+          };
+          video.addEventListener("timeupdate", timeupdate);
+          video.preload = "metadata";
+          video.src = url;
+          // Load video in Safari / IE11
+          video.muted = true;
+          video.playsInline = true;
+          video.play();
+        };
+        fileReader.readAsArrayBuffer(file);
+      }
+    });
+  </script>
+  <script>
+    var curImages = new Array();
 
-      function SidebarCollapse() {
-        $(".menu-collapsed").toggleClass("d-none");
-        $(".sidebar-submenu").toggleClass("d-none");
-        $(".submenu-icon").toggleClass("d-none");
-        $("#sidebar-container").toggleClass("sidebar-expanded sidebar-collapsed");
+    $("textarea").liveUrl({
+      loadStart: function () {
+        $(".liveurl-loader").show();
+      },
+      loadEnd: function () {
+        $(".liveurl-loader").hide();
+      },
+      clear: function () {
+        $(".liveurl").hide();
+      },
+      success: function (data) {
+        var output = $(".liveurl");
+        output.find(".title").text(data.title);
+        output.find(".description").text(data.description);
+        output.find(".url").text(data.url);
+        output.find(".image").empty();
 
-        // Treating d-flex/d-none on separators with title
-        var SeparatorTitle = $(".sidebar-separator-title");
-        if (SeparatorTitle.hasClass("d-flex")) {
-          SeparatorTitle.removeClass("d-flex");
-        } else {
-          SeparatorTitle.addClass("d-flex");
+        output.find(".close").one("click", function () {
+          var liveUrl = $(this).parent();
+          liveUrl.hide("fast");
+          liveUrl.find(".video").html("").hide();
+          liveUrl.find(".image").html("");
+          liveUrl.find(".controls .prev").addClass("inactive");
+          liveUrl.find(".controls .next").addClass("inactive");
+          liveUrl.find(".thumbnail").hide();
+          liveUrl.find(".image").hide();
+
+          $("textarea").trigger("clear");
+          curImages = new Array();
+        });
+
+        output.show("fast");
+
+        if (data.video != null) {
+          var ratioW = data.video.width / 350;
+          data.video.width = 350;
+          data.video.height = data.video.height / ratioW;
+
+          var video =
+            '<object width="' +
+            data.video.width +
+            '" height="' +
+            data.video.height +
+            '">' +
+            '<param name="movie"' +
+            'value="' +
+            data.video.file +
+            '"></param>' +
+            '<param name="allowScriptAccess" value="always"></param>' +
+            '<embed src="' +
+            data.video.file +
+            '"' +
+            'type="application/x-shockwave-flash"' +
+            'allowscriptaccess="always"' +
+            'width="' +
+            data.video.width +
+            '" height="' +
+            data.video.height +
+            '"></embed>' +
+            "</object>";
+          output.find(".video").html(video).show();
+        }
+      },
+      addImage: function (image) {
+        var output = $(".liveurl");
+        var jqImage = $(image);
+        jqImage.attr("alt", "Preview");
+
+        if (image.width / image.height > 7 || image.height / image.width > 4) {
+          // we dont want extra large images...
+          return false;
         }
 
-        // Collapse/Expand icon
-        $("#collapse-icon").toggleClass("fa-angle-double-left fa-angle-double-right");
+        curImages.push(jqImage.attr("src"));
+        output.find(".image").append(jqImage);
+
+        if (curImages.length == 1) {
+          // first image...
+
+          output.find(".thumbnail .current").text("1");
+          output.find(".thumbnail").show();
+          output.find(".image").show();
+          jqImage.addClass("active");
+        }
+
+        if (curImages.length == 2) {
+          output.find(".controls .next").removeClass("inactive");
+        }
+
+        output.find(".thumbnail .max").text(curImages.length);
+      },
+    });
+
+    $(".liveurl ").on("click", ".controls .button", function () {
+      var self = $(this);
+      var liveUrl = $(this).parents(".liveurl");
+      var content = liveUrl.find(".image");
+      var images = $("img", content);
+      var activeImage = $("img.active", content);
+
+      if (self.hasClass("next")) var elem = activeImage.next("img");
+      else var elem = activeImage.prev("img");
+
+      if (elem.length > 0) {
+        activeImage.removeClass("active");
+        elem.addClass("active");
+        liveUrl.find(".thumbnail .current").text(elem.index() + 1);
+
+        if (elem.index() + 1 == images.length || elem.index() + 1 == 1) {
+          self.addClass("inactive");
+        }
       }
 
-      document.getElementById("upload").addEventListener("change", function (event) {
-        var file = event.target.files[0];
-        var fileReader = new FileReader();
-        if (file.type.match("image")) {
-          fileReader.onload = function (event) {
-            $(".preview").attr("src", event.target.result);
-          };
-          fileReader.readAsDataURL(file);
-        } else {
-          fileReader.onload = function () {
-            var blob = new Blob([fileReader.result], {
-              type: file.type,
-            });
-            var url = URL.createObjectURL(blob);
-            // console.log(url);
-            var video = document.createElement("video");
-            var timeupdate = function () {
-              if (snapImage()) {
-                video.removeEventListener("timeupdate", timeupdate);
-                video.pause();
-              }
-            };
-            video.addEventListener("loadeddata", function () {
-              if (snapImage()) {
-                video.removeEventListener("timeupdate", timeupdate);
-              }
-            });
-            var snapImage = function () {
-              var canvas = document.createElement("canvas");
-              canvas.width = video.videoWidth;
-              canvas.height = video.videoHeight;
-              canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-              var image = canvas.toDataURL();
-              var success = image.length > 100000;
-              if (success) {
-                var img = document.createElement("img");
-                img.src = image;
-                // document.getElementsByTagName('div')[0].appendChild(img);
-                $(".preview").attr("src", image);
-                URL.revokeObjectURL(url);
-              }
-              return success;
-            };
-            video.addEventListener("timeupdate", timeupdate);
-            video.preload = "metadata";
-            video.src = url;
-            // Load video in Safari / IE11
-            video.muted = true;
-            video.playsInline = true;
-            video.play();
-          };
-          fileReader.readAsArrayBuffer(file);
-        }
-      });
-    </script>
-    <script>
-      var curImages = new Array();
+      if (self.hasClass("next")) var other = elem.prev("img");
+      else var other = elem.next("img");
 
-      $("textarea").liveUrl({
-        loadStart: function () {
-          $(".liveurl-loader").show();
-        },
-        loadEnd: function () {
-          $(".liveurl-loader").hide();
-        },
-        clear: function () {
-          $(".liveurl").hide();
-        },
-        success: function (data) {
-          var output = $(".liveurl");
-          output.find(".title").text(data.title);
-          output.find(".description").text(data.description);
-          output.find(".url").text(data.url);
-          output.find(".image").empty();
+      if (other.length > 0) {
+        if (self.hasClass("next")) self.prev().removeClass("inactive");
+        else self.next().removeClass("inactive");
+      } else {
+        if (self.hasClass("next")) self.prev().addClass("inactive");
+        else self.next().addClass("inactive");
+      }
+    });
+  </script>
+</body>
 
-          output.find(".close").one("click", function () {
-            var liveUrl = $(this).parent();
-            liveUrl.hide("fast");
-            liveUrl.find(".video").html("").hide();
-            liveUrl.find(".image").html("");
-            liveUrl.find(".controls .prev").addClass("inactive");
-            liveUrl.find(".controls .next").addClass("inactive");
-            liveUrl.find(".thumbnail").hide();
-            liveUrl.find(".image").hide();
-
-            $("textarea").trigger("clear");
-            curImages = new Array();
-          });
-
-          output.show("fast");
-
-          if (data.video != null) {
-            var ratioW = data.video.width / 350;
-            data.video.width = 350;
-            data.video.height = data.video.height / ratioW;
-
-            var video =
-              '<object width="' +
-              data.video.width +
-              '" height="' +
-              data.video.height +
-              '">' +
-              '<param name="movie"' +
-              'value="' +
-              data.video.file +
-              '"></param>' +
-              '<param name="allowScriptAccess" value="always"></param>' +
-              '<embed src="' +
-              data.video.file +
-              '"' +
-              'type="application/x-shockwave-flash"' +
-              'allowscriptaccess="always"' +
-              'width="' +
-              data.video.width +
-              '" height="' +
-              data.video.height +
-              '"></embed>' +
-              "</object>";
-            output.find(".video").html(video).show();
-          }
-        },
-        addImage: function (image) {
-          var output = $(".liveurl");
-          var jqImage = $(image);
-          jqImage.attr("alt", "Preview");
-
-          if (image.width / image.height > 7 || image.height / image.width > 4) {
-            // we dont want extra large images...
-            return false;
-          }
-
-          curImages.push(jqImage.attr("src"));
-          output.find(".image").append(jqImage);
-
-          if (curImages.length == 1) {
-            // first image...
-
-            output.find(".thumbnail .current").text("1");
-            output.find(".thumbnail").show();
-            output.find(".image").show();
-            jqImage.addClass("active");
-          }
-
-          if (curImages.length == 2) {
-            output.find(".controls .next").removeClass("inactive");
-          }
-
-          output.find(".thumbnail .max").text(curImages.length);
-        },
-      });
-
-      $(".liveurl ").on("click", ".controls .button", function () {
-        var self = $(this);
-        var liveUrl = $(this).parents(".liveurl");
-        var content = liveUrl.find(".image");
-        var images = $("img", content);
-        var activeImage = $("img.active", content);
-
-        if (self.hasClass("next")) var elem = activeImage.next("img");
-        else var elem = activeImage.prev("img");
-
-        if (elem.length > 0) {
-          activeImage.removeClass("active");
-          elem.addClass("active");
-          liveUrl.find(".thumbnail .current").text(elem.index() + 1);
-
-          if (elem.index() + 1 == images.length || elem.index() + 1 == 1) {
-            self.addClass("inactive");
-          }
-        }
-
-        if (self.hasClass("next")) var other = elem.prev("img");
-        else var other = elem.next("img");
-
-        if (other.length > 0) {
-          if (self.hasClass("next")) self.prev().removeClass("inactive");
-          else self.next().removeClass("inactive");
-        } else {
-          if (self.hasClass("next")) self.prev().addClass("inactive");
-          else self.next().addClass("inactive");
-        }
-      });
-    </script>
-  </body>
 </html>
+{% endblock body %}

@@ -1,6 +1,25 @@
 from django.db import models
-from mood.models import *
+from django.http import request
+from django.contrib.sessions.models import Session
+from mood.models import CustomUser
+from uuid import uuid4
+
 # Create your models here.
+
+
+class Friend(models.Model):
+    u1 = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, verbose_name="From User", related_name='fromuser')
+    u2 = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, verbose_name="To User", related_name='touser')
+    date = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ['u1', 'u2']
+
+    def __str__(self):
+        return str(self.u1.username + "    "+self.u2.username)
 
 
 class Follow(models.Model):
@@ -13,9 +32,22 @@ class Follow(models.Model):
     class Meta:
         ordering = ["follow_time", ]
 
+    @property
+    def friends(self):
+
+        x = Follow.objects.get(following=self.follower,
+                               follower=self.following)
+        if x is not None:
+            return True
+
+        return False
+
 
 class Post(models.Model):
+
     PRIVACY_CHOICE = (('1', 'Public'), ('2', 'Friends'), ('3', 'Private'),)
+    id = models.UUIDField(
+        primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     caption = models.CharField(max_length=500, null=True)
@@ -34,18 +66,18 @@ class Post(models.Model):
     def __str__(self):
         return str(self.id)
 
-    @property
+    @ property
     def likeset(self):
         likes = self.like_set.all()
         return likes
 
-    @property
+    @ property
     def cmtset(self):
         commentss = self.comment_set.all()
         # print(commentss)
         return commentss
 
-    @property
+    @ property
     def cmtcount(self):
         try:
             commentss = self.comment_set.count()
@@ -53,7 +85,7 @@ class Post(models.Model):
             commentss = 0
         return commentss
 
-    @property
+    @ property
     def likecount(self):
         try:
             likes = self.like_set.count()
@@ -82,7 +114,8 @@ class Comment(models.Model):
 
 
 class Notification(models.Model):
-    NOTIFICATION_TYPES = ((1, 'Like'), (2, 'Comment'), (3, 'follow'),)
+    NOTIFICATION_TYPES = (('1', 'Like'), ('2', 'Comment'),
+                          ('3', 'follow'), ('4', 'Friend'))
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='noti_post', blank=True, null=True)
     sender = models.ForeignKey(
@@ -93,3 +126,6 @@ class Notification(models.Model):
     text_preview = models.CharField(max_length=50, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     is_seen = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.notification_type)

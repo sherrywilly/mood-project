@@ -4,3 +4,6 @@ from social.models import *
 
 admin.site.register(Follow)
 admin.site.register(Post)
+admin.site.register(Friend)
+admin.site.register(Comment)
+admin.site.register(Notification)

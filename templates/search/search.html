@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% load static %} {% block header %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile</title>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile-mood.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/responsive.cs' %}s" rel="stylesheet" />
+    <link href="{% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.liveurl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fontawesome-pro-5.13.0/js/all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  </head>
+
+  <body>
+    {% endblock header %} {% block body %}
+    <div class="container-fluid">
+      <div class="row m-0 center-scroll row-height">
+        <div class="col-12">
+          <h5 class="p-3">Search Result</h5>
+
+          <div class="card m-2 search-card">
+            {% for i in searching %}
+            <div class="card-body d-flex search-cardbody">
+              <div class="col-2 search-profilepic">
+                <img
+                  src="{{i.bio.profile_pic}}"
+                  class="rounded-circle"
+                  alt=""
+                  height="100"
+                  data-holder-rendered="true"
+                />
+
+                {% comment %}
+                <img src="{% static 'img/unknown.jpg' %}" class="img-fluid rounded-circle" alt="" />
+                {% endcomment %}
+              </div>
+              <div class="col-4 search-profileadd">
+                {% comment %}
+                <a href="{% url 'searchprofile_full_view' i.pk %}">
+                  {% endcomment %}
+                  <h5>{{i.first_name}}</h5>
+                  {% if i.email %}
+                  <p>{{i.email}}</p>
+                  {% endif %}
+                </a>
+                <!-- <p class="search-pro">Professional</p> -->
+              </div>
+              <div class="col-6 search-btns">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-bg-blue m-1 f-btn{{i.pk}}"
+                  id="{{i.pk}}"
+                >
+                  {% if i.pk in r_user %}UnFollow {% else %}Follow{% endif %}
+                </button>
+                <button type="button" class="btn btn-primary btn-bg-blue m-1">Add Friend</button>
+              </div>
+            </div>
+
+            <script>
+              $(document).ready(function(){
+
+                $('.f-btn{{i.pk}}').click(function(){
+                  x= $(this).attr('id')
+                  let y = $(this).text()
+                  console.log(x)
+                  console.log(y)
+                    $.ajax({
+                        url:'{% url 'follow' %}',
+                        method:"POST",
+                        data:{'f-id':x},
+                        success:function(data){
+                          console.log(y)
+                          if (data !="True"){
+                            alert('Failed')
+                          }else{
+                            console.log('hjk')
+                           if ( y != "UnFollow"){
+
+                           document.getElementById(x).innerHTML = "UnFollow"
+                          }else{
+
+                             document.getElementById(x).innerHTML = "Follow"
+                          }}}
+
+
+
+                      })
+                })
+
+              })
+            </script>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

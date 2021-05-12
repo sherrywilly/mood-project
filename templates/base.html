@@ -1,0 +1,188 @@
+{% load static %} {% block header %} {% endblock header %}
+
+<nav class="navbar navbar-expand-sm navbar-light bg-gray d-flex fixed-top">
+  <div class="col-xl-8 col-lg-8 col-md-7 col-sm-6 col-8 d-flex">
+    <div class="">
+      <button class="btn btn-outline-dark btn-sm openbtn" onclick="myFunction()" id="menu-toggle">
+        <span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span>
+      </button>
+    </div>
+    <form action="{% url 'explore' %}" method="get">
+      <div class="container flex">
+        <div class="mood-logo col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6">
+          <img src="{% static 'img/mood-png.png' %}" alt="" class="img-fluid" />
+        </div>
+        <div class="input-group search">
+          <input
+            class="form-control py-2 border-right-0 border"
+            type="search"
+            id="search-input"
+            placeholder="Search"
+            name="tags"
+          />
+          <span class="input-group-append">
+            <button
+              class="btn btn-outline-secondary border-left-0 border bg-white"
+              id="btn-icon"
+              type="submit"
+            >
+              <i class="fa fa-search text-dark"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-5 col-sm-6 col-4 float-right d-flex">
+    <button
+      class="navbar-toggler navv"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContents"
+      aria-controls="navbarSupportedContents"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContents">
+      <ul class="navbar-nav disp">
+        <li class="nav-item dropdown drop-noti comment">
+          <a href="#" class="btn btn-clean notification-btn comment-btn">
+            <i class="fas fa-comment-alt bell-btn"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown drop-noti noti">
+          <a href="{% url 'notification' %}" class="btn btn-clean notification-btn">
+            <span class="badge badge-dark badge-corner" style="padding-top: 5px; border-radius: 50%"
+              >{{request.user.bio.notification_count}}</span
+            >
+            <i class="far fa-bell text-dark bell-btn"></i>
+          </a>
+        </li>
+        <div class="d-flex">
+          <div class="timeline-headernav-profile">
+            <img src="{{request.user.bio.profile_pic}}" alt="" class="rounded-circle" />
+          </div>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle mr-5 text-dark"
+              href="#"
+              id="navbarDropdown2"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {{request.user.username}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item text-danger logout-dropbox" href=" {% url 'my_profile' %}"
+                >View Profile</a
+              >
+              <a class="dropdown-item logout-dropbox" href="#">Help</a>
+              <a class="dropdown-item logout-dropbox" href="#">Logout</a>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="border-bottom bordclass"></div>
+<div class="d-flex w-100" style="margin-top: 5rem" id="wrapper">
+  <!-- Sidebar -->
+  <div class="border-right sidepanel" id="sidebar-wrapper">
+    <div class="col-12 my-profile mt-4">
+      <div class="profilepic-leftnav">
+        <img src="{{request.user.bio.profile_pic}}" alt="" style="border-radius: 50%; width: 45%" />
+      </div>
+      <div class="dropdown show leftside-dropdown">
+        <a
+          class="btn btn-secondary dropdown-toggle border-0 text-dark text"
+          style="background-color: transparent"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{request.user.username}}
+        </a>
+        <div class="dropdown-menu text-left" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'my_profile' %}">View Profile</a>
+          <a class="dropdown-item" href="#">Help</a>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="search-leftnav col-12">
+      <div class="nav-item dropdown drop-noti">
+        <a href="#" class="btn btn-clean notification-btn">
+          <i class="fas fa-comment-alt"></i>
+        </a>
+      </div>
+      <div class="nav-item dropdown drop-noti">
+        <a href="#" class="btn btn-clean notification-btn">
+          <span
+            class="badge badge-dark badge-corner"
+            style="padding-top: 2px; border-radius: 50%; right: -20px !important"
+            >8</span
+          >
+          <i class="far fa-bell text-dark"></i>
+        </a>
+      </div>
+    </div>
+    <div class="search-leftnav col-12">
+      <input type="text" name="search" placeholder="SEARCH.." class="search2" />
+      <button type="submit" class="scrhbtn"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="list-group list-group-flush mt-4 left-nav">
+      <a href="{% url 'timeline' %}" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-home-lg bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">Home</span>
+      </a>
+      <a href="{% url 'my_profile' %}" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-id-card bg-white p-1 text-dark rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">Profile</span></a
+      >
+      <a href="#" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-user-friends bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-3 pt-1 items font-weight-bold">Groups</span></a
+      >
+      <a href="{% url 'activity' %}" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-bell bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">Activities</span></a
+      >
+      <a href="{% url 'user_settings' %}" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-cog bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">Settings</span>
+      </a>
+      <a href="#" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-question-circle bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">Help</span>
+      </a>
+      <a href="#" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="far fa-plus-circle bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">FAQ</span>
+      </a>
+    </div>
+  </div>
+
+  {% block body %} {% endblock body %}
+</div>

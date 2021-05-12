@@ -1,0 +1,671 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %} " />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/profile-mood.css' %} " />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link href=" {% static 'css/mdb.min.cs' %}s" rel="stylesheet" />
+    <link href=" {% static 'css/style.css' %}" rel="stylesheet" />
+    <link href=" {% static 'css/responsive.css' %}" rel="stylesheet" />
+    <link href=" {% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src=" {% static 'js/popper.min.js' %} "></script>
+    <script type="text/javascript" src=" {% static 'bootstrap/js/bootstrap.min.js' %} "></script>
+    <script type="text/javascript" src=" {% static 'js/jquery.liveurl.js' %} "></script>
+    <script type="text/javascript" src=" {% static 'js/mdb.min.j' %} s"></script>
+    <script type="text/javascript" src=" {% static 'fontawesome-pro-5.13.0/js/all.js' %} "></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+
+    {% endblock %}
+
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+
+    {% block body%}
+    <div id="page-content-wrapper" class="w-100">
+        <div class="container-fluid">
+            <div class="row m-0">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 center-scroll row-height pt-3">
+
+
+
+                    <div class="card mt-4 w-75" style="background-color: #d4d7da; border-radius:25px;">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <div class="d-flex"><img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                                         class="rounded-circle " height="70" alt="" loading="lazy"/>
+                                    <h6 class="text-center mt-4 ml-2"><strong>{{post.user.email}}</strong></h6>
+                                </div>
+                                <div>
+                                    <button type="button" class="custom-btn" title="Save"><i
+                                            class="far fa-bookmark"></i></button>
+                                    <small class="text-muted">posted {{post.date|naturaltime}}</small></div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"> {{ post.caption }} </p>
+                        </div>
+                        {% if post.file %}
+                        <img src="{{ post.file.url }}" class="card-img-bottom m-auto" style="width:95%;" alt="..."/>
+                        {% endif %}
+<!--                        <div class="card-body">-->
+<!--                            <p class="card-text"> hello I am new in this city</p>-->
+<!--                        </div>-->
+                        <div class="card-footer border-0">
+
+
+                            <a href="{% url 'postlike' post.id %}" id="likeBtn">
+                                <i id="likeIcon"
+                                   class="{% if  liked_posts %} fas fa-heart {% else %} far fa-heart {% endif %} text-danger">
+                                </i></a> <button  id="likeCount{{i.id}}" style="background:none;border:none;">{{ post.likecount }}</button>
+
+
+
+<!--                            <button type="button" class="custom-btn mr-5" title="Share" data-toggle="modal" data-target="#exampleModal"><i-->
+<!--                                    class="fas fa-share text-primary" id="like-Count"></i>20-->
+<!--                            </button>-->
+                            <button type="button" class="custom-btn comment-btn" title="Comment" id="comment-btn{{i.id}}"><i
+                                    class="fas fa-comment" style="color: #D848DC;"></i>{{post.cmtcount}}
+                            </button>
+
+
+                            <div class="card-comment " id="comment-card{{i.id}}">
+                                <div class="d-flex">
+                                  <img src="{{request.user.bio.profile_pic}}" class="rounded-circle" height="50" alt=""
+                                                         loading="lazy"/> 
+                                    <h6 class="text-center mt-3 ml-2"><strong>{{request.user.first_name}}</strong></h6>
+                                </div>
+                                <form method="post" action="{% url 'comment' %}" id="commentForm{{post.id}}">
+                                    {% csrf_token %}
+
+                               <div class="input-group">
+                                    <textarea class="comment-input " rows="1" placeholder="Write a comment.."
+                                              name="comments" id="comments{{post.id}}"></textarea>
+                                    <input type="hidden" value="{{post.id}}" name="commentid" id ="commentid{{post.id}}">
+                                    <button type="submit" class="btn btn-outline-famroutes btn-floating comment-send"><i
+                                            class="fas fa-angle-double-right" style="font-size:25px;"></i></button>
+                                </div>
+
+                                    </form>
+                                <div class="col mt-3">
+                                    <h6>Recent Comments</h6>
+                                    <p>{{i.cmtcount}}</p>
+                                </div>
+
+
+
+
+                                {% for j in post.cmtset %}
+                                <div class="card w-100 comment">
+                                    <div class="d-flex p-3"><img
+                                            src="{{j.user.bio.profile_pic}}"
+                                            class="rounded-circle " height="40" alt="" loading="lazy"/>
+                                        <h6 class="text-center mt-2 ml-2"><strong>{{j.user.email}}</strong></h6>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p>{{j.comment}}</p>
+                                    </div>
+<!--                                    <div class="d-flex p-3"><img-->
+<!--                                            src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"-->
+<!--                                            class="rounded-circle " height="40" alt="" loading="lazy"/>-->
+<!--                                        <h6 class="text-center mt-2 ml-2"><strong>Blue Sapphire</strong></h6>-->
+<!--                                    </div>-->
+
+                                </div>
+
+
+
+
+                                {% endfor %}
+
+ <script>
+                        $("#commentForm{{post.id}}").on("submit", function(e) {
+                            e.preventDefault();
+
+                            var comments = $('#comments{{post.id}}').val();
+                            var commentid = $('#commentid{{post.id}}').val();
+                            var token =  '{{csrf_token}}';
+
+                            $.ajax({
+                                  headers: { "X-CSRFToken": token },
+                                  url: "{% url 'comment' %}",
+                                  type: 'POST',
+                                  data: { "comments": comments,"commentid": commentid},
+                                  dataType: 'json',
+                                  success: function (comment_list) {
+<!--                                  //$('<div class="comment-text"><p>{{comment_list.comment}}</p></div>').appendTo($('.card w-100'));
+
+                                       for (i of comment_list) {
+                                       console.log(i.comment)
+                                        //$(".card").prepend("<b>Prepended text</b>");
+
+
+                                    $('<div class="d-flex p-3"> <img src="{{request.user.bio.profile_pic}}" class="rounded-circle " height="40" alt="" loading="lazy"/> <h6 class="text-center mt-2 ml-2"><strong>{{request.user.email}}</strong></h6> </div><div class="comment-text"><p>'+ i.comment +'</p></div>').prependTo($('.comment'));
+                                       }
+
+
+
+
+                                }
+
+                            })
+
+                        });
+                    </script>
+
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content col-12">
+            <div class="modal-header">
+                <h5 class="modal-title">Share</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body">
+                <div class="icon-container1 d-flex">
+
+                     <div class="smd"> <a style="text-decoration:none;color:black" href="" id="whatsapp"><i class="img-thumbnail fab fa-whatsapp fa-2x" style="color: #25D366;background-color: #cef5dc;"></i>
+                        <p>Whatsapp</p> </a>
+                    </div>
+
+                    <div class="smd"> <a href="" style="text-decoration:none;color:black" id="fb"><i class="img-thumbnail fab fa-facebook fa-2x" style="color: #3b5998;background-color: #eceff5;"></i>
+                        <p>Facebook</p></a>
+                    </div>
+
+                    <div class="smd"> <a href="" style="text-decoration:none;color:black" id="twitter"><i class=" img-thumbnail fab fa-twitter fa-2x" style="color:#4c6ef5;background-color: aliceblue"></i>
+                        <p>Twitter</p> </a>
+                    </div>
+
+                    <div class="smd"> <i class="img-thumbnail fas fa-copy fa-2x" style="color: #cbced6;background-color: aliceblue;"></i>
+                        <p>Copy Link</p>
+                    </div>
+
+                </div>
+
+<!--                <div class="icon-container2 d-flex">-->
+<!--                    <div class="smd"> <i class="img-thumbnail fab fa-whatsapp fa-2x" style="color: #25D366;background-color: #cef5dc;"></i>-->
+<!--                        <p>Whatsapp</p>-->
+<!--                    </div>-->
+<!--                    <div class="smd"> <i class="img-thumbnail fab fa-facebook-messenger fa-2x" style="color: #3b5998;background-color: #eceff5;"></i>-->
+<!--                        <p>Messenger</p>-->
+<!--                    </div>-->
+<!--                    <div class="smd"> <i class="img-thumbnail fab fa-telegram fa-2x" style="color: #4c6ef5;background-color: aliceblue"></i>-->
+<!--                        <p>Telegram</p>-->
+<!--                    </div>-->
+<!--                    <div class="smd"> <i class="img-thumbnail fab fa-weixin fa-2x" style="color: #7bb32e;background-color: #daf1bc;"></i>-->
+<!--                        <p>WeChat</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+<!--            <div class="modal-footer"> <label style="font-weight: 600">Page Link <span class="message"></span></label><br />-->
+<!--                <div class="row"> <input class="col-10 ur" type="url" placeholder="https://www.arcardio.app/acodyseyy" id="myInput" aria-describedby="inputGroup-sizing-default" style="height: 40px;"> <button class="cpy" onclick="myFunction()"><i class="far fa-clone"></i></button> </div>-->
+<!--            </div>-->
+        </div>
+    </div>
+
+                            <script>
+                                const facebookbtn = document.querySelector("#fb");
+                                const whatsappbtn = document.querySelector("#whatsapp");
+                                const twitterbtn = document.querySelector("#twitter");
+
+                                function init(){
+  let postUrl = encodeURI(document.location.href);
+  let postTitle = encodeURI("Hi,open the link and Join Kaarmy ");
+
+  facebookbtn.setAttribute(
+    "href",
+    `https://www.facebook.com/sharer.php?u=${postUrl }`
+  );
+  whatsappbtn.setAttribute(
+    "href",
+    `https://wa.me/?text=${postTitle} ${postUrl}`
+  );
+  twitterbtn.setAttribute(
+    "href",
+    `https://twitter.com/share?url=${postUrl}&text=${postTitle}`
+  );
+
+//  mailbutton.setAttribute(
+//    "href",
+//    `https://www.facebook.com/sharer.php?u=${postUrl }`
+//  );
+}
+init();
+                            </script>
+
+                    <script>
+           $("#likeBtn").click(function(e){
+                e.preventDefault();
+          var URL = this.href;
+          var likecount = $('#likeCount{{i.id}}').val();
+          console.log(likecount);
+
+
+            $.ajax({
+                url: URL,
+                success: function (response) {
+                console.log(response.liked);
+                console.log(response.lcn);
+
+                    if (response.liked === true) {
+                        $("#likeIcon").removeClass('far fa-heart text-danger');
+                        $("#likeIcon").attr('class', 'fas fa-heart text-danger');
+
+                        $("#likeCount").html(response.lcn);
+
+
+                    }
+                    else {
+                        $("#likeIcon" ).removeClass('fas fa-heart text-danger');
+                        $("#likeIcon").attr('class', 'far fa-heart text-danger');
+
+                        $("#likeCount{{i.id}}").html(response.lcn);
+
+                    }
+                },
+
+            });
+        });
+
+        $('#comment-btn{{i.id}}').on('click', function(){
+       $('#comment-card{{i.id}}').toggleClass('hidden')
+    });
+<!--            $("#loveBtn{{i.id}}").click(function(e){-->
+<!--                e.preventDefault();-->
+<!--                var href = this.href;-->
+
+<!--                $.ajax({-->
+<!--                    url : href,-->
+<!--                    success : function(response){-->
+<!--                        if(response["liked"]){-->
+<!--                            alert('liked')-->
+<!--$('#likeBtn + response.post_id').toggleClass('show');-->
+
+
+<!--                        }-->
+
+<!--                        else{-->
+<!--                            alert('unliked')-->
+
+<!--                        }-->
+<!--                    }-->
+
+
+<!--                })-->
+
+<!--            })-->
+
+
+
+                    </script>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<!--Modal Start     -->
+<div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-model-content">
+            <div class="modal-header custom-modal-header bg-gradient-blue">
+                <h5 class="modal-title" id="newPostModalLabel">New Post</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" data-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'post' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <select class="privacy-select" name="privacy" id="privacy">
+                            <option value="public">&#xf0ac; Public </option>
+                            <option value="friends">&#xf0c0; Friends</option>
+                            <option value="private">&#xf023; Only Me</option>
+                        </select>
+                        <textarea class="form-control br-20" placeholder="write something here" name="caption"
+                                  id="caption" maxlength="20"></textarea>
+                        <div class="liveurl-loader"></div>
+                        <div class="liveurl">
+                            <div class="close" title="Entfernen"></div>
+                            <div class="inner">
+                                <div class="image"></div>
+                                <div class="details">
+                                    <div class="info">
+                                        <div class="title"></div>
+                                        <div class="description"></div>
+                                        <div class="url"></div>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <div class="pictures">
+                                            <div class="controls">
+                                                <div class="prev button inactive"></div>
+                                                <div class="next button inactive"></div>
+                                                <div class="count"><span class="current">0</span><span> on </span><span
+                                                        class="max">0</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="video"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview"><img class="img-thumbnail preview w-25 ml-2" src="img/DENTOL black.png" alt="">
+                    </div>
+                    <div class="add">
+                        <label for="upload"><i class="fas fa-photo-video"></i> Add photos or videos</label>
+                        <input type="file" id="upload" name="file" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4">
+                    </div>
+
+            </div>
+
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-default" data-dismiss="modal"> Close</button>
+                <button type="submit" class="btn btn-primary bg-gradient-blue">Post</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+       	function myFunction(){
+		var x = document.getElementById("sidebar-wrapper");
+		if (x.style.display === "none") {
+			x.style.display = "block";
+		} else{
+			x.style.display = "none";
+		}
+	}
+
+
+</script>
+<script>
+
+
+
+    // Hide submenus
+    $('#body-row .collapse').collapse('hide');
+
+    // Collapse/Expand icon
+    $('#collapse-icon').addClass('fa-angle-double-left');
+
+    // Collapse click
+    $('[data-toggle=sidebar-colapse]').click(function () {
+        SidebarCollapse();
+    });
+
+    function SidebarCollapse() {
+        $('.menu-collapsed').toggleClass('d-none');
+        $('.sidebar-submenu').toggleClass('d-none');
+        $('.submenu-icon').toggleClass('d-none');
+        $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
+
+        // Treating d-flex/d-none on separators with title
+        var SeparatorTitle = $('.sidebar-separator-title');
+        if (SeparatorTitle.hasClass('d-flex')) {
+            SeparatorTitle.removeClass('d-flex');
+        } else {
+            SeparatorTitle.addClass('d-flex');
+        }
+
+        // Collapse/Expand icon
+        $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+
+    }
+
+    document.getElementById('upload').addEventListener('change', function (event) {
+
+        var file = event.target.files[0];
+        var fileReader = new FileReader();
+        if (file.type.match('image')) {
+            fileReader.onload = function (event) {
+                $('.preview').attr('src', event.target.result);
+            };
+            fileReader.readAsDataURL(file);
+        } else {
+            fileReader.onload = function () {
+
+                var blob = new Blob([fileReader.result], {type: file.type});
+                var url = URL.createObjectURL(blob);
+                // console.log(url);
+                var video = document.createElement('video');
+                var timeupdate = function () {
+                    if (snapImage()) {
+                        video.removeEventListener('timeupdate', timeupdate);
+                        video.pause();
+                    }
+                };
+                video.addEventListener('loadeddata', function () {
+                    if (snapImage()) {
+                        video.removeEventListener('timeupdate', timeupdate);
+                    }
+                });
+                var snapImage = function () {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                    var image = canvas.toDataURL();
+                    var success = image.length > 100000;
+                    if (success) {
+                        var img = document.createElement('img');
+                        img.src = image;
+                        // document.getElementsByTagName('div')[0].appendChild(img);
+                        $('.preview').attr('src', image);
+                        URL.revokeObjectURL(url);
+                    }
+                    return success;
+                };
+                video.addEventListener('timeupdate', timeupdate);
+                video.preload = 'metadata';
+                video.src = url;
+                // Load video in Safari / IE11
+                video.muted = true;
+                video.playsInline = true;
+                video.play();
+            };
+            fileReader.readAsArrayBuffer(file);
+        }
+    });
+
+
+
+</script>
+ <script>
+                        $("#commentForm{{i.id}}").on("submit", function(e) {
+                            e.preventDefault();
+
+                            var comments = $('#comments{{i.id}}').val();
+                            var commentid = $('#commentid{{i.id}}').val();
+                            var token =  '{{csrf_token}}';
+
+                            $.ajax({
+                                  headers: { "X-CSRFToken": token },
+                                  url: "{% url 'comment' %}",
+                                  type: 'POST',
+                                  data: { "comments": comments,"commentid": commentid},
+                                  dataType: 'json',
+                                  success: function (comment_list) {
+
+
+                                  
+
+
+
+
+                                }
+
+                            })
+
+                        });
+                    </script>
+<script>
+
+    var curImages = new Array();
+
+    $('textarea').liveUrl({
+        loadStart: function () {
+            $('.liveurl-loader').show();
+        },
+        loadEnd: function () {
+            $('.liveurl-loader').hide();
+        },
+        clear: function () {
+            $('.liveurl').hide();
+        },
+        success: function (data) {
+            var output = $('.liveurl');
+            output.find('.title').text(data.title);
+            output.find('.description').text(data.description);
+            output.find('.url').text(data.url);
+            output.find('.image').empty();
+
+            output.find('.close').one('click', function () {
+                var liveUrl = $(this).parent();
+                liveUrl.hide('fast');
+                liveUrl.find('.video').html('').hide();
+                liveUrl.find('.image').html('');
+                liveUrl.find('.controls .prev').addClass('inactive');
+                liveUrl.find('.controls .next').addClass('inactive');
+                liveUrl.find('.thumbnail').hide();
+                liveUrl.find('.image').hide();
+
+                $('textarea').trigger('clear');
+                curImages = new Array();
+            });
+
+            output.show('fast');
+
+            if (data.video != null) {
+                var ratioW = data.video.width / 350;
+                data.video.width = 350;
+                data.video.height = data.video.height / ratioW;
+
+                var video =
+                    '<object width="' + data.video.width + '" height="' + data.video.height + '">' +
+                    '<param name="movie"' +
+                    'value="' + data.video.file + '"></param>' +
+                    '<param name="allowScriptAccess" value="always"></param>' +
+                    '<embed src="' + data.video.file + '"' +
+                    'type="application/x-shockwave-flash"' +
+                    'allowscriptaccess="always"' +
+                    'width="' + data.video.width + '" height="' + data.video.height + '"></embed>' +
+                    '</object>';
+                output.find('.video').html(video).show();
+
+
+            }
+        },
+        addImage: function (image) {
+            var output = $('.liveurl');
+            var jqImage = $(image);
+            jqImage.attr('alt', 'Preview');
+
+            if ((image.width / image.height) > 7
+                || (image.height / image.width) > 4) {
+                // we dont want extra large images...
+                return false;
+            }
+
+            curImages.push(jqImage.attr('src'));
+            output.find('.image').append(jqImage);
+
+
+            if (curImages.length == 1) {
+                // first image...
+
+                output.find('.thumbnail .current').text('1');
+                output.find('.thumbnail').show();
+                output.find('.image').show();
+                jqImage.addClass('active');
+
+            }
+
+            if (curImages.length == 2) {
+                output.find('.controls .next').removeClass('inactive');
+            }
+
+            output.find('.thumbnail .max').text(curImages.length);
+        }
+    });
+
+
+    $('.liveurl ').on('click', '.controls .button', function () {
+        var self = $(this);
+        var liveUrl = $(this).parents('.liveurl');
+        var content = liveUrl.find('.image');
+        var images = $('img', content);
+        var activeImage = $('img.active', content);
+
+        if (self.hasClass('next'))
+            var elem = activeImage.next("img");
+        else var elem = activeImage.prev("img");
+
+        if (elem.length > 0) {
+            activeImage.removeClass('active');
+            elem.addClass('active');
+            liveUrl.find('.thumbnail .current').text(elem.index() + 1);
+
+            if (elem.index() + 1 == images.length || elem.index() + 1 == 1) {
+                self.addClass('inactive');
+            }
+        }
+
+        if (self.hasClass('next'))
+            var other = elem.prev("img");
+        else var other = elem.next("img");
+
+        if (other.length > 0) {
+            if (self.hasClass('next'))
+                self.prev().removeClass('inactive');
+            else self.next().removeClass('inactive');
+        } else {
+            if (self.hasClass('next'))
+                self.prev().addClass('inactive');
+            else self.next().addClass('inactive');
+        }
+
+
+    });
+
+
+</script>
+</body>
+</html>
+
+{% endblock body %}

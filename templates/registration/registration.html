@@ -41,18 +41,18 @@
         <form  method="post">
         {% csrf_token %}
           <div class="form-group d-flex mt-3">
-            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name="first_name">
-            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name'>
+            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name="first_name" required>
+            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name' required>
           </div>
           <div class="form-group d-flex">
             <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number" name="phone">
-            <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email" name="email">
+            <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email" name="email" id="email2" required>
           </div>
           <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px;">
             <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Category</label>
             <div class="gender d-flex col-sm-10 col-9 pt-2">
               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="1">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="1" checked>
                 <label class="form-check-label p-0" for="inlineRadio5">Single</label>
               </div>
               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
@@ -85,7 +85,7 @@
                 <label class="form-check-label p-0" for="inlineRadio3">Transgenders</label>
               </div>
               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="4">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="4" checked>
                 <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
               </div>
             </div>
@@ -93,16 +93,17 @@
           <div class="form-group d-flex details-group dob m-1">
             <div class="add col-6 p-0 mt-4">
               <label for="upload" class="col-12 col-form-label p-2 m-1 bg-gray"><i class="fas fa-photo-video pr-2"></i>Upload latest Photo</label>
-              <input type="file" id="upload" name="file" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4">
+              <input type="file" id="upload" name="file" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4" required>
             </div>
-            <div class="col-6 mt-3 preview"><img src="{% static 'img/g1.jpg' %}" alt="" class="rounded-circle"></div>
+             <div class="preview"><img class="rounded-circle preview w-25 ml-2" src="img/DENTOL black.png" alt=""> </div>
+            {% comment %} <div class="col-6 mt-3 preview"><img src="{% static 'img/g1.jpg' %}" alt="" class="rounded-circle"></div> {% endcomment %}
           </div>
           <div class="form-group d-flex">
-            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="User Name" name="username">
-            <input type="password" class="form-control m-1 p-2 bg-gray" placeholder="Password" name="password1">
+            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="User Name" name="username" id="phoneno" required>
+            <input type="password" class="form-control m-1 p-2 bg-gray" placeholder="Password" name="password1" required>
           </div>
           <div class="col-12 buttons mt-4 pb-5 text-center">
-            <button class="btn btn-primary my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit">Submit</button>
+            <button class="btn btn-primary my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit" id="submit-btn">Submit</button>
           </div>
         </form>
       </div>
@@ -176,14 +177,14 @@ $('#phoneno').keyup(function(){
 
                         url : '{% url 'check_phone_exist' %}',
                         type : 'POST',
-                        data : {phone:phoneno},
+                        data : {'phoneno':phoneno},
                     })
                     .done(function(response){
                     console.log(response);
 
                          if(response == 'True'){
                          $('#phoneno-error').hide();
-                         $( "#phoneno" ).after( '<span id="phoneno-error" style="color:red">phone Already Used</span>' );
+                         $( "#phoneno" ).after( '<span id="phoneno-error" style="color:red">username Already exist</span>' );
                          $("#submit-btn").attr("disabled", true)
                          }else{
                            $('#phoneno-error').hide();
@@ -201,11 +202,103 @@ $('#phoneno').keyup(function(){
 
 
 
+  
+ 
+
+
+</script>
+<script>
+
+
+
+    // Hide submenus
+    $('#body-row .collapse').collapse('hide');
+
+    // Collapse/Expand icon
+    $('#collapse-icon').addClass('fa-angle-double-left');
+
+    // Collapse click
+    $('[data-toggle=sidebar-colapse]').click(function () {
+        SidebarCollapse();
+    });
+
+    function SidebarCollapse() {
+        $('.menu-collapsed').toggleClass('d-none');
+        $('.sidebar-submenu').toggleClass('d-none');
+        $('.submenu-icon').toggleClass('d-none');
+        $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
+
+        // Treating d-flex/d-none on separators with title
+        var SeparatorTitle = $('.sidebar-separator-title');
+        if (SeparatorTitle.hasClass('d-flex')) {
+            SeparatorTitle.removeClass('d-flex');
+        } else {
+            SeparatorTitle.addClass('d-flex');
+        }
+
+        // Collapse/Expand icon
+        $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+
+    }
+
+    document.getElementById('upload').addEventListener('change', function (event) {
+      console.log('gjkhgjhkg')
+        var file = event.target.files[0];
+        var fileReader = new FileReader();
+        if (file.type.match('image')) {
+            fileReader.onload = function (event) {
+                $('.preview').attr('src', event.target.result);
+            };
+            fileReader.readAsDataURL(file);
+        } else {
+            fileReader.onload = function () {
+
+                var blob = new Blob([fileReader.result], {type: file.type});
+                var url = URL.createObjectURL(blob);
+                // console.log(url);
+                var video = document.createElement('video');
+                var timeupdate = function () {
+                    if (snapImage()) {
+                        video.removeEventListener('timeupdate', timeupdate);
+                        video.pause();
+                    }
+                };
+                video.addEventListener('loadeddata', function () {
+                    if (snapImage()) {
+                        video.removeEventListener('timeupdate', timeupdate);
+                    }
+                });
+                var snapImage = function () {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                    var image = canvas.toDataURL();
+                    var success = image.length > 100000;
+                    if (success) {
+                        var img = document.createElement('img');
+                        img.src = image;
+                        // document.getElementsByTagName('div')[0].appendChild(img);
+                        $('.preview').attr('src', image);
+                        URL.revokeObjectURL(url);
+                    }
+                    return success;
+                };
+                video.addEventListener('timeupdate', timeupdate);
+                video.preload = 'metadata';
+                video.src = url;
+                // Load video in Safari / IE11
+                video.muted = true;
+                video.playsInline = true;
+                video.play();
+            };
+            fileReader.readAsArrayBuffer(file);
+        }
+    });
 
 
 
 </script>
-
 </div>
 </body>
 </html>
