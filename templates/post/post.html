@@ -82,7 +82,7 @@
 
                             <a href="{% url 'postlike' post.id %}" id="likeBtn">
                                 <i id="likeIcon"
-                                   class="{% if  liked_posts %} fas fa-heart {% else %} far fa-heart {% endif %} text-danger">
+                                   class="{% if request.user.pk in   post.like_list %} fas fa-heart {% else %} far fa-heart {% endif %} text-dark">
                                 </i></a> <button  id="likeCount{{i.id}}" style="background:none;border:none;">{{ post.likecount }}</button>
 
 
@@ -122,7 +122,7 @@
 
 
                                 {% for j in post.cmtset %}
-                                <div class="card w-100 comment">
+                                <div class="card w-100 comment-post">
                                     <div class="d-flex p-3"><img
                                             src="{{j.user.bio.profile_pic}}"
                                             class="rounded-circle " height="40" alt="" loading="lazy"/>
@@ -160,13 +160,13 @@
                                   dataType: 'json',
                                   success: function (comment_list) {
 <!--                                  //$('<div class="comment-text"><p>{{comment_list.comment}}</p></div>').appendTo($('.card w-100'));
-
+                                            $("#commentForm{{post.id}}").trigger('reset')
                                        for (i of comment_list) {
                                        console.log(i.comment)
                                         //$(".card").prepend("<b>Prepended text</b>");
 
 
-                                    $('<div class="d-flex p-3"> <img src="{{request.user.bio.profile_pic}}" class="rounded-circle " height="40" alt="" loading="lazy"/> <h6 class="text-center mt-2 ml-2"><strong>{{request.user.email}}</strong></h6> </div><div class="comment-text"><p>'+ i.comment +'</p></div>').prependTo($('.comment'));
+                                    $('<div class="d-flex p-3"> <img src="{{request.user.bio.profile_pic}}" class="rounded-circle " height="40" alt="" loading="lazy"/> <h6 class="text-center mt-2 ml-2"><strong>{{request.user.email}}</strong></h6> </div><div class="comment-text"><p>'+ i.comment +'</p></div>').prependTo($('.comment-post'));
                                        }
 
 
@@ -276,16 +276,16 @@ init();
                 console.log(response.lcn);
 
                     if (response.liked === true) {
-                        $("#likeIcon").removeClass('far fa-heart text-danger');
-                        $("#likeIcon").attr('class', 'fas fa-heart text-danger');
+                        $("#likeIcon").removeClass('far fa-heart text-dark');
+                        $("#likeIcon").attr('class', 'fas fa-heart text-dark');
 
                         $("#likeCount").html(response.lcn);
 
 
                     }
                     else {
-                        $("#likeIcon" ).removeClass('fas fa-heart text-danger');
-                        $("#likeIcon").attr('class', 'far fa-heart text-danger');
+                        $("#likeIcon" ).removeClass('fas fa-heart text-dark');
+                        $("#likeIcon").attr('class', 'far fa-heart text-dark');
 
                         $("#likeCount{{i.id}}").html(response.lcn);
 

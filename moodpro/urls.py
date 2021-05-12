@@ -9,6 +9,7 @@ urlpatterns = [
     #! pages without  authentication
     path('', views.loginpage, name='login'),
     path('register/', views.register, name='register'),
+    path('logout/', views.logout_view, name='logout'),
     #! validations
     path('check_email_exist/', views.check_email_exist, name='check_email_exist'),
     path('check_phone_exist/', views.check_phone_exist, name='check_phone_exist'),
@@ -31,6 +32,11 @@ urlpatterns = [
     path('p-about/', views.about_privacy_update, name="p_about"),
     path('p-search/', views.search_privacy_update, name="p_search"),
     path('setting_update/', views.setting_update, name="setting_update"),
+
+    #!ardmin area
+    path('admin-area/', views.admin_area, name="admin_area"),
+    path('admin-accept/<int:id>/', views.u_accept, name="u_activate"),
+    path('admin-reject/<int:id>/', views.u_reject, name="u_reject"),
 
 
 ]

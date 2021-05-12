@@ -1,0 +1,343 @@
+{% extends 'base.html' %} {% load static %} {% block header %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile</title>
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!--<link href="css/mdb.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <!--<link rel="stylesheet" type="text/css" href="css/byhand-all.css">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile-mood.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/responsive.cs' %}s" rel="stylesheet" />
+    <link href="{% static 'fontawesome-pro-5.13.0/css/all.css' %}" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.liveurl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fontawesome-pro-5.13.0/js/all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+      .avatar {
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% endblock header %} {% block body %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-12 mt-3">
+          <div class="card">
+            <div class="card-header text-capitalize font-weight-bold text-dark">
+              Pending Requests
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Profile</th>
+                      <th>First Name</th>
+                      <th>Email</th>
+                      <th>Username</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in users %}
+                    <tr>
+                      <th>{{forloop.counter}}</th>
+                      <th><img src="{{i.bio.profile_pic }}" class="avatar" alt="dfvx" /></th>
+                      <th>{{i.first_name}}</th>
+                      <th>{{i.email}}</th>
+                      <th>{{i.username}}</th>
+                      <th col-span="2">
+                      <form action="{% url 'u_activate' i.id %}" method="POST" class="d-inline-block">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-dark btn-sm" value="Verify"/></td>
+                                        </form>
+                    <form action="{% url 'u_reject' i.id %}" method="POST" class="d-inline-block">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-danger btn-sm" value="reject"/></td>
+                                        </form>
+                      
+                      </th>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("sidebar-wrapper");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      //        $("#menu-toggle").click(function (e) {
+      //            e.preventDefault();
+      //            $("#sidebar-wrapper").show();
+      //            $("#wrapper").toggleClass("toggled");
+      //        });
+      //
+    </script>
+    <script>
+      $(".comment-btn").on("click", function () {
+        $("#comment-card").toggleClass("hidden");
+      });
+      // Hide submenus
+      $("#body-row .collapse").collapse("hide");
+
+      // Collapse/Expand icon
+      $("#collapse-icon").addClass("fa-angle-double-left");
+
+      // Collapse click
+      $("[data-toggle=sidebar-colapse]").click(function () {
+        SidebarCollapse();
+      });
+
+      function SidebarCollapse() {
+        $(".menu-collapsed").toggleClass("d-none");
+        $(".sidebar-submenu").toggleClass("d-none");
+        $(".submenu-icon").toggleClass("d-none");
+        $("#sidebar-container").toggleClass("sidebar-expanded sidebar-collapsed");
+
+        // Treating d-flex/d-none on separators with title
+        var SeparatorTitle = $(".sidebar-separator-title");
+        if (SeparatorTitle.hasClass("d-flex")) {
+          SeparatorTitle.removeClass("d-flex");
+        } else {
+          SeparatorTitle.addClass("d-flex");
+        }
+
+        // Collapse/Expand icon
+        $("#collapse-icon").toggleClass("fa-angle-double-left fa-angle-double-right");
+      }
+
+      document.getElementById("upload").addEventListener("change", function (event) {
+        var file = event.target.files[0];
+        var fileReader = new FileReader();
+        if (file.type.match("image")) {
+          fileReader.onload = function (event) {
+            $(".preview").attr("src", event.target.result);
+          };
+          fileReader.readAsDataURL(file);
+        } else {
+          fileReader.onload = function () {
+            var blob = new Blob([fileReader.result], {
+              type: file.type,
+            });
+            var url = URL.createObjectURL(blob);
+            // console.log(url);
+            var video = document.createElement("video");
+            var timeupdate = function () {
+              if (snapImage()) {
+                video.removeEventListener("timeupdate", timeupdate);
+                video.pause();
+              }
+            };
+            video.addEventListener("loadeddata", function () {
+              if (snapImage()) {
+                video.removeEventListener("timeupdate", timeupdate);
+              }
+            });
+            var snapImage = function () {
+              var canvas = document.createElement("canvas");
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+              var image = canvas.toDataURL();
+              var success = image.length > 100000;
+              if (success) {
+                var img = document.createElement("img");
+                img.src = image;
+                // document.getElementsByTagName('div')[0].appendChild(img);
+                $(".preview").attr("src", image);
+                URL.revokeObjectURL(url);
+              }
+              return success;
+            };
+            video.addEventListener("timeupdate", timeupdate);
+            video.preload = "metadata";
+            video.src = url;
+            // Load video in Safari / IE11
+            video.muted = true;
+            video.playsInline = true;
+            video.play();
+          };
+          fileReader.readAsArrayBuffer(file);
+        }
+      });
+    </script>
+    <script>
+      var curImages = new Array();
+
+      $("textarea").liveUrl({
+        loadStart: function () {
+          $(".liveurl-loader").show();
+        },
+        loadEnd: function () {
+          $(".liveurl-loader").hide();
+        },
+        clear: function () {
+          $(".liveurl").hide();
+        },
+        success: function (data) {
+          var output = $(".liveurl");
+          output.find(".title").text(data.title);
+          output.find(".description").text(data.description);
+          output.find(".url").text(data.url);
+          output.find(".image").empty();
+
+          output.find(".close").one("click", function () {
+            var liveUrl = $(this).parent();
+            liveUrl.hide("fast");
+            liveUrl.find(".video").html("").hide();
+            liveUrl.find(".image").html("");
+            liveUrl.find(".controls .prev").addClass("inactive");
+            liveUrl.find(".controls .next").addClass("inactive");
+            liveUrl.find(".thumbnail").hide();
+            liveUrl.find(".image").hide();
+
+            $("textarea").trigger("clear");
+            curImages = new Array();
+          });
+
+          output.show("fast");
+
+          if (data.video != null) {
+            var ratioW = data.video.width / 350;
+            data.video.width = 350;
+            data.video.height = data.video.height / ratioW;
+
+            var video =
+              '<object width="' +
+              data.video.width +
+              '" height="' +
+              data.video.height +
+              '">' +
+              '<param name="movie"' +
+              'value="' +
+              data.video.file +
+              '"></param>' +
+              '<param name="allowScriptAccess" value="always"></param>' +
+              '<embed src="' +
+              data.video.file +
+              '"' +
+              'type="application/x-shockwave-flash"' +
+              'allowscriptaccess="always"' +
+              'width="' +
+              data.video.width +
+              '" height="' +
+              data.video.height +
+              '"></embed>' +
+              "</object>";
+            output.find(".video").html(video).show();
+          }
+        },
+        addImage: function (image) {
+          var output = $(".liveurl");
+          var jqImage = $(image);
+          jqImage.attr("alt", "Preview");
+
+          if (image.width / image.height > 7 || image.height / image.width > 4) {
+            // we dont want extra large images...
+            return false;
+          }
+
+          curImages.push(jqImage.attr("src"));
+          output.find(".image").append(jqImage);
+
+          if (curImages.length == 1) {
+            // first image...
+
+            output.find(".thumbnail .current").text("1");
+            output.find(".thumbnail").show();
+            output.find(".image").show();
+            jqImage.addClass("active");
+          }
+
+          if (curImages.length == 2) {
+            output.find(".controls .next").removeClass("inactive");
+          }
+
+          output.find(".thumbnail .max").text(curImages.length);
+        },
+      });
+
+      $(".liveurl ").on("click", ".controls .button", function () {
+        var self = $(this);
+        var liveUrl = $(this).parents(".liveurl");
+        var content = liveUrl.find(".image");
+        var images = $("img", content);
+        var activeImage = $("img.active", content);
+
+        if (self.hasClass("next")) var elem = activeImage.next("img");
+        else var elem = activeImage.prev("img");
+
+        if (elem.length > 0) {
+          activeImage.removeClass("active");
+          elem.addClass("active");
+          liveUrl.find(".thumbnail .current").text(elem.index() + 1);
+
+          if (elem.index() + 1 == images.length || elem.index() + 1 == 1) {
+            self.addClass("inactive");
+          }
+        }
+
+        if (self.hasClass("next")) var other = elem.prev("img");
+        else var other = elem.next("img");
+
+        if (other.length > 0) {
+          if (self.hasClass("next")) self.prev().removeClass("inactive");
+          else self.next().removeClass("inactive");
+        } else {
+          if (self.hasClass("next")) self.prev().addClass("inactive");
+          else self.next().addClass("inactive");
+        }
+      });
+    </script>
+  </body>
+</html>
+{% endblock body %}

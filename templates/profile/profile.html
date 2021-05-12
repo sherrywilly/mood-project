@@ -64,17 +64,20 @@
                           data:{'f-id':x},
                           success:function(data){
                             console.log(y)
-                            if (data !="True"){
-                              alert('Failed')
-                            }else{
-                              console.log('hjk')
-                             if ( y != "UnFollow"){
-                              
-                             document.getElementById(x).innerHTML = "UnFollow"
-                            }else{
-      
-                               document.getElementById(x).innerHTML = "Follow"
-                            }}}
+                            if (data['status'] =="Fail"){
+                                                                      alert('Failed')
+                                                                    }else{
+                                                                      console.log(x)
+                                                                     if ( data['action'] == "Follow"){
+
+                                                                     document.getElementById(x).innerHTML = "UnFollow";
+                                                                    }else if(data['action'] == 'UnFollow'){
+
+                                                                       document.getElementById(x).innerHTML = "Follow";
+                                                                    }else{
+                                                                      console.log('failed')
+                                                                      location.reload()
+                                                                    }}}
                             
                           
                           
@@ -83,7 +86,8 @@
 
                 })
                 </script>
-                <button class="btn btn-light text-dark btn-photo m-1">Friends</button>
+                <button class="btn btn-light text-dark btn-photo m-1"> {% if currentuser.pk in friends %} Friend {% elif current_user.pk in nonaccepted%}Request Sent &nbsp;
+                  {% else%}Add Friend{% endif %}</button>
               </div>
               {% endif %}
             </div>
@@ -125,10 +129,11 @@
                   <div class="tab-pane fade show active" id="nav-about" role="tabpanel"
                     aria-labelledby="nav-profile-tab">
                     <div class="col-12 text-right">
+                    {% if current_user.pk == request.user.pk %}
                       <button type="submit" class="btn btn-light border m-1" data-toggle="modal"
                         data-target="#editModal">
                         Edit Profile
-                      </button>
+                      </button>{% endif %}
                     </div>
                     <div class="card login-height registration-card">
                       <div class="card-body registration-body">
@@ -508,11 +513,11 @@
                         </span>
                       </div>
                       <div class="d-flex">
-                        {% for i in friends %}
+                        {% for i in friend %}
                         <div class="col-3 border m-1 p-0 text-center friendsDetails">
-                          <img src="{{i.following.bio.profile_pic}}" alt="" class="img-fluid img-thumbnail"
+                          <img src="{{i.bio.profile_pic}}" alt="" class="img-fluid img-thumbnail"
                             style="height:270px !important; object-fit:cover;width:100%" />
-                          <p>{{i.following.first_name}}&nbsp;{% if i.following.last_name %}{{i.following.last_name}}
+                          <p>{{i.first_name}}&nbsp;{% if i.last_name %}{{i.last_name}}
                             {% endif %}</p>
                         </div>
                         {% if  forloop.counter|divisibleby:4 %}

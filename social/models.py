@@ -31,6 +31,7 @@ class Follow(models.Model):
 
     class Meta:
         ordering = ["follow_time", ]
+        unique_together = ['following', 'follower']
 
     @property
     def friends(self):
@@ -66,12 +67,19 @@ class Post(models.Model):
     def __str__(self):
         return str(self.id)
 
-    @ property
+    @property
     def likeset(self):
         likes = self.like_set.all()
+
         return likes
 
-    @ property
+    @property
+    def cmt_limited_set(self):
+        commentss = self.comment_set.all()[:2]
+        # print(commentss)
+        return commentss
+
+    @property
     def cmtset(self):
         commentss = self.comment_set.all()
         # print(commentss)
@@ -84,6 +92,11 @@ class Post(models.Model):
         except:
             commentss = 0
         return commentss
+
+    @property
+    def like_list(self):
+        l = [i.user.pk for i in self.like_set.all()]
+        return l
 
     @ property
     def likecount(self):

@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from mood.helpers import *
 from django.shortcuts import render, redirect
 from mood.models import *
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
@@ -12,9 +13,17 @@ from itertools import groupby
 from django.contrib.auth.models import User
 from django.urls import reverse
 # Create your views here.
-
-
+from django.contrib.auth.decorators import login_required
 #! registration page
+from moodpro.decorators import unauth_user
+
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse('login'))
+
+
+@unauth_user
 def register(request):
     Email = request.POST.get('email')
     Username = request.POST.get('username')
@@ -24,7 +33,8 @@ def register(request):
     Password = request.POST.get('password1')
     Cat = request.POST.get('inlineRadioOptions')
     Gender = request.POST.get('inlineRadioOptions1')
-    #password = make_password(Password)
+    img = request.FILES.get('file')
+    # password = make_password(Password)
     if request.method == "POST":
         user = CustomUser()
         user.first_name = fname
@@ -37,16 +47,17 @@ def register(request):
         user.save()
         bio = Bio()
         bio.user = user
+        bio.image = img
         bio.category = Cat
         bio.gender = Gender
         bio.save()
-        login(request, user)
-        return HttpResponseRedirect('timeline')
-        # return redirect('register_as')
+        # login(request, user)
+        # return HttpResponseRedirect('timeline')
+        return redirect(reverse('login'))
     return render(request, 'registration/registration.html')
 
 
-@csrf_exempt
+@ csrf_exempt
 def check_email_exist(request):
     email = request.POST.get('email')
     print(request.user.id)
@@ -61,7 +72,7 @@ def check_email_exist(request):
         return HttpResponse(False)
 
 
-@csrf_exempt
+@ csrf_exempt
 def check_phone_exist(request):
     phone = request.POST.get('phoneno')
     user_obj = CustomUser.objects.filter(username=phone).exists()
@@ -72,6 +83,7 @@ def check_phone_exist(request):
 
 
 #! LOGIN VIEW
+@ unauth_user
 def loginpage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -80,23 +92,36 @@ def loginpage(request):
         try:
             user = CustomUser.objects.get(
                 Q(username=username) | Q(email=username))
+            if user is None:
+                raise ValueError
 
-            if user.check_password(password):
-
-                print('username')
-                login(request, user)
-                print(user)
-                return redirect('timeline')
-        except CustomUser.DoesNotExist:
-            messages.info(request, 'Username OR Password is incorrect')
-            try:
-                user = CustomUser.objects.get(email=username)
+            if user.status == '1':
+                x = '1'
+                context = {
+                    'i': x
+                }
+                return render(request, 'registration/login.html', context)
+            elif user.status == '3':
+                x = '3'
+                context = {
+                    'i': x
+                }
+                return render(request, 'registration/login.html', context)
+            else:
                 if user.check_password(password):
-                    login(request, user)
-                    return redirect('timeline')
-            except:
-                messages.info(request, 'Username OR Password is incorrect')
-                # return redirect('dashboard')
+                    if user.last_login is not None:
+                        login(request, user)
+                        return redirect(reverse('timeline'))
+                    else:
+                        login(request, user)
+                        return redirect(reverse('timeline'))
+
+                else:
+
+                    messages.error(request, 'InValid Credentials')
+        except:
+            messages.error(request, 'InValid Credentials')
+            # return redirect('dashboard')
 
         # if user is not None:
         #
@@ -108,31 +133,36 @@ def loginpage(request):
     return render(request, 'registration/login.html')
 
 
+@ login_required(login_url='login')
 def my_profile(request, pk=None):
     if pk is not None:
         current_user = CustomUser.objects.get(id=pk)
     else:
         current_user = request.user
     posts = Post.objects.filter(user=current_user)
-    try:
-        friends = [i for i in Follow.objects.filter(
-            follower=current_user) if i.friends == True]
-    except:
-        friends = []
+
     _y = [i.following.pk for i in request.user.by.all()]
     print(_y)
-    p = groupby(posts, 4)
+    # p = groupby(posts, 4)
+
+    _n = get_active_friends(user=request.user)
+    _nx = get_active_friends(user=current_user)
+    friends = CustomUser.objects.filter(id__in=_nx)
+    _m = get_inactive_friends(user=request.user)
 
     context = {
         'posts': posts,
-        'gposts': p,
-        'friends': friends,
+        # 'gposts': p,
+        'friend': friends,
         'r_user': _y,
-        'current_user': current_user
+        'current_user': current_user,
+        'friends': _n,
+        'nonaccepted': _m,
     }
     return render(request, 'profile/profile.html', context)
 
 
+@ login_required(login_url='login')
 def notification(request):
     notifications = Notification.objects.filter(
         user=request.user).order_by('-date')
@@ -146,6 +176,7 @@ def notification(request):
     return render(request, 'notification/notification.html', context)
 
 
+@ login_required(login_url='login')
 def explore_users(request):
 
     search = request.GET.get('tags')
@@ -168,6 +199,7 @@ def explore_users(request):
     return render(request, 'search/search.html', context)
 
 
+@ login_required(login_url='login')
 def user_setting(request):
     context = {
 
@@ -175,7 +207,8 @@ def user_setting(request):
     return render(request, "profile/edit.html", context)
 
 
-@csrf_exempt
+@ login_required(login_url='login')
+@ csrf_exempt
 def email_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
 
@@ -187,7 +220,8 @@ def email_privacy_update(request):
     return HttpResponse(True)
 
 
-@csrf_exempt
+@ login_required(login_url='login')
+@ csrf_exempt
 def phone_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
     try:
@@ -199,7 +233,8 @@ def phone_privacy_update(request):
     return HttpResponse(True)
 
 
-@csrf_exempt
+@ login_required(login_url='login')
+@ csrf_exempt
 def about_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
     try:
@@ -211,7 +246,8 @@ def about_privacy_update(request):
     return HttpResponse(True)
 
 
-@csrf_exempt
+@ login_required(login_url='login')
+@ csrf_exempt
 def search_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
     try:
@@ -223,6 +259,7 @@ def search_privacy_update(request):
     return HttpResponse(True)
 
 
+@ login_required(login_url='login')
 def setting_update(request):
     if request.method == 'POST':
         fname = request.POST.get('first_name')
@@ -251,3 +288,28 @@ def setting_update(request):
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponse(True)
+
+
+def admin_area(request):
+    context = {
+        'users': CustomUser.objects.filter(status='1')
+    }
+    return render(request, 'admin-area/index.html', context)
+
+
+@ login_required(login_url='login')
+def u_accept(request, id):
+    if request.method == "POST":
+        x = CustomUser.objects.get(id=id)
+        x.status = '2'
+        x.save()
+        return redirect(reverse('admin_area'))
+
+
+@ login_required(login_url='login')
+def u_reject(request, id):
+    if request.method == "POST":
+        x = CustomUser.objects.get(id=id)
+        x.status = '3'
+        x.save()
+        return redirect(reverse('admin_area'))

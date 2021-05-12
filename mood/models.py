@@ -42,6 +42,8 @@ class CustomAccountManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    CHOICES = (('1', 'Pending'),
+               ('2', 'Approved'), ('3', 'Rejected'),)
     email = models.EmailField(_('email address'), unique=True, null=True)
     username = models.CharField(max_length=150, unique=True, null=True)
     first_name = models.CharField(max_length=150, blank=True, null=True)
@@ -50,6 +52,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=12, null=True, blank=-True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
+    status = models.CharField(choices=CHOICES, default=1, max_length=50)
 
     objects = CustomAccountManager()
 
@@ -88,7 +91,7 @@ class Bio(models.Model):
         try:
             url = self.image.url
         except:
-            url = ""
+            url = "/media/a.png"
         return url
 
     def __unicode__(self):

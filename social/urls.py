@@ -12,7 +12,12 @@ urlpatterns = [
     path('test/', views.friends, name="test"),
     path('post-detail/<uuid:id>', views.post_detail, name="post_detail"),
     path('follow/', views.follow, name="follow"),
-    path('friend_request/', views.friend_request, name="friend_request"),
+    path('sent_request/', views.friend_request, name="friend_request"),
+    path('friend_requests/', views.friend_request_view, name="friend_requests"),
+    path('friend_requests/accept/', views.friend_request_accept,
+         name="friend_request_accept"),
+    path('friend_request/cancel/', views.friend_request_cancel,
+         name="friend_request_cancel"),
 
 
 ]

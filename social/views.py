@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from mood.helpers import *
 from django.shortcuts import redirect, render
 from social.models import *
@@ -10,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
+@login_required(login_url='login')
 def activity(request):
     try:
         posts = Post.objects.filter(user=request.user)
@@ -25,6 +27,7 @@ def activity(request):
     return render(request, 'timeline/timeline.html', context)
 
 
+@login_required(login_url='login')
 def timeline(request):
     try:
         _x = [i.following.pk for i in request.user.by.all()]
@@ -43,6 +46,7 @@ def timeline(request):
     return render(request, 'timeline/timeline.html', context)
 
 
+@login_required(login_url='login')
 def PostView(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -66,6 +70,7 @@ def PostView(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required(login_url='login')
 def like(request, id):
 
     # if liked:
@@ -87,6 +92,7 @@ def like(request, id):
     return redirect('index')
 
 
+@login_required(login_url='login')
 def dislike(request, id):
     dislike = Like.objects.filter(post_id=id)
     dislike.delete()
@@ -98,6 +104,7 @@ def dislike(request, id):
     return redirect('index')
 
 
+@login_required(login_url='login')
 def postlike(request, id):
     print(request)
     liked = Like.objects.filter(user_id=request.user.id, post_id=id)
@@ -139,12 +146,14 @@ def postlike(request, id):
     return HttpResponse(response, content_type="application/json")
 
 
+@login_required(login_url='login')
 def likecount(request, id):
     likescount = Like.objects.filter(post_id=id).count()
 
     return render(request, 'index.html', {'likescount': likescount})
 
 
+@login_required(login_url='login')
 def comment(request):
     if request.method == "POST":
         post = request.POST.get('commentid')
@@ -195,6 +204,7 @@ def check_friends(id, id2):
     return None
 
 
+@login_required(login_url='login')
 def friends(request):
     c = get_active_friends(user=request.user)
     # x = [i for i in Follow.objects.filter(
@@ -210,6 +220,7 @@ def friends(request):
     return HttpResponse('text')
 
 
+@login_required(login_url='login')
 def post_detail(request, id):
     post = Post.objects.get(id=id)
     context = {
@@ -218,6 +229,7 @@ def post_detail(request, id):
     return render(request, 'post/post.html', context)
 
 
+@login_required(login_url='login')
 @ csrf_exempt
 def follow(request):
     if request.method == 'POST':
@@ -241,13 +253,23 @@ def follow(request):
             except:
                 pass
             print('followed')
+            y = {
+                'status': 'success',
+                'action': 'Follow'
+            }
         else:
             x.delete()
             print('unfollow')
-        return HttpResponse(True)
+            y = {
+                'status': 'success',
+                'action': 'UnFollow'
+            }
+        return JsonResponse(y)
+
     return HttpResponse(False)
 
 
+@login_required(login_url='login')
 @csrf_exempt
 def friend_request(request):
     if request.method == "POST":
@@ -262,8 +284,59 @@ def friend_request(request):
         if x is None:
             Friend.objects.create(u1=request.user, u2_id=rid)
             print('friend request sent')
+            s = "Success"
+            a = 'Friend'
         else:
             x.delete()
             print('friend request canceled')
+            a = 'UnFriend'
+            s = 'Success'
+        y = {
+            'status': s,
+            'action': a
+        }
+        return JsonResponse(y)
+    return HttpResponse(False)
+
+
+@login_required(login_url='login')
+def friend_request_view(request):
+    # requests = [i.u1.pk for i in Friend.objects.filter(
+    #     u2=request.user, active=False)]
+    # print(requests)
+    # _r = CustomUser.objects.filter(id__in=requests)
+    _r = Friend.objects.filter(
+        u2=request.user, active=False)
+    context = {
+        'requests': _r
+    }
+    return render(request, 'friendrequest/index.html', context)
+
+
+@login_required(login_url='login')
+@csrf_exempt
+def friend_request_cancel(request):
+    if request.method == "POST":
+        rid = request.POST.get('r-id')
+        try:
+            _x = Friend.objects.get(id=rid)
+            _x.delete()
+        except:
+            return HttpResponse(False)
+        return HttpResponse(True)
+    return HttpResponse(False)
+
+
+@login_required(login_url='login')
+@csrf_exempt
+def friend_request_accept(request):
+    if request.method == "POST":
+        rid = request.POST.get('r-id')
+        try:
+            _x = Friend.objects.get(id=rid)
+            _x.active = True
+            _x.save()
+        except:
+            return HttpResponse(False)
         return HttpResponse(True)
     return HttpResponse(False)

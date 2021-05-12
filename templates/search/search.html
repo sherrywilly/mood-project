@@ -88,7 +88,7 @@
                 </button>
                 <button
                   type="button"
-                  class="btn btn-dark btn-bg-blue m-1 a-btn{{i.pk}}"
+                  class="btn btn-dark btn-bg-blue m-1 a-btn{{i.pk}} ff-btn"
                   id="{{i.pk}}"
                 >
                   {% if i.pk in friends %} Friend {% elif i.pk in nonaccepted%}Request Sent &nbsp;
@@ -98,78 +98,78 @@
             </div>
 
             <script>
-                                          $(document).ready(function(){
+                                                        $(document).ready(function(){
 
 
 
-                                            $('.a-btn{{i.pk}}').click(function(){
-                                              x= $(this).attr('id')
-                                              let y = $(this).text()
-                                              console.log(x)
-                                              console.log(y)
-                                                $.ajax({
-                                                    url:'{% url 'friend_request' %}',
-                                                    method:"POST",
-                                                    data:{'r-id':x},
-                                                    success:function(data){
-                                                      console.log(y)
-                                                      if (data !="True"){
+                                                          $('.a-btn{{i.pk}}').click(function(){
+                                                            m= $(this).attr('id')
+                                                            let y = $(this).text()
+                                                            console.log(m)
+                                                            console.log(y)
+                                                              $.ajax({
+                                                                  url:'{% url 'friend_request' %}',
+                                                                  method:"POST",
+                                                                  data:{'r-id':m},
+                                                                  success:function(data){
+                                                                    console.log(y)
+                                                                    if (data['status'] =="Fail"){
+              alert('some thing went wrong')
+                                                                    }else{
+                                                                      console.log('hjk')
+                                                                     if ( data['action'] == "Friend" ){
+                                                                $('.a-btn{{i.pk}}').text('Request Sent')
 
-                                                      }else{
-                                                        console.log('hjk')
-                                                       if ( y == "Add Friend" ){
-              console.log('fAILED')
-                                                       document.getElementById(x).innerHTML = "Request Sent"
-                                                      }else if(y == 'Request Sent'){
-                            console.log('fAILED')
-                                                         document.getElementById(x).innerHTML = "Add Friend"
-                                                      }else{
-                                                        console.log('fAILED')
-                                                        location.reload()
-                                                      }
+                                                                    }else if(data['action'] == 'UnFriend'){
+                                                                      $('.a-btn{{i.pk}}').text('Add Friend')
 
-
-                                                      }}
+                                                                    }else{
+                                                                      console.log('fAILED')
+                                                                      location.reload()
+                                                                    }
 
 
-
-                                                  });
-                                            });
+                                                                    }}
 
 
 
-                                            $('.f-btn{{i.pk}}').click(function(){
-                                              x= $(this).attr('id')
-                                              let y = $(this).text()
-                                              console.log(x)
-                                              console.log(y)
-                                                $.ajax({
-                                                    url:'{% url 'follow' %}',
-                                                    method:"POST",
-                                                    data:{'f-id':x},
-                                                    success:function(data){
-                                                      console.log(y)
-                                                      if (data !="True"){
-                                                        alert('Failed')
-                                                      }else{
-                                                        console.log(x)
-                                                       if ( y == "Follow"){
-
-                                                       document.getElementById(x).innerHTML = "UnFollow";
-                                                      }else if(y == 'UnFollow'){
-
-                                                         document.getElementById(x).innerHTML = "Follow";
-                                                      }else{
-                                                        console.log('failed')
-                                                         location.reload()
-                                                      }}}
+                                                                });
+                                                          });
 
 
 
-                                                  });
-                                            });
+                                                          $('.f-btn{{i.pk}}').click(function(){
+                                                            x= $(this).attr('id')
+                                                            let y = $(this).text()
+                                                            console.log(x)
+                                                            console.log(y)
+                                                              $.ajax({
+                                                                  url:'{% url 'follow' %}',
+                                                                  method:"POST",
+                                                                  data:{'f-id':x},
+                                                                  success:function(data){
+                                                                    console.log(y)
+                                                                    if (data['status'] =="Fail"){
+                                                                      alert('Failed')
+                                                                    }else{
+                                                                      console.log(x)
+                                                                     if ( data['action'] == "Follow"){
 
-                                          });
+                                                                     document.getElementById(x).innerHTML = "UnFollow";
+                                                                    }else if(data['action'] == 'UnFollow'){
+
+                                                                       document.getElementById(x).innerHTML = "Follow";
+                                                                    }else{
+                                                                      console.log('failed')
+                                                                      location.reload()
+                                                                    }}}
+
+
+
+                                                                });
+                                                          });
+
+                                                        });
             </script>
             {% endfor %}
           </div>

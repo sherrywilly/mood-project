@@ -136,7 +136,7 @@
 
                                     </form>
                                     <div class="col mt-3">
-                                        <h6>Recent Comments</h6>
+                                            <a href="{% url 'post_detail' i.id %}"> <h6>Recent Comments</h6></a> 
                                         <p>{{i.cmtcount}}</p>
                                     </div>
 
@@ -146,7 +146,7 @@
 
                                     <div class="card w-100">
 
-                                        {% for j in i.cmtset %}
+                                        {% for j in i.cmt_limited_set %}
                                         <div class="d-flex p-3 avatar">
                                             {% if j.user.bio.profile_pic %}
                                             <img src="{{j.user.bio.profile_pic}}" class="rounded-circle " height="40"

@@ -1,5 +1,13 @@
 {% load static %} {% block header %} {% endblock header %}
-
+<style>
+  .avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+</style>
 <nav class="navbar navbar-expand-sm navbar-light bg-gray d-flex fixed-top">
   <div class="col-xl-8 col-lg-8 col-md-7 col-sm-6 col-8 d-flex">
     <div class="">
@@ -60,9 +68,10 @@
             <i class="far fa-bell text-dark bell-btn"></i>
           </a>
         </li>
+
         <div class="d-flex">
           <div class="timeline-headernav-profile">
-            <img src="{{request.user.bio.profile_pic}}" alt="" class="rounded-circle" />
+            <img src="{{request.user.bio.profile_pic}}" alt="" class="avatar" />
           </div>
           <li class="nav-item dropdown">
             <a
@@ -81,7 +90,7 @@
                 >View Profile</a
               >
               <a class="dropdown-item logout-dropbox" href="#">Help</a>
-              <a class="dropdown-item logout-dropbox" href="#">Logout</a>
+              <a class="dropdown-item logout-dropbox" href="{% url 'logout' %}">Logout</a>
             </div>
           </li>
         </div>
@@ -95,7 +104,7 @@
   <div class="border-right sidepanel" id="sidebar-wrapper">
     <div class="col-12 my-profile mt-4">
       <div class="profilepic-leftnav">
-        <img src="{{request.user.bio.profile_pic}}" alt="" style="border-radius: 50%; width: 45%" />
+        <img src="{{request.user.bio.profile_pic}}" alt="" class="avatar" />
       </div>
       <div class="dropdown show leftside-dropdown">
         <a
@@ -113,7 +122,7 @@
         <div class="dropdown-menu text-left" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="{% url 'my_profile' %}">View Profile</a>
           <a class="dropdown-item" href="#">Help</a>
-          <a class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
         </div>
       </div>
     </div>
@@ -157,6 +166,12 @@
         </button>
         <span class="px-3 pt-1 items font-weight-bold">Groups</span></a
       >
+      <a href="{% url 'friend_requests' %}" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-user-plus bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-3 pt-1 items font-weight-bold">requests</span></a
+      >
       <a href="{% url 'activity' %}" class="list-group-items list-group-item-action d-flex">
         <button type="button" class="custom-btn icon-btn" title="Save">
           <i class="fas fa-bell bg-dark p-1 text-white rounded-circle"></i>
@@ -169,6 +184,15 @@
         </button>
         <span class="px-4 pt-1 items font-weight-bold">Settings</span>
       </a>
+      {% if request.user.is_superuser %}
+      <a href="{% url 'admin_area' %}" class="list-group-items list-group-item-action d-flex">
+        <button type="button" class="custom-btn icon-btn" title="Save">
+          <i class="fas fa-atom bg-dark p-1 text-white rounded-circle"></i>
+        </button>
+        <span class="px-4 pt-1 items font-weight-bold">Admin Area</span>
+      </a>
+
+      {% endif %}
       <a href="#" class="list-group-items list-group-item-action d-flex">
         <button type="button" class="custom-btn icon-btn" title="Save">
           <i class="fas fa-question-circle bg-dark p-1 text-white rounded-circle"></i>
