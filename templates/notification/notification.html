@@ -66,7 +66,7 @@
 
 
 
-                    {% if i.notification_type == 1 %}
+                    {% if i.notification_type == '1' %}
                     <div>
                         <a href="{% url 'post_detail' i.post_id %}">
                             <div class="m-2 notification">
@@ -80,7 +80,7 @@
                             </div>
                         </a>
                     </div>
-                    {% elif i.notification_type == 2 %}
+                    {% elif i.notification_type == '2' %}
                     <div>
 
 
@@ -99,12 +99,12 @@
                                 </div>
                         </a>
                     </div>
-                    {% elif i.notification_type == 3 %}
+                    {% elif i.notification_type == '3' %}
                     <div>
                         <div class="m-2 notification">
                             <div class="m-2 notification">
-                                {% if i.sender.image %}
-                                <img src="{{i.sender.image.url}}" alt="" class="img-fluid rounded-circle">
+                                {% if i.sender.bio.profile_pic %}
+                                <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
                                 {% else %}
                                 <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
                                 {% endif %}
@@ -124,12 +124,12 @@
                                             profile</span></p>
                                 </div>
                             </div> -->
-                        {% elif i.notification_type == 4 %}
+                        {% elif i.notification_type == '4' %}
                         <div>
                             <div class="m-2 notification">
                                 <div class="m-2 notification">
-                                    {% if i.sender.image %}
-                                    <img src="{{i.sender.image.url}}" alt="" class="img-fluid rounded-circle">
+                                    {% if i.sender.bio.profile_pic %}
+                                    <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
                                     {% else %}
                                     <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
                                     {% endif %}

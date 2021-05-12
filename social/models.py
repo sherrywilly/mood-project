@@ -122,7 +122,8 @@ class Notification(models.Model):
         CustomUser, on_delete=models.CASCADE, related_name='noti_from_user')
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name='noti_to_user')
-    notification_type = models.IntegerField(choices=NOTIFICATION_TYPES)
+    notification_type = models.CharField(
+        choices=NOTIFICATION_TYPES, max_length=50)
     text_preview = models.CharField(max_length=50, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     is_seen = models.BooleanField(default=False)

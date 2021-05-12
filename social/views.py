@@ -231,6 +231,12 @@ def follow(request):
             try:
                 Follow.objects.create(following_id=following,
                                       follower=request.user)
+                notify = Notification()
+
+                notify.user_id = following
+                notify.sender_id = request.user.id
+                notify.notification_type = 3
+                notify.save()
 
             except:
                 pass
@@ -242,12 +248,15 @@ def follow(request):
     return HttpResponse(False)
 
 
+@csrf_exempt
 def friend_request(request):
     if request.method == "POST":
         rid = request.POST.get('r-id')
         try:
             x = Friend.objects.get(
-                Q(u1=request.user, u2_id=rid) | Q(u1_id=rid, u2=request.user)).exclude(active=True)
+                Q(u1=request.user, u2_id=rid) | Q(u1_id=rid, u2=request.user))
+            if x.active == True:
+                return HttpResponse(False)
         except:
             x = None
         if x is None:

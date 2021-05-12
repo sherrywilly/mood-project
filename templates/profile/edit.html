@@ -211,95 +211,91 @@
                   <div class="col-md-9 col-12 m-auto">
 					  <div class="card login-height registration-card">
                     <div class="card-body registration-body">
-                      <form action="" methot="post">
-                        <div class="form-group d-flex mt-3">
-                          <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name">
-                          <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name">
-                        </div>
-                        <div class="form-group d-flex">
-                          <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number">
-                          <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email">
-                        </div>
-                        <div class="form-group birth d-flex" style="margin: 0.3rem;">
-                          <label class="col-form-label col-lg-2 col-md-2 col-sm-2 col-4 bg-gray dob rounded" style="padding-top: 5px!important;">Date of Birth</label>
-                          <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-8 p-2 bg-gray">
-                        </div>
-						  
-                        <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px;">
-                          <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
-                          <div class="gender col-sm-10 col-9 pt-2">
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                              <label class="form-check-label p-0" for="inlineRadio1">Male</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                              <label class="form-check-label p-0" for="inlineRadio2">Female</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                              <label class="form-check-label p-0" for="inlineRadio3">Transgender</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
-                              <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
-                            </div>
-                          </div>
-                        </div>
-                         <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px;">
-                          <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Category</label>
-                          <div class="gender col-sm-10 col-9 pt-2">
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio5" value="option1">
-                              <label class="form-check-label p-0" for="inlineRadio5">Single</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio6" value="option2">
-                              <label class="form-check-label p-0" for="inlineRadio6">Couple</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio7" value="option3">
-                              <label class="form-check-label p-0" for="inlineRadio7">Widower</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio8" value="option4">
-                              <label class="form-check-label p-0" for="inlineRadio8">Divorced</label>
+                      <form action="{% url 'setting_update' %}" method="post">
+                        {% csrf_token %}
+              <div class="form-group d-flex mt-3">
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name='first_name' value="{% if request.user.first_name %}{{request.user.first_name}}{% endif %}" required/>
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name' value="{% if request.user.last_name %}{{request.user.last_name}}{% endif %}"" required/>
+              </div>
+              <div class="form-group d-flex">
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number" name='phone' value="{% if request.user.phone %}{{request.user.phone}}{% endif %}" required/>
+                <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email" name='email' value="{{request.user.email}}" required/>
+              </div>
+              <div class="form-group d-flex mt-3">
+                <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
+                <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob" value="{{request.user.bio.dob|date:'Y-m-d'}}"/>
+              </div>
+                   <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                  value="1" &nbsp; ## ##{% if request.user.bio.gender == '1' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio1">Male</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                  value="2" &nbsp; ## ##{% if request.user.bio.gender == '2' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio2">Female</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                  value="3" &nbsp; ## ##{% if request.user.bio.gender == '3' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio3">Transgender</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                  value="4" &nbsp; ## ##{% if request.user.bio.gender == '4' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
+                              </div>
                             </div>
                           </div>
-                        </div>
-						  <div class="form-group partdob mt-3">
-                          <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Partner Name">
-                          <div class="d-flex birth col-md-6 col-sm-6 col-12 p-0">
-                          <label class="col-form-label col-4 bg-gray dob rounded" style="padding-top: 5px!important;">Date of Birth</label>
-                          <input type="date" class="form-control m-1 p-2 bg-gray">
-                        </div>
-                        </div>
-						  <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px;">
-                          <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
-                          <div class="gender col-sm-10 col-9 pt-2">
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio9" value="option1">
-                              <label class="form-check-label p-0" for="inlineRadio9">Male</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio10" value="option2">
-                              <label class="form-check-label p-0" for="inlineRadio10">Female</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio11" value="option3">
-                              <label class="form-check-label p-0" for="inlineRadio11">Transgender</label>
-                            </div>
-                            <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio12" value="option4">
-                              <label class="form-check-label p-0" for="inlineRadio12">Not To Say</label>
+                          <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
+                            <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Category</label>
+                            <div class="gender col-sm-10 col-9 pt-2">
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio5" value="1" &nbsp; &nbsp;{% if request.user.bio.category == '1' %}
+                                  checked &nbsp;&nbsp;{% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio5">Single
+                                </label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio6" value="2" &nbsp; &nbsp;{% if request.user.bio.category == '2' %}
+                                  checked &nbsp;&nbsp;{% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio6">Couple</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio7" value="3" &nbsp; ## {% if request.user.bio.category == '3' %}
+                                  checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio7">Widower</label>
+                              </div>
+                              <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                                  id="inlineRadio8" value="4" &nbsp;&nbsp;
+                                  &nbsp;{% if request.user.bio.category == '4' %} checked {% endif %} />
+                                <label class="form-check-label p-0" for="inlineRadio8">Divorced</label>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        
+            
+             
+        
+                    
                          <div class="col-12 profile-about-them bg-gray mt-2">
                           <h5>About Himself</h5>
                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
                         </div>
+                              <div class="col-12 buttons mt-4 pb-5 text-center">
+                <button class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit">
+                  Save
+                </button>
+                <button class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit">
+                  Cancel
+                </button>
+              </div>
                       </form>
                     </div>
                   </div>

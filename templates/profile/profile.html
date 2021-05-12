@@ -660,7 +660,7 @@
               </div>
               <div class="form-group d-flex mt-3">
                 <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
-                <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob"/>
+                <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob" value="{{request.user.bio.dob|date:'Y-m-d'}}"/>
               </div>
                    <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
                             <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>

@@ -1,3 +1,4 @@
+from mood.helpers import *
 from django.shortcuts import render, redirect
 from mood.models import *
 from django.contrib import messages
@@ -154,11 +155,15 @@ def explore_users(request):
     print(a)
     print(searching)
     _y = [i.following.pk for i in request.user.by.all()]
+    _n = get_active_friends(user=request.user)
+    _m = get_inactive_friends(user=request.user)
 
     context = {
         'searching': searching,
         'count': a,
-        'r_user': _y
+        'r_user': _y,
+        'friends': _n,
+        'nonaccepted': _m,
     }
     return render(request, 'search/search.html', context)
 
@@ -244,5 +249,5 @@ def setting_update(request):
 
         # lname= request.POST.get('')
 
-        return HttpResponseRedirect(reverse('my_profile'))
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponse(True)

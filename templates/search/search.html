@@ -70,12 +70,10 @@
                 {% endcomment %}
               </div>
               <div class="col-4 search-profileadd">
-                {% comment %}
-                <a href="{% url 'searchprofile_full_view' i.pk %}">
-                  {% endcomment %}
-                  <h5>{{i.first_name}}</h5>
+                <a href="{% url 'userprofile' i.pk %}">
+                  <h5 class="text-dark">{{i.first_name}}</h5>
                   {% if i.email %}
-                  <p>{{i.email}}</p>
+                  <p class="text-dark">{{i.email}}</p>
                   {% endif %}
                 </a>
                 <!-- <p class="search-pro">Professional</p> -->
@@ -83,47 +81,95 @@
               <div class="col-6 search-btns">
                 <button
                   type="button"
-                  class="btn btn-primary btn-bg-blue m-1 f-btn{{i.pk}}"
+                  class="btn btn-dark btn-bg-blue m-1 f-btn{{i.pk}}"
                   id="{{i.pk}}"
                 >
-                  {% if i.pk in r_user %}UnFollow {% else %}Follow{% endif %}
+                  {% if i.pk in r_user %}UnFollow{% else %}Follow {% endif %}
                 </button>
-                <button type="button" class="btn btn-primary btn-bg-blue m-1">Add Friend</button>
+                <button
+                  type="button"
+                  class="btn btn-dark btn-bg-blue m-1 a-btn{{i.pk}}"
+                  id="{{i.pk}}"
+                >
+                  {% if i.pk in friends %} Friend {% elif i.pk in nonaccepted%}Request Sent &nbsp;
+                  {% else%}Add Friend{% endif %}
+                </button>
               </div>
             </div>
 
             <script>
-              $(document).ready(function(){
-
-                $('.f-btn{{i.pk}}').click(function(){
-                  x= $(this).attr('id')
-                  let y = $(this).text()
-                  console.log(x)
-                  console.log(y)
-                    $.ajax({
-                        url:'{% url 'follow' %}',
-                        method:"POST",
-                        data:{'f-id':x},
-                        success:function(data){
-                          console.log(y)
-                          if (data !="True"){
-                            alert('Failed')
-                          }else{
-                            console.log('hjk')
-                           if ( y != "UnFollow"){
-
-                           document.getElementById(x).innerHTML = "UnFollow"
-                          }else{
-
-                             document.getElementById(x).innerHTML = "Follow"
-                          }}}
+                                          $(document).ready(function(){
 
 
 
-                      })
-                })
+                                            $('.a-btn{{i.pk}}').click(function(){
+                                              x= $(this).attr('id')
+                                              let y = $(this).text()
+                                              console.log(x)
+                                              console.log(y)
+                                                $.ajax({
+                                                    url:'{% url 'friend_request' %}',
+                                                    method:"POST",
+                                                    data:{'r-id':x},
+                                                    success:function(data){
+                                                      console.log(y)
+                                                      if (data !="True"){
 
-              })
+                                                      }else{
+                                                        console.log('hjk')
+                                                       if ( y == "Add Friend" ){
+              console.log('fAILED')
+                                                       document.getElementById(x).innerHTML = "Request Sent"
+                                                      }else if(y == 'Request Sent'){
+                            console.log('fAILED')
+                                                         document.getElementById(x).innerHTML = "Add Friend"
+                                                      }else{
+                                                        console.log('fAILED')
+                                                        location.reload()
+                                                      }
+
+
+                                                      }}
+
+
+
+                                                  });
+                                            });
+
+
+
+                                            $('.f-btn{{i.pk}}').click(function(){
+                                              x= $(this).attr('id')
+                                              let y = $(this).text()
+                                              console.log(x)
+                                              console.log(y)
+                                                $.ajax({
+                                                    url:'{% url 'follow' %}',
+                                                    method:"POST",
+                                                    data:{'f-id':x},
+                                                    success:function(data){
+                                                      console.log(y)
+                                                      if (data !="True"){
+                                                        alert('Failed')
+                                                      }else{
+                                                        console.log(x)
+                                                       if ( y == "Follow"){
+
+                                                       document.getElementById(x).innerHTML = "UnFollow";
+                                                      }else if(y == 'UnFollow'){
+
+                                                         document.getElementById(x).innerHTML = "Follow";
+                                                      }else{
+                                                        console.log('failed')
+                                                         location.reload()
+                                                      }}}
+
+
+
+                                                  });
+                                            });
+
+                                          });
             </script>
             {% endfor %}
           </div>

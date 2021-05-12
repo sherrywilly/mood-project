@@ -11,7 +11,8 @@ urlpatterns = [
     path('post/', views.PostView, name="post"),
     path('test/', views.friends, name="test"),
     path('post-detail/<uuid:id>', views.post_detail, name="post_detail"),
-    path('follow', views.follow, name="follow"),
+    path('follow/', views.follow, name="follow"),
+    path('friend_request/', views.friend_request, name="friend_request"),
 
 
 ]

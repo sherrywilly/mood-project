@@ -14,7 +14,7 @@ urlpatterns = [
     path('check_phone_exist/', views.check_phone_exist, name='check_phone_exist'),
     # ! profile
     path('profile/', views.my_profile, name='my_profile'),
-    path('profile/<pk>/', views.my_profile, name="userprofile"),
+    path('explore/user/<pk>/', views.my_profile, name="userprofile"),
 
     #!notifications
     path('notifications', views.notification, name="notification"),
