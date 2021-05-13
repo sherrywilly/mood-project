@@ -279,6 +279,9 @@ def friend_request(request):
                 Q(u1=request.user, u2_id=rid) | Q(u1_id=rid, u2=request.user))
             if x.active == True:
                 return HttpResponse(False)
+            y = Friend.objects.get(u1_id=rid, u2=request.user)
+            if y is not None:
+                return HttpResponse(False)
         except:
             x = None
         if x is None:

@@ -211,8 +211,20 @@
                   <div class="col-md-9 col-12 m-auto">
 					  <div class="card login-height registration-card">
                     <div class="card-body registration-body">
-                      <form action="{% url 'setting_update' %}" method="post">
+                      <form action="{% url 'setting_update' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
+
+
+                                <div class="form-group d-flex">
+               
+               
+            <div class="add col-6 p-0 mt-5">
+              <label for="upload" class="col-12 col-form-label p-2 m-1 bg-gray"><i class="fas fa-photo-video pr-2"></i>Upload profile Photo</label>
+              <input type="file" id="upload" name="file" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4">
+            </div>
+             <div class="preview"><img class="preview w-25 ml-2 avatar" style="height:130px" src="{{request.user.bio.profile_pic}}" alt=""> </div>
+            {% comment %} <div class="col-6 mt-3 preview"><img src="{{request.user.bio.profile_pic}}" alt="" class="rounded-circle"></div> {% endcomment %}
+          </div>
               <div class="form-group d-flex mt-3">
                 <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name='first_name' value="{% if request.user.first_name %}{{request.user.first_name}}{% endif %}" required/>
                 <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name' value="{% if request.user.last_name %}{{request.user.last_name}}{% endif %}"" required/>
@@ -225,6 +237,8 @@
                 <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
                 <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob" value="{{request.user.bio.dob|date:'Y-m-d'}}"/>
               </div>
+              
+       
                    <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
                             <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
                             <div class="gender col-sm-10 col-9 pt-2">
@@ -322,7 +336,99 @@
 //            $("#sidebar-wrapper").show();
 //            $("#wrapper").toggleClass("toggled");
 //        });
-//    </script> 
+ </script> 
+ <script>
+
+
+
+    // Hide submenus
+    $('#body-row .collapse').collapse('hide');
+
+    // Collapse/Expand icon
+    $('#collapse-icon').addClass('fa-angle-double-left');
+
+    // Collapse click
+    $('[data-toggle=sidebar-colapse]').click(function () {
+        SidebarCollapse();
+    });
+
+    function SidebarCollapse() {
+        $('.menu-collapsed').toggleClass('d-none');
+        $('.sidebar-submenu').toggleClass('d-none');
+        $('.submenu-icon').toggleClass('d-none');
+        $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
+
+        // Treating d-flex/d-none on separators with title
+        var SeparatorTitle = $('.sidebar-separator-title');
+        if (SeparatorTitle.hasClass('d-flex')) {
+            SeparatorTitle.removeClass('d-flex');
+        } else {
+            SeparatorTitle.addClass('d-flex');
+        }
+
+        // Collapse/Expand icon
+        $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
+
+    }
+
+    document.getElementById('upload').addEventListener('change', function (event) {
+      console.log('gjkhgjhkg')
+        var file = event.target.files[0];
+        var fileReader = new FileReader();
+        if (file.type.match('image')) {
+            fileReader.onload = function (event) {
+                $('.preview').attr('src', event.target.result);
+            };
+            fileReader.readAsDataURL(file);
+        } else {
+            fileReader.onload = function () {
+
+                var blob = new Blob([fileReader.result], {type: file.type});
+                var url = URL.createObjectURL(blob);
+                // console.log(url);
+                var video = document.createElement('video');
+                var timeupdate = function () {
+                    if (snapImage()) {
+                        video.removeEventListener('timeupdate', timeupdate);
+                        video.pause();
+                    }
+                };
+                video.addEventListener('loadeddata', function () {
+                    if (snapImage()) {
+                        video.removeEventListener('timeupdate', timeupdate);
+                    }
+                });
+                var snapImage = function () {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                    var image = canvas.toDataURL();
+                    var success = image.length > 100000;
+                    if (success) {
+                        var img = document.createElement('img');
+                        img.src = image;
+                        // document.getElementsByTagName('div')[0].appendChild(img);
+                        $('.preview').attr('src', image);
+                        URL.revokeObjectURL(url);
+                    }
+                    return success;
+                };
+                video.addEventListener('timeupdate', timeupdate);
+                video.preload = 'metadata';
+                video.src = url;
+                // Load video in Safari / IE11
+                video.muted = true;
+                video.playsInline = true;
+                video.play();
+            };
+            fileReader.readAsArrayBuffer(file);
+        }
+    });
+
+
+
+</script>
 </body>
 </html>
     

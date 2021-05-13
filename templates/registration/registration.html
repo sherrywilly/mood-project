@@ -38,7 +38,7 @@
     </nav>
     <div class="card login-height registration-card">
       <div class="card-body registration-body">
-        <form  method="post">
+        <form  method="post" enctype="multipart/form-data">
         {% csrf_token %}
           <div class="form-group d-flex mt-3">
             <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name="first_name" required>

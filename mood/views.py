@@ -142,22 +142,26 @@ def my_profile(request, pk=None):
     posts = Post.objects.filter(user=current_user)
 
     _y = [i.following.pk for i in request.user.by.all()]
-    print(_y)
+
     # p = groupby(posts, 4)
 
     _n = get_active_friends(user=request.user)
     _nx = get_active_friends(user=current_user)
+    print(_nx)
     friends = CustomUser.objects.filter(id__in=_nx)
     _m = get_inactive_friends(user=request.user)
-
+    _f = get_inactive_friends(user=current_user)
+    liked_posts = [i.post.pk for i in Like.objects.filter(user=request.user)]
     context = {
         'posts': posts,
         # 'gposts': p,
+        'liked_posts': liked_posts,
         'friend': friends,
         'r_user': _y,
         'current_user': current_user,
-        'friends': _n,
+        'friends': _nx,
         'nonaccepted': _m,
+        'pending': _f
     }
     return render(request, 'profile/profile.html', context)
 
@@ -270,6 +274,8 @@ def setting_update(request):
         gender = request.POST.get('inlineRadioOptions')
         category = request.POST.get('inlineRadioOptions1')
         partner = request.POST.get('partner')
+        img = request.FILES.get('file')
+        print(img)
         user = CustomUser.objects.get(id=request.user.id)
         user.first_name = fname
         user.last_name = lname
@@ -281,6 +287,8 @@ def setting_update(request):
         user2.category = category
         if partner is not None:
             user2.partner = partner
+        if img is not None:
+            user2.image = img
         user2.dob = dob
         user2.save()
 

@@ -2,7 +2,7 @@ from django.urls import path
 from social import views
 urlpatterns = [
     path('timeline/', views.timeline, name="timeline"),
-    path('activities/', views.timeline, name="activity"),
+    path('activities/', views.activity, name="activity"),
     path('like/<uuid:id>', views.like, name="like"),
     path('dislike/<uuid:id>', views.dislike, name="dislike"),
     path('likecount/<uuid:id>', views.likecount, name="likecount"),

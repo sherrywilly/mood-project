@@ -102,9 +102,7 @@
                                     </i></a> <button id="likeCount{{i.id}}"
                                     style="background:none;border:none;">{{ i.likecount }}</button>
 
-                                <button type="button" class="custom-btn mr-4" title="Share">
-                                    <i class="fas fa-share text-primary"></i>20
-                                </button> <button type="button" class="custom-btn comment-btn{{i.id}}" title="Comment"
+                                 <button type="button" class="custom-btn comment-btn{{i.id}}" title="Comment"
                                     id="comment-btn{{i.id}}"><i class="fas fa-comment"
                                         style="color: #D848DC;"></i>{{i.cmtcount}}
                                 </button>
@@ -118,7 +116,7 @@
                                         <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="50"
                                             width="50" style="margin-left: -31px;" alt="" loading="lazy" />
                                         {% endif %}
-                                        <h6 class="text-center mt-3 ml-2"><strong>Blue Sapphire</strong></h6>
+                                        <h6 class="text-center mt-3 ml-2"><strong>{{request.user.first_name}}</strong></h6>
                                     </div>
                                     <form method="post" action="{% url 'comment' %}" id="commentForm{{i.id}}">
                                         {% csrf_token %}
@@ -144,7 +142,7 @@
 
 
 
-                                    <div class="card w-100">
+                                    <div class="card w-100 comment-post{{i.id}}">
 
                                         {% for j in i.cmt_limited_set %}
                                         <div class="d-flex p-3 avatar">
@@ -239,7 +237,14 @@
 
 
 
+    $("#commentForm{{i.id}}").trigger('reset');
+  for (i of comment_list) {
+                                       console.log(i.comment)
+                                        //$(".card").prepend("<b>Prepended text</b>");
 
+
+                                    $('<div class="d-flex p-3"> <img src="{{request.user.bio.profile_pic}}" class="rounded-circle " height="40" alt="" loading="lazy"/> <h6 class="text-center mt-2 ml-2"><strong>{{request.user.first_name}}</strong></h6> </div><div class="comment-text"><p>'+ i.comment +'</p></div>').prependTo($('.comment-post{{i.id}}'));
+                                       }
 
 
 

@@ -86,8 +86,53 @@
 
                 })
                 </script>
-                <button class="btn btn-light text-dark btn-photo m-1"> {% if currentuser.pk in friends %} Friend {% elif current_user.pk in nonaccepted%}Request Sent &nbsp;
+                <button class="btn btn-light text-dark btn-photo m-1 a-btn" id="{{current_user.pk}}"> {% if request.user.pk in friends %} Friend {% elif current_user.pk in nonaccepted %}Request Sent &nbsp;{%elif request.user.pk in pending%}Confirm
                   {% else%}Add Friend{% endif %}</button>
+
+
+<script>
+  $(document).ready(function(){
+
+
+
+                                                          $('.a-btn').click(function(){
+                                                            m= $(this).attr('id')
+                                                            let y = $(this).text()
+                                                            console.log(m)
+                                                            console.log(y)
+                                                              $.ajax({
+                                                                  url:'{% url 'friend_request' %}',
+                                                                  method:"POST",
+                                                                  data:{'r-id':m},
+                                                                  success:function(data){
+                                                                    console.log(y)
+                                                                    if (data['status'] =="Fail"){
+              alert('some thing went wrong')
+                                                                    }else{
+                                                                      console.log('hjk')
+                                                                     if ( data['action'] == "Friend" ){
+                                                                $('.a-btn{{i.pk}}').text('Request Sent')
+
+                                                                    }else if(data['action'] == 'UnFriend'){
+                                                                      $('.a-btn{{i.pk}}').text('Add Friend')
+
+                                                                    }else{
+                                                                      console.log('fAILED')
+                                                                      location.reload()
+                                                                    }
+
+
+                                                                    }}
+
+
+
+                                                                });
+                                                          });
+  });
+
+</script>
+
+
               </div>
               {% endif %}
             </div>
@@ -322,10 +367,7 @@
                               class="{% if i.pk in liked_posts %} fas fa-heart {% else %} far fa-heart {% endif %} text-dark">
                             </i></a> <button id="likeCount{{i.id}}"
                             style="background:none;border:none;">{{ i.likecount }}</button>
-
-                          <button type="button" class="custom-btn mr-4" title="Share">
-                            <i class="fas fa-share text-primary"></i>20
-                          </button> <button type="button" class="custom-btn comment-btn{{i.id}}" title="Comment"
+ <button type="button" class="custom-btn comment-btn{{i.id}}" title="Comment"
                             id="comment-btn{{i.id}}"><i class="fas fa-comment"
                               style="color: #D848DC;"></i>{{i.cmtcount}}
                           </button>
@@ -354,7 +396,7 @@
 
                             </form>
                             <div class="col mt-3">
-                              <h6>Recent Comments</h6>
+                               <a href="{% url 'post_detail' i.id %}"> <h6>Recent Comments</h6></a> 
                               <p>{{i.cmtcount}}</p>
                             </div>
 
@@ -362,9 +404,9 @@
 
 
 
-                            <div class="card w-100">
+                            <div class="card w-100 comment-post">
 
-                              {% for j in i.cmtset %}
+                              {% for j in i.cmt_limited_set %}
                               <div class="d-flex p-3 avatar">
                                 {% if j.user.bio.profile_pic %}
                                 <img src="{{j.user.bio.profile_pic}}" class="rounded-circle " height="40" width="40"
@@ -456,7 +498,14 @@
                             success: function (comment_list) {
 
 
+                      $("#commentForm{{i.id}}").trigger('reset');
+  for (i of comment_list) {
+                                       console.log(i.comment)
+                                        //$(".card").prepend("<b>Prepended text</b>");
 
+
+                                    $('<div class="d-flex p-3"> <img src="{{request.user.bio.profile_pic}}" class="rounded-circle " height="40" alt="" loading="lazy"/> <h6 class="text-center mt-2 ml-2"><strong>{{request.user.first_name}}</strong></h6> </div><div class="comment-text"><p>'+ i.comment +'</p></div>').prependTo($('.comment-post'));
+                                       }
 
 
 
@@ -517,8 +566,8 @@
                         <div class="col-3 border m-1 p-0 text-center friendsDetails">
                           <img src="{{i.bio.profile_pic}}" alt="" class="img-fluid img-thumbnail"
                             style="height:270px !important; object-fit:cover;width:100%" />
-                          <p>{{i.first_name}}&nbsp;{% if i.last_name %}{{i.last_name}}
-                            {% endif %}</p>
+                         <a href="{% url 'userprofile' i.pk %}" class="text-dark"><p>{{i.first_name}}&nbsp;{% if i.last_name %}{{i.last_name}}
+                            {% endif %}</p></a> 
                         </div>
                         {% if  forloop.counter|divisibleby:4 %}
                       </div>
