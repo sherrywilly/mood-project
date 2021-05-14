@@ -705,8 +705,8 @@
             <form action="{% url 'setting_update' %}" method="post">
             {% csrf_token %}
               <div class="form-group d-flex mt-3">
-                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name='first_name' value"{% if request.user.first_name %}{{request.user.first_name}}{% endif %}" required/>
-                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name' value="{% if request.user.last_name %}{{request.user.last_name}}{% endif %}"" required/>
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name" name='first_name' value="{% if request.user.first_name %}{{ request.user.first_name }}{% endif %}" required/>
+                <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name" name='last_name' value="{% if request.user.last_name %}{{request.user.last_name}}{% endif %}" required/>
               </div>
               <div class="form-group d-flex">
                 <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number" name='phone' value="{% if request.user.phone %}{{request.user.phone}}{% endif %}" required/>
@@ -720,22 +720,22 @@
                             <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>
                             <div class="gender col-sm-10 col-9 pt-2">
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" 
                                   value="1" &nbsp; ## ##{% if current_user.bio.gender == '1' %} checked {% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio1">Male</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" 
                                   value="2" &nbsp; ## ##{% if current_user.bio.gender == '2' %} checked {% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio2">Female</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" 
                                   value="3" &nbsp; ## ##{% if current_user.bio.gender == '3' %} checked {% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio3">Transgender</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" 
                                   value="4" &nbsp; ## ##{% if current_user.bio.gender == '4' %} checked {% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
                               </div>
@@ -745,33 +745,36 @@
                             <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Category</label>
                             <div class="gender col-sm-10 col-9 pt-2">
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                                  id="inlineRadio5" value="1" &nbsp; &nbsp;{% if current_user.bio.category == '1' %}
+                                <input class="form-check-input watcher" type="radio" name="inlineRadioOptions1"
+                                   value="1" &nbsp; &nbsp;{% if current_user.bio.category == '1' %}
                                   checked &nbsp;&nbsp;{% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio5">Single
                                 </label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                                  id="inlineRadio6" value="2" &nbsp; &nbsp;{% if current_user.bio.category == '2' %}
+                                <input class="form-check-input watcher" type="radio" name="inlineRadioOptions1"
+                                  id="couple-event" value="2" &nbsp; &nbsp;{% if current_user.bio.category == '2' %}
                                   checked &nbsp;&nbsp;{% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio6">Couple</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                                  id="inlineRadio7" value="3" &nbsp; ## {% if current_user.bio.category == '3' %}
+                                <input class="form-check-input watcher" type="radio" name="inlineRadioOptions1"
+                                   value="3" &nbsp; ## {% if current_user.bio.category == '3' %}
                                   checked {% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio7">Widower</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                                  id="inlineRadio8" value="4" &nbsp;&nbsp;
+                                <input class="form-check-input watcher" type="radio" name="inlineRadioOptions1"
+                                   value="4" &nbsp;&nbsp;
                                   &nbsp;{% if current_user.bio.category == '4' %} checked {% endif %} />
                                 <label class="form-check-label p-0" for="inlineRadio8">Divorced</label>
                               </div>
                             </div>
                           </div>
-            
+            				  <div class="form-group partdob mt-3" id='partner-pop'>
+                          
+                         
+                        </div>
              
               <div class="col-12 buttons mt-4 pb-5 text-center">
                 <button class="btn btn-black my-2 my-sm-0 m-2 btn1 bg-dark border-0" type="submit">
@@ -1019,6 +1022,30 @@
         else self.next().addClass("inactive");
       }
     });
+  </script>
+
+
+  <script>
+  $(document).ready(function(){
+    x = $('#couple-event').prop('checked')
+    console.log(x)
+    if(x){
+       $('#partner-pop').html('<input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Partner Name" name="partner" value="{{current_user.bio.partner}}">').fadeIn('slow')
+    }
+
+
+
+    $('.watcher').change(function(){
+      console.log($(this).val())
+      if($(this).val() == 2){
+        $('#partner-pop').html('<input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Partner Name" name="partner" value="{{current_user.bio.partner}}">').fadeIn('slow')
+      }else{
+        $('#partner-pop').fadeOut("slow")
+       
+      }
+    })
+  })
+  
   </script>
 </body>
 

@@ -61,15 +61,15 @@
               <div class="col-lg-12 border-bottom m-3 border-dark">
                 <h4 class="font-weight-bold">Email</h4>
                 <div class="form-check mt-2">
-                  <input class="form-check-input email-p" type="radio" name="email" id="public" value="1" checked>
+                  <input class="form-check-input email-p" type="radio" name="email" id="public" value="1" {% if request.user.privacy.email_privacy == '1' %}checked{% endif %}>
                   <label class="form-check-label" for="public"> Public </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input email-p" type="radio" name="email" id="onlyme" value="3">
+                  <input class="form-check-input email-p" type="radio" name="email" id="onlyme" value="3" {% if request.user.privacy.email_privacy == '3' %}checked{% endif %}>
                   <label class="form-check-label" for="onlyme"> Only me </label>
                 </div>
                 <div class="form-check mb-2">
-                  <input class="form-check-input email-p" type="radio" name="email" id="friends" value="2">
+                  <input class="form-check-input email-p" type="radio" name="email" id="friends" value="2" {% if request.user.privacy.email_privacy == '2' %}checked{% endif %}>
                   <label class="form-check-label" for="friends"> Friends </label>
                 </div>
                 <script>
@@ -98,15 +98,15 @@
 				<div class="col-lg-12 border-bottom m-3 border-dark">
                 <h4 class="font-weight-bold">Phone Number</h4>
                 <div class="form-check mt-2">
-                  <input class="form-check-input phone-p" type="radio" name="phone" id="public1" value="1" checked>
+                  <input class="form-check-input phone-p" type="radio" name="phone" id="public1" value="1" {% if request.user.privacy.phone_privacy == '1' %}checked{% endif %}>
                   <label class="form-check-label" for="public1"> Public </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input phone-p" type="radio" name="phone" id="onlyme1" value="3">
+                  <input class="form-check-input phone-p" type="radio" name="phone" id="onlyme1" value="3" {% if request.user.privacy.phone_privacy == '3' %}checked{% endif %}>
                   <label class="form-check-label" for="onlyme2"> Only me </label>
                 </div>
                 <div class="form-check mb-2">
-                  <input class="form-check-input phone-p" type="radio" name="phone" id="friends1" value="2">
+                  <input class="form-check-input phone-p" type="radio" name="phone" id="friends1" value="2" {% if request.user.privacy.phone_privacy == '2' %}checked{% endif %}>
                   <label class="form-check-label" for="friends3"> Friends </label>
                 </div>
               </div>
@@ -135,15 +135,15 @@
 				<div class="col-lg-12 border-bottom m-3 border-dark">
                 <h4 class="font-weight-bold">About</h4>
                 <div class="form-check mt-2">
-                  <input class="form-check-input about-p" type="radio" name="about" id="public2" value="1" checked>
+                  <input class="form-check-input about-p" type="radio" name="about" id="public2" value="1" {% if request.user.privacy.about_privacy == '1' %}checked{% endif %}>
                   <label class="form-check-label" for="public2"> Public </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input about-p" type="radio" name="about" id="onlyme2" value="3">
+                  <input class="form-check-input about-p" type="radio" name="about" id="onlyme2" value="3" {% if request.user.privacy.about_privacy == '3' %}checked{% endif %}>
                   <label class="form-check-label" for="onlyme2"> Only me </label>
                 </div>
                 <div class="form-check mb-2">
-                  <input class="form-check-input about-p" type="radio" name="about" id="friends2" value="2">
+                  <input class="form-check-input about-p" type="radio" name="about" id="friends2" value="2" {% if request.user.privacy.about_privacy == '2' %}checked{% endif %}>
                   <label class="form-check-label" for="friends2"> Friends </label>
                 </div>
               </div>
@@ -172,15 +172,15 @@
 				<div class="col-lg-12 border-bottom m-3 border-dark">
                 <h4 class="font-weight-bold">Search Appearence</h4>
                 <div class="form-check mt-2">
-                  <input class="form-check-input search-p" type="radio" name="public" id="public3" value="1" checked>
+                  <input class="form-check-input search-p" type="radio" name="public" id="public3" value="1" {% if request.user.privacy.search_privacy == '1' %}checked{% endif %}>
                   <label class="form-check-label" for="public3"> Public </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input search-p" type="radio" name="public" id="onlyme3" value="3">
+                  <input class="form-check-input search-p" type="radio" name="public" id="onlyme3" value="3" {% if request.user.privacy.search_privacy == '3' %}checked{% endif %}>
                   <label class="form-check-label" for="onlyme3"> Only me </label>
                 </div>
                 <div class="form-check mb-2">
-                  <input class="form-check-input search-p" type="radio" name="public" id="friends3" value="2">
+                  <input class="form-check-input search-p" type="radio" name="public" id="friends3" value="2" {% if request.user.privacy.search_privacy == '2' %}checked{% endif %}>
                   <label class="form-check-label" for="friends3"> Friends </label>
                 </div>
               </div>

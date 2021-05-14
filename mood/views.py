@@ -136,7 +136,7 @@ def loginpage(request):
 @ login_required(login_url='login')
 def my_profile(request, pk=None):
     if pk is not None:
-        current_user = CustomUser.objects.get(id=pk)
+        current_user, created = CustomUser.objects.get_or_create(id=pk)
     else:
         current_user = request.user
     posts = Post.objects.filter(user=current_user)
@@ -211,21 +211,23 @@ def user_setting(request):
     return render(request, "profile/edit.html", context)
 
 
-@ login_required(login_url='login')
-@ csrf_exempt
+@login_required(login_url='login')
+@csrf_exempt
 def email_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
 
     _x = Privacy.objects.get(user=request.user)
     print(_x)
+    x = request.POST.get('email-id')
+    print(x)
     _x.email_privacy = request.POST.get('email-id')
     _x.save()
 
     return HttpResponse(True)
 
 
-@ login_required(login_url='login')
-@ csrf_exempt
+@login_required(login_url='login')
+@csrf_exempt
 def phone_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
     try:
@@ -237,8 +239,8 @@ def phone_privacy_update(request):
     return HttpResponse(True)
 
 
-@ login_required(login_url='login')
-@ csrf_exempt
+@login_required(login_url='login')
+@csrf_exempt
 def about_privacy_update(request):
     Privacy.objects.get_or_create(user=request.user)
     try:
@@ -276,13 +278,13 @@ def setting_update(request):
         partner = request.POST.get('partner')
         img = request.FILES.get('file')
         print(img)
-        user = CustomUser.objects.get(id=request.user.id)
+        user, created = CustomUser.objects.get_or_create(id=request.user.id)
         user.first_name = fname
         user.last_name = lname
         user.email = email
         user.phone = phone
         user.save()
-        user2 = Bio.objects.get(user=request.user)
+        user2, created = Bio.objects.get_or_create(user=request.user)
         user2.gender = gender
         user2.category = category
         if partner is not None:

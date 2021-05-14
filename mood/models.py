@@ -85,7 +85,7 @@ class Bio(models.Model):
         choices=CATEGORY_CHOICES, max_length=30, null=True)
     gender = models.CharField(max_length=50, choices=GENDER_CHOICES, null=True)
     dob = models.DateField(null=True)
-    patner = models.CharField(max_length=100, null=True, blank=True)
+    partner = models.CharField(max_length=100, null=True, blank=True)
 
     def profile_pic(self):
         try:
