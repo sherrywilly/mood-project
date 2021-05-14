@@ -55,7 +55,7 @@
                   margin: 2% auto;
                 ">
                             <div class="d-flex mt-2 timeline-head">
-                                <img src="{{request.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                                <img src="{{request.user.bio.profile_pic}}" class="avatar" height="70" alt=""
                                     loading="lazy" />
                                 <h6 class="text-center mt-4 ml-2"><strong>{{request.user.username}}</strong></h6>
                             </div>
@@ -74,7 +74,7 @@
                             <div class="card-header border-0">
                                 <div class="card-title">
                                     <div class="d-flex">
-                                        <img src="{{i.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                                        <img src="{{i.user.bio.profile_pic}}" class="avatar" style="height:50px !important;width:50px" alt=""
                                             loading="lazy" />
                                         <h6 class="text-center mt-4 ml-2"><strong>{{i.user.first_name}}
                                                 {% if  i.user.last_name %} {{i.user.last_name}} {% endif %}</strong>
@@ -111,7 +111,7 @@
                                 <div class="card-comment hidden" id="comment-card{{i.id}}">
                                     <div class="d-flex avatar">
                                         {% if request.user.bio.profile_pic %}<img src="{{request.user.bio.profile_pic}}"
-                                            class="rounded-circle" height="50" style="margin-left: -31px;" alt=""
+                                            class="avatar"  style="margin-left: -31px;" alt=""
                                             loading="lazy" /> {% else %}
                                         <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="50"
                                             width="50" style="margin-left: -31px;" alt="" loading="lazy" />
@@ -147,8 +147,7 @@
                                         {% for j in i.cmt_limited_set %}
                                         <div class="d-flex p-3 avatar">
                                             {% if j.user.bio.profile_pic %}
-                                            <img src="{{j.user.bio.profile_pic}}" class="rounded-circle " height="40"
-                                                width="40" alt="" loading="lazy" />
+                                            <img src="{{j.user.bio.profile_pic}}" class="avatar"  style="height: 50px !important; width: 50px"  alt="" loading="lazy" />
                                             {% else %}
                                             <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="40"
                                                 width="40" alt="" loading="lazy" />

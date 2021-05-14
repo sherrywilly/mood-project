@@ -58,8 +58,8 @@
                     <div class="card mt-4 w-75" style="background-color: #d4d7da; border-radius:25px;">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <div class="d-flex"><img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                                         class="rounded-circle " height="70" alt="" loading="lazy"/>
+                                <div class="d-flex"><img src="{{post.user.bio.profile_pic}}"
+                                                         class="avatar "  style="height: 60px !important; width: 60px" alt="" loading="lazy"/>
                                     <h6 class="text-center mt-4 ml-2"><strong>{{post.user.email}}</strong></h6>
                                 </div>
                                 <div>
@@ -97,7 +97,7 @@
 
                             <div class="card-comment " id="comment-card{{i.id}}">
                                 <div class="d-flex">
-                                  <img src="{{request.user.bio.profile_pic}}" class="rounded-circle" height="50" alt=""
+                                  <img src="{{request.user.bio.profile_pic}}" class="avatar" height="50" alt=""
                                                          loading="lazy"/> 
                                     <h6 class="text-center mt-3 ml-2"><strong>{{request.user.first_name}}</strong></h6>
                                 </div>
@@ -125,7 +125,7 @@
                                 <div class="card w-100 comment-post">
                                     <div class="d-flex p-3"><img
                                             src="{{j.user.bio.profile_pic}}"
-                                            class="rounded-circle " height="40" alt="" loading="lazy"/>
+                                            class="avatar" height="40" alt="" loading="lazy"/>
                                         <h6 class="text-center mt-2 ml-2"><strong>{{j.user.email}}</strong></h6>
                                     </div>
                                     <div class="comment-text">

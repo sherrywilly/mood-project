@@ -421,7 +421,7 @@
                             border-radius: 12px;
                           ">
                         <div class="d-flex mt-2 timeline-head">
-                          <img src="{{request.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                          <img src="{{request.user.bio.profile_pic}}" class="avatar" height="70" alt=""
                             loading="lazy" />
                           <h6 class="text-center mt-4 ml-2">
                             <strong>{{request.user.username}}</strong>
@@ -444,7 +444,7 @@
                         <div class="card-header border-0">
                           <div class="card-title">
                             <div class="d-flex">
-                              <img src="{{i.user.bio.profile_pic}}" class="rounded-circle" height="70" alt=""
+                              <img src="{{i.user.bio.profile_pic}}" class="avatar" height="70" alt=""
                                 loading="lazy" />
                               <h6 class="text-center mt-4 ml-2">
                                 <strong>{{i.user.first_name}} &nbsp;
@@ -482,7 +482,7 @@
                           <div class="card-comment hidden" id="comment-card{{i.id}}">
                             <div class="d-flex avatar">
                               {% if request.user.bio.profile_pic %}<img src="{{request.user.bio.profile_pic}}"
-                                class="rounded-circle" height="50" style="margin-left: -31px;" alt="" loading="lazy" />
+                                class="avatar" height="50" style="margin-left: -31px;" alt="" loading="lazy" />
                               {% else %}
                               <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="50" width="50"
                                 style="margin-left: -31px;" alt="" loading="lazy" />
@@ -515,7 +515,7 @@
                               {% for j in i.cmt_limited_set %}
                               <div class="d-flex p-3 avatar">
                                 {% if j.user.bio.profile_pic %}
-                                <img src="{{j.user.bio.profile_pic}}" class="rounded-circle " height="40" width="40"
+                                <img src="{{j.user.bio.profile_pic}}" class="avatar" height="40" width="40"
                                   alt="" loading="lazy" />
                                 {% else %}
                                 <img src="{% static 'img/unknown.jpg' %}" class="rounded-circle" height="40" width="40"
@@ -820,7 +820,7 @@
               </div>
               <div class="form-group d-flex mt-3">
                 <label class="col-form-label col-2 p-2 bg-gray dob rounded">Date of Birth</label>
-                <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob" value="{{request.user.bio.dob|date:'Y-m-d'}}"/>
+                <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-10 p-2 bg-gray" name="dob" value="{{request.user.bio.dob|date:'Y-m-d'}}" required/>
               </div>
                    <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
                             <label for="Email" class="col-sm-2 col-3 col-form-label p-2 m-1">Gender</label>

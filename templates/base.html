@@ -71,7 +71,12 @@
 
         <div class="d-flex">
           <div class="timeline-headernav-profile">
-            <img src="{{request.user.bio.profile_pic}}" alt="" class="avatar" />
+            <img
+              src="{{request.user.bio.profile_pic}}"
+              alt=""
+              class="avatar"
+              style="height: 50px !important; width: 50px"
+            />
           </div>
           <li class="nav-item dropdown">
             <a
@@ -104,7 +109,12 @@
   <div class="border-right sidepanel" id="sidebar-wrapper">
     <div class="col-12 my-profile mt-4">
       <div class="profilepic-leftnav">
-        <img src="{{request.user.bio.profile_pic}}" alt="" class="avatar" />
+        <img
+          src="{{request.user.bio.profile_pic}}"
+          alt=""
+          class="avatar"
+          style="height: 50px !important; width: 50px"
+        />
       </div>
       <div class="dropdown show leftside-dropdown">
         <a

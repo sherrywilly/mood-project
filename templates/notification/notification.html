@@ -71,7 +71,7 @@
                         <a href="{% url 'post_detail' i.post_id %}">
                             <div class="m-2 notification">
                                 {% if i.sender.bio.profile_pic %}
-                                <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
+                                <img src="{{i.sender.bio.profile_pic}}"  alt="" class="avatar" style="height:50px !important;width:50px">
                                 {% else %}
                                 <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
 
@@ -89,7 +89,7 @@
                             <div class="m-2 notification">
                                 <div class="m-2 notification">
                                     {% if i.sender.bio.profile_pic %}
-                                    <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
+                                    <img src="{{i.sender.bio.profile_pic}}" alt="" class="avatar" style="height:50px !important;width:50px" >
                                     {% else %}
                                     <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
 
@@ -104,7 +104,7 @@
                         <div class="m-2 notification">
                             <div class="m-2 notification">
                                 {% if i.sender.bio.profile_pic %}
-                                <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
+                                <img src="{{i.sender.bio.profile_pic}}" alt="" class="avatar" style="height:50px !important;width:50px">
                                 {% else %}
                                 <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
                                 {% endif %}
@@ -129,7 +129,7 @@
                             <div class="m-2 notification">
                                 <div class="m-2 notification">
                                     {% if i.sender.bio.profile_pic %}
-                                    <img src="{{i.sender.bio.profile_pic}}" alt="" class="img-fluid rounded-circle">
+                                    <img src="{{i.sender.bio.profile_pic}}" alt="" class="avatar" height="70">
                                     {% else %}
                                     <img src="{% static 'img/g1.jpg' %}" alt="" class="img-fluid rounded-circle">
                                     {% endif %}
