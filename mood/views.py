@@ -323,3 +323,25 @@ def u_reject(request, id):
         x.status = '3'
         x.save()
         return redirect(reverse('admin_area'))
+
+
+def changeProfile(request):
+    if request.method == "POST":
+        img = request.FILES.get('file')
+        _x, _ = Bio.objects.get_or_create(user=request.user)
+        _x.image = img
+        _x.save()
+        return HttpResponseRedirect(reverse('my_profile'))
+    else:
+        return HttpResponse("un autherized request")
+
+
+def changeCover(request):
+    if request.method == "POST":
+        img = request.FILES.get('file')
+        _x, _ = Bio.objects.get_or_create(user=request.user)
+        _x.cover = img
+        _x.save()
+        return HttpResponseRedirect(reverse('my_profile'))
+    else:
+        return HttpResponse("un autherized request")

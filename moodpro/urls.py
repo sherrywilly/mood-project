@@ -38,6 +38,14 @@ urlpatterns = [
     path('admin-accept/<int:id>/', views.u_accept, name="u_activate"),
     path('admin-reject/<int:id>/', views.u_reject, name="u_reject"),
 
+    # !chat
+    path('chat/', include("chat.urls")),
+
+    # ! chanage profile
+
+    path('changeprofile/', views.changeProfile, name="changeprofile"),
+    path('changecover/', views.changeCover, name="changecover"),
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

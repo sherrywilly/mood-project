@@ -45,7 +45,57 @@
         <div class="row m-0">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 center-scroll row-height p-0 profile-body">
             <div class="cover-photo p-0 w-100 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12">
-              <img src="{% static 'img/Rectangle-1774.jpg' %}" alt="" class="img-fluid" />
+            <div style="position: relative;">
+              <img src="{{ request.user.bio.cover_pic }}" alt="" class="img-fluid" />
+              {% if request.user.pk == current_user.pk %}
+              <button type="submit" class="btn btn-light text-dark font-weight-bold" style="position:absolute; bottom:10px;right:20px " data-toggle="modal"
+                        data-target="#editcoverPicture">Change Cover</button>{% endif %}
+              </div>
+
+            <div class="modal fade" id="editcoverPicture" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-md">
+                <div class="modal-content modal-radius">
+                  <div class="modal-header">
+                    <h5>Edit cover Picture</h5>
+                  </div>
+                  <form class="w-100" action="{% url 'changecover' %}" method="post" id="create-coverPicture" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="modal-body">
+                      <div class="preview text-center mt-3"> <img class="img-thumbnail preview-coverPicture w-25 ml-2" src="{{request.user.bio.cover_pic}}" alt=""> </div>
+                      <div class="add text-center mt-2">
+                        <label for="upload-coverPicture"><i class="fas fa-photo-video"></i>Change Cover Picture</label>
+                        <input type="file" id="upload-coverPicture" name="file" class="hidden" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer border-0 text-center"> <a href="#">
+                      <button type="submit" class="btn btn-primary bg-gradient-blue">Add</button>
+                      </a>
+                      <button type="button" class="btn btn-default border" data-dismiss="modal"> Close </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!--      /Add Document Modal-->
+	<script>
+	document.getElementById('upload-coverPicture').addEventListener('change', function (event) {
+     
+        var file = event.target.files[0];
+        var fileReader = new FileReader();
+        if (file.type.match('image')) {
+       
+            fileReader.onload = function (event) {
+                $('.preview-coverPicture').attr('src', event.target.result);
+            };
+            fileReader.readAsDataURL(file);
+        }
+
+    });
+		</script>
+
+
+
               {% if not current_user.pk == request.user.pk %}
               <div class="cover-photoBtn w-100 d-flex">
                 <button class="btn btn-light text-dark btn-photo m-1 f-btn" id="{{current_user.pk}}">{% if current_user.pk in r_user  %}UnFollow {% else %}Follow{% endif %}</button>
@@ -138,9 +188,65 @@
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xm-12 profile-details p-0 m-2">
               <div class="col-md-2 col-sm-2 col-12 profile-name text-center bg-gray">
-                <img src="{{ current_user.bio.profile_pic}}" alt="" class="img-fluid" style="object-fit: cover;" />
+              {% if current_user.pk  == request.user.pk %} <button style="border:none; background-color:transparent" type="submit"  data-toggle="modal"
+                        data-target="#editProfilePicture"> <img src="{{ current_user.bio.profile_pic}}" alt="" class="img-fluid" style="object-fit: cover;" />
+                        
+                        </button>
+                        {% else %} <img src="{{ current_user.bio.profile_pic}}" alt="" class="img-fluid" style="object-fit: cover;" />{% endif %}
+               
                 <h5 class="pt-2">{{current_user.first_name}}</h5>
               </div>
+
+
+
+
+
+
+	 <!--          Edit Profile Picture Modal-->
+            <div class="modal fade" id="editProfilePicture" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-md">
+                <div class="modal-content modal-radius">
+                  <div class="modal-header">
+                    <h5>Edit Profile Picture</h5>
+                  </div>
+                  <form class="w-100" action="{% url 'changeprofile' %}" method="post" id="create-profilePicture" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="modal-body">
+                      <div class="preview text-center mt-3"> <img class="img-thumbnail preview-profilePicture w-25 ml-2" src="{{request.user.bio.profile_pic}}" alt=""> </div>
+                      <div class="add text-center mt-2">
+                        <label for="upload-profilePicture"><i class="fas fa-photo-video"></i>Change Profile Picture</label>
+                        <input type="file" id="upload-profilePicture" name="file" class="hidden" accept=".jpg,.jpeg.,.gif,.png,.mov,.mp4" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer border-0 text-center"> <a href="#">
+                      <button type="submit" class="btn btn-primary bg-gradient-blue">Add</button>
+                      </a>
+                      <button type="button" class="btn btn-default border" data-dismiss="modal"> Close </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!--      /Add Document Modal-->
+	<script>
+	document.getElementById('upload-profilePicture').addEventListener('change', function (event) {
+
+        var file = event.target.files[0];
+        var fileReader = new FileReader();
+        if (file.type.match('image')) {
+            fileReader.onload = function (event) {
+                $('.preview-profilePicture').attr('src', event.target.result);
+            };
+            fileReader.readAsDataURL(file);
+        }
+
+    });
+		</script>
+
+
+
+
 
               <div class="col-md-10 col-sm-10 col-12 profile-about bg-gray m-2">
                 <h5>About Himself</h5>
@@ -185,22 +291,22 @@
                         <form action="" methot="post">
                           <div class="form-group d-flex mt-3">
                             <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="First Name"
-                              value="{{current_user.first_name}}" />
+                              value="{{current_user.first_name}}"  readonly/>
                             <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Last Name"
-                              value="{% if current_user.last_name %}{{ current_user.last_name }} {% endif %}" />
+                              value="{% if current_user.last_name %}{{ current_user.last_name }} {% endif %}"  readonly/>
                           </div>
                           <div class="form-group d-flex">
                             <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Mobile Number"
-                              value="{% if request.user.phone %}{{request.user.phone}}{% endif %}" />
+                              value="{% if request.user.phone %}{{request.user.phone}}{% endif %}"  readonly/>
                             <input type="email" class="form-control m-1 p-2 bg-gray" placeholder="Email"
-                              value="{% if current_user.email %}{{request.user.email}}{% endif %}" />
+                              value="{% if current_user.email %}{{request.user.email}}{% endif %}" readonly/>
                           </div>
                           {% if current_user.bio.dob %}
                           <div class="form-group birth d-flex" style="margin: 0.3rem">
                             <label class="col-form-label col-lg-2 col-md-2 col-sm-2 col-4 bg-gray dob rounded"
                               style="padding-top: 5px !important">Date of Birth</label>
                             <input type="date" class="form-control m-1 col-lg-4 col-md-4 col-sm-4 col-8 p-2 bg-gray"
-                              value="{{current_user.bio.dob|date:'Y-m-d'}}" />
+                              value="{{current_user.bio.dob|date:'Y-m-d'}}" readonly/>
                           </div>
                           {% endif %}
                           <div class="form-group d-flex bg-gray details-group m-1 mt-3" style="border-radius: 6px">
@@ -208,22 +314,22 @@
                             <div class="gender col-sm-10 col-9 pt-2">
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                  value="1" &nbsp; ## ##{% if current_user.bio.gender == '1' %} checked {% endif %} />
+                                  value="1" &nbsp; ## ##{% if current_user.bio.gender == '1' %} checked {% endif %}  disabled/>
                                 <label class="form-check-label p-0" for="inlineRadio1">Male</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                  value="2" &nbsp; ## ##{% if current_user.bio.gender == '2' %} checked {% endif %} />
+                                  value="2" &nbsp; ## ##{% if current_user.bio.gender == '2' %} checked {% endif %} disabled />
                                 <label class="form-check-label p-0" for="inlineRadio2">Female</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                  value="3" &nbsp; ## ##{% if current_user.bio.gender == '3' %} checked {% endif %} />
+                                  value="3" &nbsp; ## ##{% if current_user.bio.gender == '3' %} checked {% endif %} disabled/>
                                 <label class="form-check-label p-0" for="inlineRadio3">Transgender</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
-                                  value="4" &nbsp; ## ##{% if current_user.bio.gender == '4' %} checked {% endif %} />
+                                  value="4" &nbsp; ## ##{% if current_user.bio.gender == '4' %} checked {% endif %} disabled/>
                                 <label class="form-check-label p-0" for="inlineRadio4">Not To Say</label>
                               </div>
                             </div>
@@ -234,33 +340,33 @@
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                                   id="inlineRadio5" value="1" &nbsp; &nbsp;{% if current_user.bio.category == '1' %}
-                                  checked &nbsp;&nbsp;{% endif %} />
+                                  checked &nbsp;&nbsp;{% endif %} disabled/>
                                 <label class="form-check-label p-0" for="inlineRadio5">Single
                                 </label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                                   id="inlineRadio6" value="2" &nbsp; &nbsp;{% if current_user.bio.category == '2' %}
-                                  checked &nbsp;&nbsp;{% endif %} />
+                                  checked &nbsp;&nbsp;{% endif %} disabled/>
                                 <label class="form-check-label p-0" for="inlineRadio6">Couple</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                                   id="inlineRadio7" value="3" &nbsp; ## {% if current_user.bio.category == '3' %}
-                                  checked {% endif %} />
+                                  checked {% endif %}  disabled/>
                                 <label class="form-check-label p-0" for="inlineRadio7">Widower</label>
                               </div>
                               <div class="form-check d-flex pl-4 col-md-3 col-sm-3 col-12">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                                   id="inlineRadio8" value="4" &nbsp;&nbsp;
-                                  &nbsp;{% if current_user.bio.category == '4' %} checked {% endif %} />
+                                  &nbsp;{% if current_user.bio.category == '4' %} checked {% endif %} disabled />
                                 <label class="form-check-label p-0" for="inlineRadio8">Divorced</label>
                               </div>
                             </div>
                           </div>
                           {% if current_user.bio.category == '2' %}
                           <div class="form-group partdob mt-3">
-                            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Partner Name" />
+                            <input type="text" class="form-control m-1 p-2 bg-gray" placeholder="Partner Name" readonly/>
                             {% comment %}
                             <div class="d-flex birth col-md-6 col-sm-6 col-12 p-0">
                               <label class="col-form-label col-4 bg-gray dob rounded"

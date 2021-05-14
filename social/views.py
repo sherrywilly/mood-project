@@ -29,6 +29,12 @@ def activity(request):
 
 @login_required(login_url='login')
 def timeline(request):
+
+    try:
+        Bio.objects.get_or_create(user=request.user)
+        Privacy.objects.get_or_create(user=request.user)
+    except:
+        pass
     try:
         _x = [i.following.pk for i in request.user.by.all()]
         _x.append(request.user.pk)

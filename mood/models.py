@@ -86,6 +86,14 @@ class Bio(models.Model):
     gender = models.CharField(max_length=50, choices=GENDER_CHOICES, null=True)
     dob = models.DateField(null=True)
     partner = models.CharField(max_length=100, null=True, blank=True)
+    cover = models.ImageField(upload_to='cover', null=True)
+
+    def cover_pic(self):
+        try:
+            url = self.cover.url
+        except:
+            url = "/media/cover/a.jpg"
+        return url
 
     def profile_pic(self):
         try:
