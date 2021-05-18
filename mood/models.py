@@ -67,14 +67,10 @@ class Bio(models.Model):
     CATEGORY_CHOICES = (
         ('1', 'Single'),
         ('2', 'Couple'),
-        ('3', 'Widower'),
-        ('4', 'Divorced')
     )
     GENDER_CHOICES = (
         ('1', 'Male'),
         ('2', 'Female'),
-        ('3', 'Transgenders'),
-        ('4', 'Not To Say')
     )
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, blank=True, null=True)
