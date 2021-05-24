@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(a27-vers!^q+k@et5s6v)(ac$eqk^xd=$=)-nb5fludoapis&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['18.222.116.106','127.0.0.1']
+ALLOWED_HOSTS = ['18.222.116.106', '127.0.0.1']
 
 
 # Application definition
@@ -134,7 +134,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

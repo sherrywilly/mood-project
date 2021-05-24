@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+    . . .
+
+    Alias /static /var/www/html/moodpro/static
+    <Directory /var/www/html/moodpro/static>
+        Require all granted
+    </Directory>
+
+    <Directory /var/www/html/moodpro/moodpro>
+        <Files wsgi.py>
+            Require all granted
+        </Files>
+    </Directory>
+
+    WSGIDaemonProcess moodpro python-home=/var/www/html/moodpro/moodpro python-path=/var/www/html/moodpro
+    WSGIProcessGroup moodpro
+    WSGIScriptAlias / /var/www/html/moodpro/moodpro/wsgi.py
+
+</VirtualHost>
